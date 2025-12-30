@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#f0f8ff"/>
+  
+  <!-- Maceta -->
+  <path d="M 145 325 L 165 378 L 235 378 L 255 325 Z" fill="#8b7355" stroke="#6b5345" stroke-width="2"/>
+  <ellipse cx="200" cy="325" rx="55" ry="14" fill="#6b5345"/>
+  
+  <!-- Tronco retorcido -->
+  <path d="M 195 325 Q 192 290 188 260 Q 185 230 190 210 Q 192 190 198 180" fill="none" stroke="#5d4e3a" stroke-width="11" stroke-linecap="round"/>
+  <path d="M 205 325 Q 208 290 212 260 Q 215 230 210 210 Q 208 190 202 180" fill="none" stroke="#6d5e4a" stroke-width="7" stroke-linecap="round"/>
+  
+  <!-- Ramas tipo conífera -->
+  <path d="M 188 280 Q 155 275 125 270" fill="none" stroke="#5d4e3a" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 192 265 Q 235 260 270 255" fill="none" stroke="#5d4e3a" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 190 245 Q 160 240 130 235" fill="none" stroke="#5d4e3a" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 195 225 Q 240 220 275 215" fill="none" stroke="#5d4e3a" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 192 205 Q 165 200 140 195" fill="none" stroke="#5d4e3a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 198 195 Q 235 190 265 185" fill="none" stroke="#5d4e3a" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Follaje tipo enebro (acículas) -->
+  <!-- Grupo izquierdo inferior -->
+  <path d="M 125 270 L 115 265 L 110 268 L 105 262 L 100 267 L 95 260 L 125 270" fill="#2d4f2d" opacity="0.8"/>
+  <path d="M 125 272 L 118 268 L 113 270 L 108 265 L 103 269 L 98 263 L 125 272" fill="#3d6b3d" opacity="0.9"/>
+  <path d="M 128 275 L 122 272 L 118 274 L 113 270 L 108 273 L 103 268 L 128 275" fill="#4d7d4d"/>
+  <path d="M 120 268 L 112 264 L 108 266 L 103 262 L 98 265 L 93 260 L 120 268" fill="#5d8d5d"/>
+  
+  <!-- Grupo derecho -->
+  <path d="M 270 255 L 280 250 L 285 253 L 290 247 L 295 252 L 300 245 L 270 255" fill="#2d4f2d" opacity="0.8"/>
+  <path d="M 268 257 L 275 253 L 280 255 L 285 250 L 290 254 L 295 248 L 268 257" fill="#3d6b3d" opacity="0.9"/>
+  <path d="M 265 260 L 272 257 L 277 259 L 282 255 L 287 258 L 292 253 L 265 260" fill="#4d7d4d"/>
+  <path d="M 273 253 L 281 249 L 286 251 L 291 247 L 296 250 L 301 245 L 273 253" fill="#5d8d5d"/>
+  
+  <!-- Grupo superior izquierdo -->
+  <path d="M 130 235 L 120 230 L 115 233 L 110 227 L 105 232 L 100 225 L 130 235" fill="#2d4f2d" opacity="0.8"/>
+  <path d="M 128 237 L 121 233 L 116 235 L 111 230 L 106 234 L 101 228 L 128 237" fill="#3d6b3d" opacity="0.9"/>
+  <path d="M 133 240 L 126 237 L 121 239 L 116 235 L 111 238 L 106 233 L 133 240" fill="#4d7d4d"/>
+  
+  <!-- Grupo superior derecho -->
+  <path d="M 275 215 L 285 210 L 290 213 L 295 207 L 300 212 L 305 205 L 275 215" fill="#2d4f2d" opacity="0.8"/>
+  <path d="M 273 217 L 280 213 L 285 215 L 290 210 L 295 214 L 300 208 L 273 217" fill="#3d6b3d" opacity="0.9"/>
+  <path d="M 270 220 L 277 217 L 282 219 L 287 215 L 292 218 L 297 213 L 270 220" fill="#4d7d4d"/>
+  
+  <!-- Grupo medio izquierdo -->
+  <path d="M 140 195 L 130 190 L 125 193 L 120 187 L 115 192 L 110 185 L 140 195" fill="#2d4f2d" opacity="0.8"/>
+  <path d="M 138 197 L 131 193 L 126 195 L 121 190 L 116 194 L 111 188 L 138 197" fill="#3d6b3d" opacity="0.9"/>
+  <path d="M 143 200 L 136 197 L 131 199 L 126 195 L 121 198 L 116 193 L 143 200" fill="#4d7d4d"/>
+  
+  <!-- Grupo medio derecho -->
+  <path d="M 265 185 L 275 180 L 280 183 L 285 177 L 290 182 L 295 175 L 265 185" fill="#2d4f2d" opacity="0.8"/>
+  <path d="M 263 187 L 270 183 L 275 185 L 280 180 L 285 184 L 290 178 L 263 187" fill="#3d6b3d" opacity="0.9"/>
+  <path d="M 260 190 L 267 187 L 272 189 L 277 185 L 282 188 L 287 183 L 260 190" fill="#4d7d4d"/>
+  
+  <!-- Copa central superior (forma cónica típica de coníferas) -->
+  <path d="M 198 180 L 180 165 L 175 168 L 170 160 L 165 165 L 160 155 L 155 163 L 150 155 L 198 180" fill="#2d4f2d" opacity="0.8"/>
+  <path d="M 198 180 L 216 165 L 221 168 L 226 160 L 231 165 L 236 155 L 241 163 L 246 155 L 198 180" fill="#2d4f2d" opacity="0.8"/>
+  <path d="M 198 178 L 183 166 L 178 169 L 173 162 L 168 167 L 163 158 L 158 165 L 153 158 L 198 178" fill="#3d6b3d" opacity="0.9"/>
+  <path d="M 198 178 L 213 166 L 218 169 L 223 162 L 228 167 L 233 158 L 238 165 L 243 158 L 198 178" fill="#3d6b3d" opacity="0.9"/>
+  <path d="M 198 175 L 186 168 L 181 171 L 176 165 L 171 170 L 166 162 L 161 168 L 156 162 L 198 175" fill="#4d7d4d"/>
+  <path d="M 198 175 L 210 168 L 215 171 L 220 165 L 225 170 L 230 162 L 235 168 L 240 162 L 198 175" fill="#4d7d4d"/>
+  
+  <!-- Acículas superiores detalladas -->
+  <path d="M 198 172 L 189 170 L 184 172 L 179 168 L 174 171 L 169 166 L 164 170 L 159 166 L 198 172" fill="#5d8d5d"/>
+  <path d="M 198 172 L 207 170 L 212 172 L 217 168 L 222 171 L 227 166 L 232 170 L 237 166 L 198 172" fill="#5d8d5d"/>
+  
+  <!-- Texto -->
+  <text x="200" y="30" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2d4f2d" text-anchor="middle">Juniperus</text>
+  <text x="200" y="55" font-family="Arial, sans-serif" font-size="16" fill="#4d7d4d" text-anchor="middle">Enebro Chino</text>
+</svg>

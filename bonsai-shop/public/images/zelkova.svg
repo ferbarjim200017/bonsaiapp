@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#fafff5"/>
+  
+  <!-- Maceta -->
+  <path d="M 150 325 L 168 378 L 232 378 L 250 325 Z" fill="#8b6f47" stroke="#6b4f27" stroke-width="2"/>
+  <ellipse cx="200" cy="325" rx="50" ry="13" fill="#6b4f27"/>
+  
+  <!-- Tronco principal -->
+  <path d="M 196 325 Q 194 285 192 245 Q 190 205 195 180" fill="none" stroke="#5a4a35" stroke-width="11" stroke-linecap="round"/>
+  <path d="M 204 325 Q 206 285 208 245 Q 210 205 205 180" fill="none" stroke="#6a5a45" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Ramas -->
+  <path d="M 192 280 Q 160 275 130 268" fill="none" stroke="#5a4a35" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 196 265 Q 230 260 265 253" fill="none" stroke="#5a4a35" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 193 245 Q 165 240 135 233" fill="none" stroke="#5a4a35" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 198 230 Q 235 225 270 218" fill="none" stroke="#5a4a35" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 194 210 Q 168 205 140 198" fill="none" stroke="#5a4a35" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 199 200 Q 232 195 265 188" fill="none" stroke="#5a4a35" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Follaje tipo olmo (hojas pequeñas) -->
+  <!-- Grupo izquierdo inferior -->
+  <ellipse cx="125" cy="268" rx="26" ry="21" fill="#2a5a2a" opacity="0.8"/>
+  <ellipse cx="135" cy="265" rx="24" ry="19" fill="#3a7a3a" opacity="0.9"/>
+  <ellipse cx="128" cy="260" rx="22" ry="18" fill="#4a9a4a"/>
+  <ellipse cx="138" cy="272" rx="20" ry="16" fill="#2a5a2a" opacity="0.7"/>
+  
+  <!-- Hojas individuales pequeñas -->
+  <ellipse cx="122" cy="265" rx="4" ry="2.5" fill="#5aaa5a" transform="rotate(-30 122 265)"/>
+  <ellipse cx="130" cy="268" rx="4" ry="2.5" fill="#5aaa5a" transform="rotate(20 130 268)"/>
+  <ellipse cx="126" cy="273" rx="3.5" ry="2" fill="#6aba6a" transform="rotate(-45 126 273)"/>
+  <ellipse cx="135" cy="270" rx="3.5" ry="2" fill="#6aba6a" transform="rotate(35 135 270)"/>
+  
+  <!-- Grupo derecho -->
+  <ellipse cx="270" cy="253" rx="28" ry="22" fill="#2a5a2a" opacity="0.8"/>
+  <ellipse cx="260" cy="250" rx="26" ry="20" fill="#3a7a3a" opacity="0.9"/>
+  <ellipse cx="265" cy="245" rx="24" ry="19" fill="#4a9a4a"/>
+  <ellipse cx="272" cy="258" rx="22" ry="17" fill="#2a5a2a" opacity="0.7"/>
+  
+  <ellipse cx="263" cy="252" rx="4" ry="2.5" fill="#5aaa5a" transform="rotate(25 263 252)"/>
+  <ellipse cx="270" cy="248" rx="4" ry="2.5" fill="#5aaa5a" transform="rotate(-20 270 248)"/>
+  <ellipse cx="267" cy="256" rx="3.5" ry="2" fill="#6aba6a" transform="rotate(40 267 256)"/>
+  <ellipse cx="275" cy="254" rx="3.5" ry="2" fill="#6aba6a" transform="rotate(-35 275 254)"/>
+  
+  <!-- Grupo superior izquierdo -->
+  <ellipse cx="130" cy="233" rx="24" ry="20" fill="#2a5a2a" opacity="0.8"/>
+  <ellipse cx="138" cy="230" rx="22" ry="18" fill="#3a7a3a" opacity="0.9"/>
+  <ellipse cx="133" cy="225" rx="20" ry="17" fill="#4a9a4a"/>
+  
+  <ellipse cx="128" cy="230" rx="4" ry="2.5" fill="#5aaa5a" transform="rotate(-25 128 230)"/>
+  <ellipse cx="136" cy="233" rx="4" ry="2.5" fill="#5aaa5a" transform="rotate(30 136 233)"/>
+  <ellipse cx="132" cy="237" rx="3.5" ry="2" fill="#6aba6a" transform="rotate(-40 132 237)"/>
+  
+  <!-- Grupo superior derecho -->
+  <ellipse cx="275" cy="218" rx="26" ry="21" fill="#2a5a2a" opacity="0.8"/>
+  <ellipse cx="265" cy="215" rx="24" ry="19" fill="#3a7a3a" opacity="0.9"/>
+  <ellipse cx="270" cy="210" rx="22" ry="18" fill="#4a9a4a"/>
+  
+  <ellipse cx="268" cy="216" rx="4" ry="2.5" fill="#5aaa5a" transform="rotate(28 268 216)"/>
+  <ellipse cx="275" cy="213" rx="4" ry="2.5" fill="#5aaa5a" transform="rotate(-22 275 213)"/>
+  <ellipse cx="272" cy="220" rx="3.5" ry="2" fill="#6aba6a" transform="rotate(38 272 220)"/>
+  
+  <!-- Grupo medio izquierdo -->
+  <ellipse cx="135" cy="198" rx="22" ry="19" fill="#2a5a2a" opacity="0.8"/>
+  <ellipse cx="142" cy="195" rx="20" ry="17" fill="#3a7a3a" opacity="0.9"/>
+  <ellipse cx="137" cy="190" rx="19" ry="16" fill="#4a9a4a"/>
+  
+  <ellipse cx="135" cy="195" rx="3.5" ry="2" fill="#5aaa5a" transform="rotate(-28 135 195)"/>
+  <ellipse cx="142" cy="198" rx="3.5" ry="2" fill="#5aaa5a" transform="rotate(32 142 198)"/>
+  
+  <!-- Grupo medio derecho -->
+  <ellipse cx="270" cy="188" rx="24" ry="20" fill="#2a5a2a" opacity="0.8"/>
+  <ellipse cx="260" cy="185" rx="22" ry="18" fill="#3a7a3a" opacity="0.9"/>
+  <ellipse cx="265" cy="180" rx="20" ry="17" fill="#4a9a4a"/>
+  
+  <ellipse cx="263" cy="186" rx="3.5" ry="2" fill="#5aaa5a" transform="rotate(26 263 186)"/>
+  <ellipse cx="270" cy="183" rx="3.5" ry="2" fill="#5aaa5a" transform="rotate(-24 270 183)"/>
+  
+  <!-- Copa central superior (forma redondeada) -->
+  <ellipse cx="200" cy="170" rx="32" ry="26" fill="#2a5a2a" opacity="0.8"/>
+  <ellipse cx="195" cy="167" rx="30" ry="24" fill="#3a7a3a" opacity="0.9"/>
+  <ellipse cx="205" cy="165" rx="28" ry="23" fill="#4a9a4a"/>
+  <ellipse cx="198" cy="175" rx="26" ry="21" fill="#2a5a2a" opacity="0.7"/>
+  <ellipse cx="207" cy="172" rx="24" ry="19" fill="#5aaa5a"/>
+  
+  <!-- Hojas detalladas superiores -->
+  <ellipse cx="195" cy="168" rx="4" ry="2.5" fill="#5aaa5a" transform="rotate(-20 195 168)"/>
+  <ellipse cx="205" cy="166" rx="4" ry="2.5" fill="#5aaa5a" transform="rotate(25 205 166)"/>
+  <ellipse cx="200" cy="173" rx="4" ry="2.5" fill="#6aba6a" transform="rotate(0 200 173)"/>
+  <ellipse cx="192" cy="175" rx="3.5" ry="2" fill="#6aba6a" transform="rotate(-35 192 175)"/>
+  <ellipse cx="208" cy="177" rx="3.5" ry="2" fill="#6aba6a" transform="rotate(30 208 177)"/>
+  <ellipse cx="198" cy="163" rx="3.5" ry="2" fill="#6aba6a" transform="rotate(-15 198 163)"/>
+  <ellipse cx="203" cy="170" rx="3" ry="1.8" fill="#7aca7a" transform="rotate(20 203 170)"/>
+  
+  <!-- Texto -->
+  <text x="200" y="30" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2a5a2a" text-anchor="middle">Zelkova</text>
+  <text x="200" y="55" font-family="Arial, sans-serif" font-size="16" fill="#4a9a4a" text-anchor="middle">Olmo Chino</text>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#f8fff8"/>
+  
+  <!-- Maceta -->
+  <path d="M 155 330 L 170 380 L 230 380 L 245 330 Z" fill="#7d4e2d" stroke="#5d3e1d" stroke-width="2"/>
+  <ellipse cx="200" cy="330" rx="45" ry="12" fill="#5d3e1d"/>
+  
+  <!-- Tronco -->
+  <path d="M 198 330 Q 196 290 195 250 Q 194 210 200 190" fill="none" stroke="#4a3a2a" stroke-width="9" stroke-linecap="round"/>
+  
+  <!-- Ramas principales -->
+  <path d="M 195 280 Q 165 275 140 270" fill="none" stroke="#4a3a2a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 197 265 Q 225 260 250 255" fill="none" stroke="#4a3a2a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 196 240 Q 170 235 145 230" fill="none" stroke="#4a3a2a" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 198 220 Q 230 215 255 210" fill="none" stroke="#4a3a2a" stroke-width="3.5" stroke-linecap="round"/>
+  
+  <!-- Hojas pequeñas tipo Carmona -->
+  <!-- Grupo izquierdo inferior -->
+  <ellipse cx="135" cy="270" rx="22" ry="18" fill="#1a4d1a" opacity="0.8"/>
+  <ellipse cx="145" cy="268" rx="20" ry="16" fill="#2d6b2d" opacity="0.9"/>
+  <ellipse cx="138" cy="263" rx="18" ry="15" fill="#3d8b3d"/>
+  <ellipse cx="148" cy="275" rx="16" ry="13" fill="#1a4d1a" opacity="0.7"/>
+  
+  <!-- Hojas pequeñas dispersas -->
+  <circle cx="132" cy="266" r="3" fill="#4d9b4d"/>
+  <circle cx="142" cy="271" r="3" fill="#4d9b4d"/>
+  <circle cx="138" cy="275" r="2.5" fill="#5dab5d"/>
+  <circle cx="146" cy="265" r="2.5" fill="#5dab5d"/>
+  
+  <!-- Grupo derecho -->
+  <ellipse cx="255" cy="255" rx="24" ry="19" fill="#1a4d1a" opacity="0.8"/>
+  <ellipse cx="245" cy="252" rx="22" ry="17" fill="#2d6b2d" opacity="0.9"/>
+  <ellipse cx="250" cy="248" rx="20" ry="16" fill="#3d8b3d"/>
+  <ellipse cx="258" cy="260" rx="18" ry="14" fill="#1a4d1a" opacity="0.7"/>
+  
+  <circle cx="248" cy="256" r="3" fill="#4d9b4d"/>
+  <circle cx="256" cy="252" r="3" fill="#4d9b4d"/>
+  <circle cx="252" cy="262" r="2.5" fill="#5dab5d"/>
+  <circle cx="260" cy="257" r="2.5" fill="#5dab5d"/>
+  
+  <!-- Grupo superior izquierdo -->
+  <ellipse cx="140" cy="230" rx="20" ry="17" fill="#1a4d1a" opacity="0.8"/>
+  <ellipse cx="148" cy="228" rx="19" ry="15" fill="#2d6b2d" opacity="0.9"/>
+  <ellipse cx="143" cy="223" rx="17" ry="14" fill="#3d8b3d"/>
+  
+  <circle cx="142" cy="228" r="3" fill="#4d9b4d"/>
+  <circle cx="148" cy="225" r="2.5" fill="#5dab5d"/>
+  <circle cx="145" cy="233" r="2.5" fill="#5dab5d"/>
+  
+  <!-- Grupo superior derecho -->
+  <ellipse cx="260" cy="210" rx="22" ry="18" fill="#1a4d1a" opacity="0.8"/>
+  <ellipse cx="250" cy="208" rx="20" ry="16" fill="#2d6b2d" opacity="0.9"/>
+  <ellipse cx="255" cy="203" rx="19" ry="15" fill="#3d8b3d"/>
+  
+  <circle cx="253" cy="210" r="3" fill="#4d9b4d"/>
+  <circle cx="258" cy="206" r="2.5" fill="#5dab5d"/>
+  <circle cx="256" cy="213" r="2.5" fill="#5dab5d"/>
+  
+  <!-- Copa central superior -->
+  <ellipse cx="200" cy="180" rx="28" ry="23" fill="#1a4d1a" opacity="0.8"/>
+  <ellipse cx="195" cy="177" rx="26" ry="21" fill="#2d6b2d" opacity="0.9"/>
+  <ellipse cx="205" cy="175" rx="24" ry="20" fill="#3d8b3d"/>
+  <ellipse cx="198" cy="185" rx="22" ry="18" fill="#1a4d1a" opacity="0.7"/>
+  <ellipse cx="207" cy="182" rx="20" ry="16" fill="#5dab5d"/>
+  
+  <!-- Hojas detalladas superiores -->
+  <circle cx="195" cy="178" r="3.5" fill="#4d9b4d"/>
+  <circle cx="205" cy="176" r="3.5" fill="#4d9b4d"/>
+  <circle cx="200" cy="183" r="3" fill="#5dab5d"/>
+  <circle cx="192" cy="185" r="2.5" fill="#5dab5d"/>
+  <circle cx="208" cy="188" r="2.5" fill="#5dab5d"/>
+  
+  <!-- Flores blancas pequeñas (característico de Carmona) -->
+  <circle cx="200" cy="175" r="4" fill="#ffffff" opacity="0.9"/>
+  <circle cx="198" cy="173" r="1.5" fill="#fffacd"/>
+  <circle cx="202" cy="173" r="1.5" fill="#fffacd"/>
+  <circle cx="200" cy="171" r="1.5" fill="#fffacd"/>
+  <circle cx="200" cy="177" r="1.5" fill="#fffacd"/>
+  
+  <circle cx="148" cy="265" r="3.5" fill="#ffffff" opacity="0.8"/>
+  <circle cx="147" cy="264" r="1.2" fill="#fffacd"/>
+  
+  <circle cx="255" cy="248" r="3.5" fill="#ffffff" opacity="0.8"/>
+  <circle cx="254" cy="247" r="1.2" fill="#fffacd"/>
+  
+  <!-- Texto -->
+  <text x="200" y="30" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a4d1a" text-anchor="middle">Carmona</text>
+  <text x="200" y="55" font-family="Arial, sans-serif" font-size="16" fill="#3d8b3d" text-anchor="middle">Bonsái del Té</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#fff5f0"/>
+  
+  <!-- Maceta -->
+  <path d="M 150 320 L 165 375 L 235 375 L 250 320 Z" fill="#6b4423" stroke="#4a2f1a" stroke-width="2"/>
+  <ellipse cx="200" cy="320" rx="50" ry="15" fill="#4a2f1a"/>
+  
+  <!-- Tronco principal -->
+  <path d="M 198 320 Q 195 280 192 240 Q 188 200 195 170" fill="none" stroke="#3d2a1f" stroke-width="10" stroke-linecap="round"/>
+  
+  <!-- Ramas -->
+  <path d="M 192 270 Q 160 260 130 250" fill="none" stroke="#3d2a1f" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 195 250 Q 240 245 270 235" fill="none" stroke="#3d2a1f" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 193 220 Q 155 215 125 205" fill="none" stroke="#3d2a1f" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 195 200 Q 235 195 265 185" fill="none" stroke="#3d2a1f" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Hojas tipo arce (forma de estrella) -->
+  <!-- Grupo izquierdo inferior -->
+  <path d="M 130 250 L 120 235 L 110 240 L 105 225 L 95 235 L 85 220 L 80 240 L 85 255 L 100 260 L 115 265 Z" fill="#dc143c" opacity="0.8"/>
+  <path d="M 125 248 L 118 238 L 108 242 L 103 230 L 93 238 L 88 228 L 85 243 L 90 255 L 102 258 L 118 260 Z" fill="#ff4500"/>
+  <path d="M 118 252 L 110 245 L 100 248 L 98 240 L 90 245 L 87 238 L 85 248 L 88 257 L 98 260 L 110 262 Z" fill="#ff6347"/>
+  
+  <!-- Grupo derecho -->
+  <path d="M 270 235 L 280 220 L 275 210 L 285 205 L 290 195 L 295 210 L 305 215 L 300 230 L 290 240 L 275 245 Z" fill="#dc143c" opacity="0.8"/>
+  <path d="M 268 233 L 275 222 L 272 215 L 280 210 L 285 202 L 288 215 L 295 220 L 292 230 L 285 237 L 273 242 Z" fill="#ff4500"/>
+  <path d="M 265 237 L 272 228 L 268 222 L 275 218 L 278 212 L 282 222 L 288 225 L 285 233 L 280 238 L 270 240 Z" fill="#ff6347"/>
+  
+  <!-- Grupo superior izquierdo -->
+  <path d="M 125 205 L 115 190 L 105 195 L 100 180 L 90 190 L 80 175 L 75 195 L 80 210 L 95 215 L 110 220 Z" fill="#dc143c" opacity="0.8"/>
+  <path d="M 122 203 L 115 193 L 108 197 L 103 185 L 95 193 L 90 183 L 87 198 L 90 208 L 100 212 L 115 215 Z" fill="#ff4500"/>
+  
+  <!-- Grupo superior derecho -->
+  <path d="M 265 185 L 275 170 L 270 160 L 280 155 L 285 145 L 290 160 L 300 165 L 295 180 L 285 190 L 270 195 Z" fill="#dc143c" opacity="0.8"/>
+  <path d="M 263 183 L 270 173 L 267 166 L 275 161 L 280 153 L 283 166 L 290 171 L 287 181 L 280 188 L 268 192 Z" fill="#ff4500"/>
+  
+  <!-- Copa central superior -->
+  <path d="M 195 170 L 185 150 L 175 155 L 170 135 L 160 145 L 150 130 L 145 155 L 155 170 L 175 180 L 195 185 Z" fill="#dc143c" opacity="0.8"/>
+  <path d="M 200 165 L 215 145 L 220 150 L 230 135 L 235 150 L 245 140 L 250 160 L 240 175 L 220 183 L 200 185 Z" fill="#dc143c" opacity="0.8"/>
+  <path d="M 193 168 L 188 155 L 180 158 L 175 145 L 168 153 L 160 145 L 158 163 L 165 173 L 180 180 L 193 183 Z" fill="#ff4500"/>
+  <path d="M 198 165 L 210 150 L 215 153 L 222 143 L 228 153 L 235 148 L 238 163 L 230 173 L 215 180 L 200 183 Z" fill="#ff4500"/>
+  
+  <!-- Hojas con degradado naranja-rojo -->
+  <path d="M 188 172 L 183 162 L 178 165 L 175 157 L 170 163 L 167 158 L 165 168 L 170 175 L 178 178 L 188 179 Z" fill="#ff6347"/>
+  <path d="M 203 168 L 208 158 L 213 161 L 218 153 L 223 161 L 228 156 L 230 166 L 225 173 L 215 177 L 205 179 Z" fill="#ff6347"/>
+  
+  <!-- Texto -->
+  <text x="200" y="30" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#8b0000" text-anchor="middle">Acer Palmatum</text>
+  <text x="200" y="55" font-family="Arial, sans-serif" font-size="16" fill="#dc143c" text-anchor="middle">Arce Japonés</text>
+</svg>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#fff8f0"/>
+  
+  <!-- Bolsa de sustrato -->
+  <path d="M 120 150 L 110 350 L 290 350 L 280 150 Z" fill="#e8d5b7" stroke="#c4a574" stroke-width="2"/>
+  
+  <!-- Pliegues de la bolsa -->
+  <path d="M 130 180 Q 150 185 170 180 Q 190 175 210 180 Q 230 185 250 180 Q 270 175 280 180" 
+        fill="none" stroke="#d4b896" stroke-width="1.5" opacity="0.6"/>
+  <path d="M 125 220 Q 145 225 165 220 Q 185 215 205 220 Q 225 225 245 220 Q 265 215 285 220" 
+        fill="none" stroke="#d4b896" stroke-width="1.5" opacity="0.6"/>
+  <path d="M 122 260 Q 142 265 162 260 Q 182 255 202 260 Q 222 265 242 260 Q 262 255 282 260" 
+        fill="none" stroke="#d4b896" stroke-width="1.5" opacity="0.6"/>
+  <path d="M 118 300 Q 138 305 158 300 Q 178 295 198 300 Q 218 305 238 300 Q 258 295 278 300" 
+        fill="none" stroke="#d4b896" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- Etiqueta en la bolsa -->
+  <rect x="140" y="190" width="120" height="80" fill="#ffffff" stroke="#c4a574" stroke-width="2" rx="3"/>
+  <rect x="145" y="195" width="110" height="70" fill="#fffef8"/>
+  
+  <!-- Texto en la etiqueta -->
+  <text x="200" y="220" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#8b4513" text-anchor="middle">AKADAMA</text>
+  <text x="200" y="238" font-family="Arial, sans-serif" font-size="12" fill="#a0522d" text-anchor="middle">Premium Quality</text>
+  <text x="200" y="255" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#6b4423" text-anchor="middle">2 LITROS</text>
+  
+  <!-- Cierre superior de la bolsa -->
+  <path d="M 120 150 Q 140 140 160 145 Q 180 150 200 145 Q 220 140 240 145 Q 260 150 280 150" 
+        fill="#d4a574" stroke="#b8935d" stroke-width="2"/>
+  <rect x="195" y="135" width="10" height="15" fill="#8b6f47" stroke="#6b4f27" stroke-width="1" rx="1"/>
+  
+  <!-- Partículas de Akadama visibles (pequeños círculos representando las piedrecillas) -->
+  <g opacity="0.4">
+    <circle cx="150" cy="280" r="3" fill="#cd853f"/>
+    <circle cx="165" cy="290" r="2.5" fill="#d2691e"/>
+    <circle cx="180" cy="285" r="3.5" fill="#c17e3a"/>
+    <circle cx="195" cy="295" r="2.8" fill="#cd853f"/>
+    <circle cx="210" cy="288" r="3.2" fill="#d2691e"/>
+    <circle cx="225" cy="292" r="2.6" fill="#c17e3a"/>
+    <circle cx="240" cy="283" r="3.3" fill="#cd853f"/>
+    <circle cx="255" cy="291" r="2.9" fill="#d2691e"/>
+    
+    <circle cx="155" cy="310" r="2.7" fill="#cd853f"/>
+    <circle cx="170" cy="315" r="3.1" fill="#d2691e"/>
+    <circle cx="185" cy="308" r="2.8" fill="#c17e3a"/>
+    <circle cx="200" cy="318" r="3.4" fill="#cd853f"/>
+    <circle cx="215" cy="312" r="2.5" fill="#d2691e"/>
+    <circle cx="230" cy="320" r="3" fill="#c17e3a"/>
+    <circle cx="245" cy="314" r="2.9" fill="#cd853f"/>
+  </g>
+  
+  <!-- Logo japonés estilizado -->
+  <g transform="translate(200, 95)">
+    <circle cx="0" cy="0" r="35" fill="none" stroke="#8b4513" stroke-width="2"/>
+    <text x="0" y="10" font-family="serif" font-size="32" font-weight="bold" fill="#8b4513" text-anchor="middle">赤</text>
+  </g>
+  
+  <!-- Sombra -->
+  <ellipse cx="200" cy="355" rx="80" ry="8" fill="#000000" opacity="0.15"/>
+  
+  <!-- Texto superior -->
+  <text x="200" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#8b4513" text-anchor="middle">Sustrato Akadama</text>
+  <text x="200" y="55" font-family="Arial, sans-serif" font-size="14" fill="#a0522d" text-anchor="middle">Importado de Japón</text>
+  
+  <!-- Indicaciones de calidad -->
+  <circle cx="165" cy="245" r="8" fill="#f4c430" stroke="#d4a017" stroke-width="1"/>
+  <text x="165" y="249" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#8b6f00" text-anchor="middle">★</text>
+</svg>

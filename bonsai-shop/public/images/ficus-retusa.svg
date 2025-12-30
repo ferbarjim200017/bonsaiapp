@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#f0f9f4"/>
+  
+  <!-- Maceta -->
+  <path d="M 150 320 L 170 380 L 230 380 L 250 320 Z" fill="#8b4513" stroke="#654321" stroke-width="2"/>
+  <ellipse cx="200" cy="320" rx="50" ry="15" fill="#654321"/>
+  
+  <!-- Tronco -->
+  <path d="M 195 320 Q 190 280 185 240 Q 180 200 190 180" fill="none" stroke="#4a3728" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 205 320 Q 210 280 215 240 Q 220 200 210 180" fill="none" stroke="#5a4738" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Ramas principales -->
+  <path d="M 190 250 Q 150 240 120 235" fill="none" stroke="#4a3728" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 195 230 Q 230 220 260 215" fill="none" stroke="#4a3728" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 192 200 Q 160 195 140 190" fill="none" stroke="#4a3728" stroke-width="5" stroke-linecap="round"/>
+  
+  <!-- Hojas (grupos de círculos para simular follaje) -->
+  <!-- Grupo izquierdo inferior -->
+  <circle cx="105" cy="235" r="30" fill="#2d5016" opacity="0.8"/>
+  <circle cx="125" cy="230" r="28" fill="#3a6b1f" opacity="0.9"/>
+  <circle cx="110" cy="220" r="25" fill="#4a8028"/>
+  <circle cx="120" cy="245" r="22" fill="#2d5016" opacity="0.7"/>
+  
+  <!-- Grupo derecho -->
+  <circle cx="265" cy="215" r="32" fill="#2d5016" opacity="0.8"/>
+  <circle cx="250" cy="208" r="30" fill="#3a6b1f" opacity="0.9"/>
+  <circle cx="270" cy="200" r="26" fill="#4a8028"/>
+  <circle cx="260" cy="225" r="24" fill="#2d5016" opacity="0.7"/>
+  
+  <!-- Grupo izquierdo superior -->
+  <circle cx="130" cy="190" r="28" fill="#2d5016" opacity="0.8"/>
+  <circle cx="145" cy="185" r="26" fill="#3a6b1f" opacity="0.9"/>
+  <circle cx="135" cy="175" r="24" fill="#4a8028"/>
+  <circle cx="150" cy="195" r="20" fill="#2d5016" opacity="0.7"/>
+  
+  <!-- Copa superior central -->
+  <circle cx="195" cy="165" r="35" fill="#2d5016" opacity="0.8"/>
+  <circle cx="205" cy="160" r="33" fill="#3a6b1f" opacity="0.9"/>
+  <circle cx="200" cy="150" r="30" fill="#4a8028"/>
+  <circle cx="190" cy="175" r="28" fill="#2d5016" opacity="0.7"/>
+  <circle cx="210" cy="170" r="26" fill="#5a9c32"/>
+  
+  <!-- Detalles de hojas brillantes -->
+  <circle cx="200" cy="155" r="8" fill="#6fb03f" opacity="0.6"/>
+  <circle cx="125" cy="225" r="7" fill="#6fb03f" opacity="0.6"/>
+  <circle cx="255" cy="210" r="7" fill="#6fb03f" opacity="0.6"/>
+  
+  <!-- Texto -->
+  <text x="200" y="30" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2d5016" text-anchor="middle">Ficus Retusa</text>
+  <text x="200" y="55" font-family="Arial, sans-serif" font-size="16" fill="#5a9c32" text-anchor="middle">Bonsái de Interior</text>
+</svg>

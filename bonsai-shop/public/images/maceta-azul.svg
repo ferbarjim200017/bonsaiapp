@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#f0f8ff"/>
+  
+  <!-- Sombra de la maceta -->
+  <ellipse cx="200" cy="340" rx="85" ry="12" fill="#000000" opacity="0.2"/>
+  
+  <!-- Base de la maceta (parte inferior) -->
+  <ellipse cx="200" cy="310" rx="75" ry="25" fill="#1e3a8a" stroke="#1e2a5a" stroke-width="2"/>
+  
+  <!-- Cuerpo principal de la maceta -->
+  <path d="M 125 310 Q 120 280 118 250 Q 115 220 120 200 Q 130 180 145 175 L 255 175 Q 270 180 280 200 Q 285 220 282 250 Q 280 280 275 310 Z" 
+        fill="#2563eb" stroke="#1e3a8a" stroke-width="2"/>
+  
+  <!-- Gradiente/brillo en la maceta -->
+  <ellipse cx="200" cy="240" rx="65" ry="50" fill="#3b82f6" opacity="0.6"/>
+  <path d="M 145 175 Q 155 178 165 176 Q 175 174 185 176 Q 195 178 205 176 Q 215 174 225 176 Q 235 178 245 176 Q 255 174 255 175" 
+        fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Reflejo brillante -->
+  <ellipse cx="170" cy="220" rx="20" ry="30" fill="#93c5fd" opacity="0.4"/>
+  <ellipse cx="165" cy="215" rx="12" ry="18" fill="#bfdbfe" opacity="0.6"/>
+  
+  <!-- Borde superior de la maceta -->
+  <ellipse cx="200" cy="175" rx="55" ry="18" fill="#3b82f6" stroke="#1e3a8a" stroke-width="2"/>
+  <ellipse cx="200" cy="175" rx="52" ry="16" fill="#60a5fa" opacity="0.7"/>
+  <ellipse cx="200" cy="174" rx="48" ry="14" fill="#93c5fd" opacity="0.3"/>
+  
+  <!-- Detalle esmaltado (textura) -->
+  <path d="M 130 280 Q 140 275 150 280 Q 160 285 170 280 Q 180 275 190 280" 
+        fill="none" stroke="#60a5fa" stroke-width="1.5" opacity="0.4"/>
+  <path d="M 210 280 Q 220 275 230 280 Q 240 285 250 280 Q 260 275 270 280" 
+        fill="none" stroke="#60a5fa" stroke-width="1.5" opacity="0.4"/>
+  
+  <path d="M 125 250 Q 135 248 145 250 Q 155 252 165 250" 
+        fill="none" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+  <path d="M 235 250 Q 245 248 255 250 Q 265 252 275 250" 
+        fill="none" stroke="#93c5fd" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Pies de la maceta -->
+  <ellipse cx="150" cy="315" rx="8" ry="5" fill="#1e2a5a"/>
+  <ellipse cx="200" cy="318" rx="8" ry="5" fill="#1e2a5a"/>
+  <ellipse cx="250" cy="315" rx="8" ry="5" fill="#1e2a5a"/>
+  
+  <!-- Agujero de drenaje (vista frontal) -->
+  <ellipse cx="200" cy="305" rx="6" ry="3" fill="#0f172a"/>
+  <ellipse cx="200" cy="304" rx="5" ry="2.5" fill="#1e293b"/>
+  
+  <!-- Rejilla de drenaje visible -->
+  <g opacity="0.6">
+    <line x1="195" y1="304" x2="205" y2="304" stroke="#475569" stroke-width="0.5"/>
+    <line x1="198" y1="302" x2="202" y2="306" stroke="#475569" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Decoración: patrón ondulado en el centro -->
+  <g opacity="0.3">
+    <path d="M 160 230 Q 170 225 180 230 Q 190 235 200 230 Q 210 225 220 230 Q 230 235 240 230" 
+          fill="none" stroke="#1e3a8a" stroke-width="2"/>
+    <path d="M 160 245 Q 170 240 180 245 Q 190 250 200 245 Q 210 240 220 245 Q 230 250 240 245" 
+          fill="none" stroke="#1e3a8a" stroke-width="2"/>
+  </g>
+  
+  <!-- Brillo intenso (punto de luz) -->
+  <ellipse cx="175" cy="210" rx="8" ry="12" fill="#ffffff" opacity="0.5"/>
+  <ellipse cx="172" cy="207" rx="4" ry="6" fill="#ffffff" opacity="0.8"/>
+  
+  <!-- Pequeñas burbujas del esmaltado -->
+  <circle cx="220" cy="260" r="2" fill="#93c5fd" opacity="0.4"/>
+  <circle cx="235" cy="240" r="1.5" fill="#93c5fd" opacity="0.4"/>
+  <circle cx="165" cy="265" r="2.5" fill="#93c5fd" opacity="0.4"/>
+  <circle cx="145" cy="235" r="1.8" fill="#93c5fd" opacity="0.4"/>
+  
+  <!-- Texto -->
+  <text x="200" y="60" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Maceta Cerámica</text>
+  <text x="200" y="85" font-family="Arial, sans-serif" font-size="16" fill="#2563eb" text-anchor="middle">Esmaltada Azul Cobalto</text>
+  <text x="200" y="105" font-family="Arial, sans-serif" font-size="13" fill="#3b82f6" text-anchor="middle">20cm · Artesanal</text>
+  
+  <!-- Sello de calidad -->
+  <g transform="translate(310, 120)">
+    <circle cx="0" cy="0" r="25" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+    <text x="0" y="-5" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1e3a8a" text-anchor="middle">100%</text>
+    <text x="0" y="8" font-family="Arial, sans-serif" font-size="9" fill="#2563eb" text-anchor="middle">Cerámica</text>
+  </g>
+</svg>
