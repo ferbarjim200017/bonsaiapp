@@ -63,7 +63,8 @@ export const getProductos = async (filters?: {
 
 export const getProductoById = async (id: string): Promise<Producto | null> => {
   try {
-    const docRef = doc(db, 'productos', id);
+    const firestore = ensureFirebase();
+    const docRef = doc(firestore, 'productos', id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -78,7 +79,8 @@ export const getProductoById = async (id: string): Promise<Producto | null> => {
 
 export const getProductoBySlug = async (slug: string): Promise<Producto | null> => {
   try {
-    const productosRef = collection(db, 'productos');
+    const firestore = ensureFirebase();
+    const productosRef = collection(firestore, 'productos');
     const q = query(productosRef, where('slug', '==', slug), limit(1));
     const querySnapshot = await getDocs(q);
 
@@ -95,7 +97,8 @@ export const getProductoBySlug = async (slug: string): Promise<Producto | null> 
 
 export const createProducto = async (producto: Omit<Producto, 'id'>): Promise<string> => {
   try {
-    const docRef = await addDoc(collection(db, 'productos'), {
+    const firestore = ensureFirebase();
+    const docRef = await addDoc(collection(firestore, 'productos'), {
       ...producto,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
@@ -109,7 +112,8 @@ export const createProducto = async (producto: Omit<Producto, 'id'>): Promise<st
 
 export const updateProducto = async (id: string, producto: Partial<Producto>): Promise<void> => {
   try {
-    const docRef = doc(db, 'productos', id);
+    const firestore = ensureFirebase();
+    const docRef = doc(firestore, 'productos', id);
     await updateDoc(docRef, {
       ...producto,
       updatedAt: Timestamp.now(),
@@ -122,7 +126,8 @@ export const updateProducto = async (id: string, producto: Partial<Producto>): P
 
 export const deleteProducto = async (id: string): Promise<void> => {
   try {
-    await deleteDoc(doc(db, 'productos', id));
+    const firestore = ensureFirebase();
+    await deleteDoc(doc(firestore, 'productos', id));
   } catch (error) {
     console.error('Error eliminando producto:', error);
     throw error;
@@ -136,7 +141,8 @@ export const getPedidos = async (filters?: {
   userId?: string;
 }): Promise<Pedido[]> => {
   try {
-    const pedidosRef = collection(db, 'pedidos');
+    const firestore = ensureFirebase();
+    const pedidosRef = collection(firestore, 'pedidos');
     const constraints: QueryConstraint[] = [orderBy('fecha', 'desc')];
 
     if (filters?.estado && filters.estado !== 'todos') {
@@ -165,7 +171,8 @@ export const getPedidos = async (filters?: {
 
 export const getPedidoById = async (id: string): Promise<Pedido | null> => {
   try {
-    const docRef = doc(db, 'pedidos', id);
+    const firestore = ensureFirebase();
+    const docRef = doc(firestore, 'pedidos', id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -185,7 +192,8 @@ export const getPedidoById = async (id: string): Promise<Pedido | null> => {
 
 export const createPedido = async (pedido: Omit<Pedido, 'id'>): Promise<string> => {
   try {
-    const docRef = await addDoc(collection(db, 'pedidos'), {
+    const firestore = ensureFirebase();
+    const docRef = await addDoc(collection(firestore, 'pedidos'), {
       ...pedido,
       fecha: Timestamp.fromDate(pedido.fecha),
       createdAt: Timestamp.now(),
@@ -199,7 +207,8 @@ export const createPedido = async (pedido: Omit<Pedido, 'id'>): Promise<string> 
 
 export const updatePedido = async (id: string, pedido: Partial<Pedido>): Promise<void> => {
   try {
-    const docRef = doc(db, 'pedidos', id);
+    const firestore = ensureFirebase();
+    const docRef = doc(firestore, 'pedidos', id);
     const updateData: any = { ...pedido };
     
     if (pedido.fecha) {
@@ -220,7 +229,8 @@ export const updatePedido = async (id: string, pedido: Partial<Pedido>): Promise
 
 export const getCupones = async (activo?: boolean): Promise<Cupon[]> => {
   try {
-    const cuponesRef = collection(db, 'cupones');
+    const firestore = ensureFirebase();
+    const cuponesRef = collection(firestore, 'cupones');
     const constraints: QueryConstraint[] = [];
 
     if (activo !== undefined) {
@@ -257,7 +267,8 @@ export const getCupones = async (activo?: boolean): Promise<Cupon[]> => {
 
 export const getCuponByCodigo = async (codigo: string): Promise<Cupon | null> => {
   try {
-    const cuponesRef = collection(db, 'cupones');
+    const firestore = ensureFirebase();
+    const cuponesRef = collection(firestore, 'cupones');
     const q = query(cuponesRef, where('codigo', '==', codigo.toUpperCase()), limit(1));
     const querySnapshot = await getDocs(q);
 
@@ -290,7 +301,8 @@ export const getCuponByCodigo = async (codigo: string): Promise<Cupon | null> =>
 
 export const createCupon = async (cupon: Omit<Cupon, 'id' | 'createdAt'>): Promise<string> => {
   try {
-    const docRef = await addDoc(collection(db, 'cupones'), {
+    const firestore = ensureFirebase();
+    const docRef = await addDoc(collection(firestore, 'cupones'), {
       ...cupon,
       codigo: cupon.codigo.toUpperCase(),
       fechaInicio: Timestamp.fromDate(cupon.fechaInicio),
@@ -306,7 +318,8 @@ export const createCupon = async (cupon: Omit<Cupon, 'id' | 'createdAt'>): Promi
 
 export const updateCupon = async (id: string, cupon: Partial<Cupon>): Promise<void> => {
   try {
-    const docRef = doc(db, 'cupones', id);
+    const firestore = ensureFirebase();
+    const docRef = doc(firestore, 'cupones', id);
     const updateData: any = { ...cupon };
     
     if (cupon.fechaInicio) {
@@ -328,7 +341,8 @@ export const updateCupon = async (id: string, cupon: Partial<Cupon>): Promise<vo
 
 export const deleteCupon = async (id: string): Promise<void> => {
   try {
-    await deleteDoc(doc(db, 'cupones', id));
+    const firestore = ensureFirebase();
+    await deleteDoc(doc(firestore, 'cupones', id));
   } catch (error) {
     console.error('Error eliminando cupón:', error);
     throw error;
