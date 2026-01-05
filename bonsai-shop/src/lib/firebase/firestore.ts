@@ -14,7 +14,7 @@ import {
   QueryConstraint,
 } from 'firebase/firestore';
 import { db } from './config';
-import type { Producto } from '@/types';
+import type { Producto, Cupon } from '@/types';
 import type { Pedido } from '@/lib/mockPedidos';
 
 // ==================== PRODUCTOS ====================
@@ -207,20 +207,6 @@ export const updatePedido = async (id: string, pedido: Partial<Pedido>): Promise
 };
 
 // ==================== CUPONES ====================
-
-export interface Cupon {
-  id?: string;
-  codigo: string;
-  tipo: 'porcentaje' | 'fijo';
-  valor: number;
-  minimoCompra?: number;
-  usoMaximo?: number;
-  usosActuales: number;
-  fechaInicio: Date;
-  fechaFin: Date;
-  activo: boolean;
-  categorias?: string[];
-}
 
 export const getCupones = async (activo?: boolean): Promise<Cupon[]> => {
   try {

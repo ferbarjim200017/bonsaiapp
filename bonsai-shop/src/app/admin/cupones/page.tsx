@@ -4,19 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Plus, Edit, Trash2, Copy } from 'lucide-react';
 import { getCupones, deleteCupon } from '@/lib/firebase/firestore';
-
-interface Cupon {
-  id: string;
-  codigo: string;
-  tipo: 'porcentaje' | 'fijo';
-  valor: number;
-  minimoCompra?: number;
-  usoMaximo?: number;
-  usosActuales: number;
-  fechaInicio: Date;
-  fechaFin: Date;
-  activo: boolean;
-}
+import type { Cupon } from '@/types';
 
 const cuponesMock: Cupon[] = [
   {
@@ -30,6 +18,7 @@ const cuponesMock: Cupon[] = [
     fechaInicio: new Date('2025-01-01'),
     fechaFin: new Date('2025-12-31'),
     activo: true,
+    createdAt: new Date('2025-01-01'),
   },
   {
     id: '2',
@@ -42,6 +31,7 @@ const cuponesMock: Cupon[] = [
     fechaInicio: new Date('2025-06-01'),
     fechaFin: new Date('2025-08-31'),
     activo: true,
+    createdAt: new Date('2025-06-01'),
   },
 ];
 
