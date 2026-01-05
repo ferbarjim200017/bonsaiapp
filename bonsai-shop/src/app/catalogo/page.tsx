@@ -97,13 +97,14 @@ export default function CatalogoPage() {
     });
   };
 
-  const hayFiltrosActivos =
+  const hayFiltrosActivos = !!(
     filtros.categoria ||
     filtros.ubicacion ||
     filtros.dificultad ||
     filtros.precioMin ||
     filtros.precioMax ||
-    filtros.enStock;
+    filtros.enStock
+  );
 
   return (
     <div className="bg-white min-h-screen">
