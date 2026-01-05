@@ -224,11 +224,21 @@ export const getCupones = async (activo?: boolean): Promise<Cupon[]> => {
       const data = doc.data();
       return {
         id: doc.id,
-        ...data,
+        codigo: data.codigo,
+        tipo: data.tipo,
+        valor: data.valor,
+        minimoCompra: data.minimoCompra,
+        usoMaximo: data.usoMaximo,
+        usosActuales: data.usosActuales,
+        usosPorCliente: data.usosPorCliente,
         fechaInicio: data.fechaInicio.toDate(),
         fechaFin: data.fechaFin.toDate(),
-      };
-    }) as Cupon[];
+        categorias: data.categorias,
+        productosIds: data.productosIds,
+        activo: data.activo,
+        createdAt: data.createdAt?.toDate() || new Date(),
+      } as Cupon;
+    });
   } catch (error) {
     console.error('Error obteniendo cupones:', error);
     return [];
@@ -246,9 +256,19 @@ export const getCuponByCodigo = async (codigo: string): Promise<Cupon | null> =>
       const data = doc.data();
       return {
         id: doc.id,
-        ...data,
+        codigo: data.codigo,
+        tipo: data.tipo,
+        valor: data.valor,
+        minimoCompra: data.minimoCompra,
+        usoMaximo: data.usoMaximo,
+        usosActuales: data.usosActuales,
+        usosPorCliente: data.usosPorCliente,
         fechaInicio: data.fechaInicio.toDate(),
         fechaFin: data.fechaFin.toDate(),
+        categorias: data.categorias,
+        productosIds: data.productosIds,
+        activo: data.activo,
+        createdAt: data.createdAt?.toDate() || new Date(),
       } as Cupon;
     }
     return null;
