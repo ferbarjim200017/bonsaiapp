@@ -1,11 +1,12 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle, Package, Mail } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
-export default function ConfirmacionPage() {
+function ConfirmacionContent() {
   const searchParams = useSearchParams();
   const numeroPedido = searchParams.get('pedido') || 'BON-XXXXX';
 
@@ -79,5 +80,21 @@ export default function ConfirmacionPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ConfirmacionPage() {
+  return (
+    <Suspense fallback={
+      <div className="bg-white min-h-screen">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <p className="text-gray-600">Cargando...</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <ConfirmacionContent />
+    </Suspense>
   );
 }
