@@ -5,8 +5,9 @@ import {
   onAuthStateChanged,
   User as FirebaseUser,
   updateProfile,
+  Auth,
 } from 'firebase/auth';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, Firestore } from 'firebase/firestore';
 import { auth, db } from './config';
 
 export interface UserProfile {
@@ -17,6 +18,22 @@ export interface UserProfile {
   createdAt: Date;
 }
 
+// Helper para verificar que Firebase Auth está configurado
+const ensureAuth = (): Auth => {
+  if (!auth) {
+    throw new Error('Firebase Auth not initialized. Make sure environment variables are set.');
+  }
+  return auth;
+};
+
+// Helper para verificar que Firestore está configurado
+const ensureDb = (): Firestore => {
+  if (!db) {
+    throw new Error('Firestore not initialized. Make sure environment variables are set.');
+  }
+  return db;
+};
+
 // Registrar nuevo usuario
 export const registerUser = async (
   email: string,
@@ -25,7 +42,10 @@ export const registerUser = async (
   rol: 'admin' | 'cliente' = 'cliente'
 ): Promise<UserProfile> => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const firebaseAuth = ensureAuth();
+    const firestore = ensureDb();
+    
+    const userCredential = await createUserWithEmailAndPassword(firebaseAuth, email, password);
     const user = userCredential.user;
 
     // Actualizar perfil de Firebase Auth
@@ -40,7 +60,7 @@ export const registerUser = async (
       createdAt: new Date(),
     };
 
-    await setDoc(doc(db, 'users', user.uid), userProfile);
+    await setDoc(doc(firestore, 'users', user.uid), userProfile);
 
     return userProfile;
   } catch (error: any) {
@@ -51,11 +71,14 @@ export const registerUser = async (
 // Iniciar sesión
 export const loginUser = async (email: string, password: string): Promise<UserProfile> => {
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const firebaseAuth = ensureAuth();
+    const firestore = ensureDb();
+    
+    const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
     const user = userCredential.user;
 
     // Obtener perfil de Firestore
-    const userDoc = await getDoc(doc(db, 'users', user.uid));
+    const userDoc = await getDoc(doc(firestore, 'users', user.uid));
     
     if (!userDoc.exists()) {
       throw new Error('Perfil de usuario no encontrado');
@@ -70,7 +93,8 @@ export const loginUser = async (email: string, password: string): Promise<UserPr
 // Cerrar sesión
 export const logoutUser = async (): Promise<void> => {
   try {
-    await signOut(auth);
+    const firebaseAuth = ensureAuth();
+    await signOut(firebaseAuth);
   } catch (error: any) {
     throw new Error(error.message || 'Error al cerrar sesión');
   }
@@ -79,7 +103,8 @@ export const logoutUser = async (): Promise<void> => {
 // Obtener perfil de usuario
 export const getUserProfile = async (uid: string): Promise<UserProfile | null> => {
   try {
-    const userDoc = await getDoc(doc(db, 'users', uid));
+    const firestore = ensureDb();
+    const userDoc = await getDoc(doc(firestore, 'users', uid));
     
     if (!userDoc.exists()) {
       return null;
@@ -94,5 +119,6 @@ export const getUserProfile = async (uid: string): Promise<UserProfile | null> =
 
 // Observer de autenticación
 export const onAuthChange = (callback: (user: FirebaseUser | null) => void) => {
-  return onAuthStateChanged(auth, callback);
+  const firebaseAuth = ensureAuth();
+  return onAuthStateChanged(firebaseAuth, callback);
 };
