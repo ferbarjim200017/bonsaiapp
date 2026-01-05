@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Filter, X } from 'lucide-react';
 import ProductCard from '@/components/products/ProductCard';
-import { obtenerProductos } from '@/lib/mockData';
+import { obtenerTodosLosProductos } from '@/lib/mockData';
 import { Producto, ProductCategory, Ubicacion, Dificultad } from '@/types';
 
 export default function CatalogoPage() {
@@ -22,12 +22,25 @@ export default function CatalogoPage() {
     ordenar: searchParams.get('ordenar') || 'relevancia',
   });
 
+  // Actualizar filtros cuando cambian los searchParams (navegación desde Header)
+  useEffect(() => {
+    setFiltros({
+      categoria: searchParams.get('categoria') || '',
+      ubicacion: searchParams.get('ubicacion') || '',
+      dificultad: searchParams.get('dificultad') || '',
+      precioMin: searchParams.get('precioMin') || '',
+      precioMax: searchParams.get('precioMax') || '',
+      enStock: searchParams.get('enStock') === 'true',
+      ordenar: searchParams.get('ordenar') || 'relevancia',
+    });
+  }, [searchParams]);
+
   useEffect(() => {
     aplicarFiltros();
   }, [filtros]);
 
-  const aplicarFiltros = () => {
-    let productosFiltrados = obtenerProductos();
+  const aplicarFiltros = async () => {
+    let productosFiltrados = await obtenerTodosLosProductos();
 
     // Aplicar filtros
     if (filtros.categoria) {

@@ -1,4 +1,5 @@
 import { Producto } from '@/types';
+import { getProductos } from '@/lib/firebase/firestore';
 
 export const productosMock: Producto[] = [
   // Bonsáis
@@ -225,4 +226,78 @@ export function obtenerProductoPorSlug(slug: string): Producto | undefined {
 
 export function obtenerProductoPorId(id: string): Producto | undefined {
   return productosMock.find((p) => p.id === id);
+}
+
+// Combinar productos de Firebase con productos mock
+export async function obtenerTodosLosProductos(filtros?: {
+  categoria?: string;
+  ubicacion?: string;
+  destacados?: boolean;
+  nuevos?: boolean;
+  enStock?: boolean;
+  limite?: number;
+}): Promise<Producto[]> {
+  try {
+    // Obtener productos de Firebase
+    const productosFirebase = await getProductos({ publicado: true });
+    
+    // Combinar con productos mock
+    const productosCombinados = [...productosFirebase, ...productosMock];
+    
+    // Eliminar duplicados por ID
+    const productosUnicos = productosCombinados.reduce((acc, producto) => {
+      if (!acc.find(p => p.id === producto.id)) {
+        acc.push(producto);
+      }
+      return acc;
+    }, [] as Producto[]);
+    
+    // Aplicar filtros si existen
+    let productos = productosUnicos;
+    
+    if (filtros) {
+      if (filtros.categoria) {
+        productos = productos.filter((p) => p.categoria === filtros.categoria);
+      }
+      if (filtros.ubicacion) {
+        productos = productos.filter(
+          (p) => p.ubicacion === filtros.ubicacion || p.ubicacion === 'ambos'
+        );
+      }
+      if (filtros.enStock) {
+        productos = productos.filter((p) => p.stock > 0);
+      }
+      if (filtros.destacados) {
+        productos = productos.filter((p) => p.destacado);
+      }
+      if (filtros.nuevos) {
+        productos = productos.filter((p) => p.nuevo);
+      }
+      if (filtros.limite) {
+        productos = productos.slice(0, filtros.limite);
+      }
+    }
+    
+    return productos;
+  } catch (error) {
+    console.error('Error obteniendo productos combinados:', error);
+    // En caso de error, devolver solo los mock
+    return obtenerProductos(filtros);
+  }
+}
+
+// Buscar producto por slug en Firebase y mock
+export async function obtenerProductoPorSlugCombinado(slug: string): Promise<Producto | null> {
+  try {
+    // Primero intentar en Firebase
+    const { getProductoBySlug } = await import('@/lib/firebase/firestore');
+    const productoFirebase = await getProductoBySlug(slug);
+    if (productoFirebase) return productoFirebase;
+    
+    // Si no está en Firebase, buscar en mock
+    return obtenerProductoPorSlug(slug) || null;
+  } catch (error) {
+    console.error('Error buscando producto por slug:', error);
+    return obtenerProductoPorSlug(slug) || null;
+  }
 }

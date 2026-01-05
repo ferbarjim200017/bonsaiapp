@@ -1,0 +1,59 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.rol == 'admin';
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      // Anyone can read user data (needed for displaying names, etc.)
+      allow read: if true;
+      // Users can only write their own data
+      allow write: if isOwner(userId);
+      // Admins can write any user data
+      allow write: if isAdmin();
+    }
+
+    // Products collection
+    match /productos/{productId} {
+      // Everyone can read published products
+      allow read: if true;
+      // Only admins can create, update, or delete products
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Orders collection
+    match /pedidos/{pedidoId} {
+      // Users can only read their own orders
+      allow read: if isAuthenticated() && 
+                      (resource.data.userId == request.auth.uid || isAdmin());
+      // Users can create orders
+      allow create: if isAuthenticated();
+      // Only admins can update orders (change status, etc.)
+      allow update: if isAdmin();
+      // Nobody can delete orders
+      allow delete: if false;
+    }
+
+    // Coupons collection
+    match /cupones/{cuponId} {
+      // Everyone can read active coupons
+      allow read: if true;
+      // Only admins can manage coupons
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}

@@ -1,112 +1,52 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, Leaf, Package, Shield, Truck } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import ProductCard from '@/components/products/ProductCard';
-import { obtenerTodosLosProductos } from '@/lib/mockData';
-import { Producto } from '@/types';
+import { obtenerProductos } from '@/lib/mockData';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Bonsái Shop - Venta de Bonsáis y Accesorios en España',
+  description: 'Tienda online especializada en bonsáis de calidad para interior y exterior. Envíos a toda España con garantía de calidad. Encuentra tu bonsái perfecto.',
+  keywords: ['bonsái', 'bonsais españa', 'comprar bonsái', 'bonsái interior', 'bonsái exterior', 'accesorios bonsái'],
+  openGraph: {
+    title: 'Bonsái Shop - Venta de Bonsáis en España',
+    description: 'Tienda online especializada en bonsáis de calidad',
+    type: 'website',
+  },
+};
 
 export default function HomePage() {
-  const [scrollY, setScrollY] = useState(0);
-  const [productosDestacados, setProductosDestacados] = useState<Producto[]>([]);
-  const [productosNuevos, setProductosNuevos] = useState<Producto[]>([]);
-
-  useEffect(() => {
-    // Cargar productos
-    const cargarProductos = async () => {
-      const destacados = await obtenerTodosLosProductos({ destacados: true, limite: 4 });
-      const nuevos = await obtenerTodosLosProductos({ nuevos: true, limite: 4 });
-      setProductosDestacados(destacados);
-      setProductosNuevos(nuevos);
-    };
-    cargarProductos();
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Calcular transformaciones basadas en scroll
-  const parallaxOffset = scrollY * 0.5;
-  const opacity = Math.max(0, 1 - scrollY / 400);
-  const scale = Math.max(0.9, 1 - scrollY / 2000);
+  const productosDestacados = obtenerProductos({ destacados: true, limite: 4 });
+  const productosNuevos = obtenerProductos({ nuevos: true, limite: 4 });
 
   return (
     <>
-      {/* Hero Section con imagen de fondo y efecto parallax */}
-      <section className="relative min-h-[600px] md:min-h-[700px] overflow-hidden">
-        {/* Imagen de fondo con parallax */}
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            transform: `translateY(${parallaxOffset}px) scale(${scale})`,
-            transition: 'transform 0.1s ease-out',
-          }}
-        >
-          <Image
-            src="/images/hero-bonsai.jpg"
-            alt="Bonsái decorativo"
-            fill
-            className="object-cover"
-            priority
-            style={{
-              filter: 'blur(3px) brightness(0.7)',
-            }}
-          />
-          {/* Overlay degradado */}
-          <div className="absolute inset-0 bg-gradient-to-br from-green-900/60 via-green-800/40 to-green-700/60" />
-        </div>
-
-        {/* Contenido del hero */}
-        <div 
-          className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32"
-          style={{
-            opacity,
-            transform: `translateY(${scrollY * 0.3}px)`,
-          }}
-        >
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-green-50 to-green-100 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
               Tu tienda de bonsáis en España
             </h1>
-            <p className="text-lg md:text-xl text-white/95 mb-8 drop-shadow-md">
+            <p className="text-lg md:text-xl text-gray-600 mb-8">
               Descubre nuestra selección de bonsáis de calidad para interior y exterior. 
               Envíos seguros a toda España con garantía y guías de cuidado incluidas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/catalogo"
-                className="btn btn-primary inline-flex items-center justify-center shadow-xl hover:shadow-2xl transition-shadow"
+                className="btn btn-primary inline-flex items-center justify-center"
               >
                 Ver catálogo
                 <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
               </Link>
               <Link
                 href="/cuidados"
-                className="btn bg-white/90 hover:bg-white text-gray-900 inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
+                className="btn btn-outline inline-flex items-center justify-center"
               >
                 Guía de cuidados
               </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Indicador de scroll */}
-        <div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-          style={{ opacity: Math.max(0, 1 - scrollY / 200) }}
-        >
-          <div className="animate-bounce">
-            <div className="w-6 h-10 border-2 border-white/60 rounded-full flex items-start justify-center p-2">
-              <div className="w-1 h-3 bg-white/60 rounded-full" />
             </div>
           </div>
         </div>

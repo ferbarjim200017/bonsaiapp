@@ -24,15 +24,15 @@ export default function CarritoPage() {
     setAplicandoCupon(true);
     setErrorCupon('');
 
-    const exito = await aplicarCupon(codigoCupon.trim().toUpperCase());
+    const resultado = await aplicarCupon(codigoCupon.trim().toUpperCase());
 
     setAplicandoCupon(false);
 
-    if (exito) {
+    if (resultado.exito) {
       setCodigoCupon('');
-      alert('✓ Cupón aplicado correctamente');
+      alert(`✓ ${resultado.mensaje}`);
     } else {
-      setErrorCupon('Cupón no válido o no cumple los requisitos (mínimo 30€)');
+      setErrorCupon(resultado.mensaje);
     }
   };
 

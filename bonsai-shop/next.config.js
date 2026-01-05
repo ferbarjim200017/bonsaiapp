@@ -8,6 +8,10 @@ const nextConfig = {
     locales: ['es'],
     defaultLocale: 'es',
   },
+  // Optimización de imports
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
 }
 
 module.exports = nextConfig

@@ -2,12 +2,14 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Menu, X, ShoppingCart, User, Search } from 'lucide-react';
+import { Menu, X, ShoppingCart, User, Search, LogOut } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { itemsCount } = useCart();
+  const { user, logout } = useAuth();
 
   const navigation = [
     { name: 'Inicio', href: '/' },
@@ -38,6 +40,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
+                prefetch={true}
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
               >
                 {item.name}
@@ -55,13 +58,44 @@ export default function Header() {
               <Search className="h-6 w-6" aria-hidden="true" />
             </Link>
 
-            <Link
-              href="/cuenta"
-              className="hidden sm:block p-2 text-gray-700 hover:text-primary-700 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
-              aria-label="Mi cuenta"
-            >
-              <User className="h-6 w-6" aria-hidden="true" />
-            </Link>
+            {/* Usuario - Dropdown en desktop */}
+            <div className="hidden sm:block relative group">
+              <Link
+                href="/cuenta"
+                className="p-2 text-gray-700 hover:text-primary-700 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 flex items-center gap-2"
+                aria-label="Mi cuenta"
+              >
+                <User className="h-6 w-6" aria-hidden="true" />
+                {user && (
+                  <span className="hidden lg:block text-sm font-medium">
+                    {user.nombre}
+                  </span>
+                )}
+              </Link>
+
+              {/* Dropdown menu */}
+              {user && (
+                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="py-1" role="menu">
+                    <Link
+                      href="/cuenta"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                    >
+                      Mi cuenta
+                    </Link>
+                    <button
+                      onClick={logout}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                      role="menuitem"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Cerrar sesión
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <Link
               href="/carrito"
@@ -103,6 +137,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
+                prefetch={true}
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md"
                 role="menuitem"
                 onClick={() => setMobileMenuOpen(false)}
@@ -110,14 +145,44 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <Link
-              href="/cuenta"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md sm:hidden"
-              role="menuitem"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Mi cuenta
-            </Link>
+            
+            {user ? (
+              <>
+                <div className="border-t border-gray-200 my-2 pt-2">
+                  <div className="px-3 py-2 text-sm text-gray-500">
+                    {user.nombre}
+                  </div>
+                  <Link
+                    href="/cuenta"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md sm:hidden"
+                    role="menuitem"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Mi cuenta
+                  </Link>
+                  <button
+                    onClick={() => {
+                      logout();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full text-left block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md flex items-center gap-2"
+                    role="menuitem"
+                  >
+                    <LogOut className="h-5 w-5" />
+                    Cerrar sesión
+                  </button>
+                </div>
+              </>
+            ) : (
+              <Link
+                href="/cuenta/login"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md sm:hidden"
+                role="menuitem"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Iniciar sesión
+              </Link>
+            )}
           </div>
         )}
       </nav>

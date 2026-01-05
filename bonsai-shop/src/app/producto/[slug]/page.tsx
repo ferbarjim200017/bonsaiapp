@@ -1,19 +1,54 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingCart, Heart, AlertCircle, ChevronRight, Package, Truck, Shield } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
-import { obtenerProductoPorSlug, productosMock } from '@/lib/mockData';
+import { obtenerProductoPorSlugCombinado, obtenerTodosLosProductos } from '@/lib/mockData';
+import { Producto } from '@/types';
 
 export default function ProductoPage({ params }: { params: { slug: string } }) {
-  const producto = obtenerProductoPorSlug(params.slug);
+  const [producto, setProducto] = useState<Producto | null>(null);
+  const [productosRelacionados, setProductosRelacionados] = useState<Producto[]>([]);
   const { agregarAlCarrito } = useCart();
   const [cantidad, setCantidad] = useState(1);
   const [imagenActiva, setImagenActiva] = useState(0);
   const [agregandoCarrito, setAgregandoCarrito] = useState(false);
+  const [cargando, setCargando] = useState(true);
+
+  useEffect(() => {
+    const cargarProducto = async () => {
+      setCargando(true);
+      const productoEncontrado = await obtenerProductoPorSlugCombinado(params.slug);
+      
+      if (productoEncontrado) {
+        setProducto(productoEncontrado);
+        
+        // Cargar productos relacionados
+        const todosLosProductos = await obtenerTodosLosProductos();
+        const relacionados = todosLosProductos
+          .filter((p) => p.categoria === productoEncontrado.categoria && p.id !== productoEncontrado.id)
+          .slice(0, 4);
+        setProductosRelacionados(relacionados);
+      }
+      setCargando(false);
+    };
+    
+    cargarProducto();
+  }, [params.slug]);
+
+  if (cargando) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Cargando producto...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!producto) {
     notFound();
@@ -41,11 +76,6 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
       alert(`${producto.nombre} añadido al carrito`);
     }, 300);
   };
-
-  // Productos relacionados (misma categoría)
-  const productosRelacionados = productosMock
-    .filter((p) => p.categoria === producto.categoria && p.id !== producto.id)
-    .slice(0, 4);
 
   return (
     <div className="bg-white min-h-screen">

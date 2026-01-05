@@ -3,7 +3,10 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import PagePreloader from '@/components/layout/PagePreloader';
+import ChatBot from '@/components/chat/ChatBot';
 import { CartProvider } from '@/context/CartContext';
+import { AuthProvider } from '@/context/AuthContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,15 +38,19 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Saltar al contenido principal
         </a>
-        <CartProvider>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main id="main-content" className="flex-1">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <PagePreloader />
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main id="main-content" className="flex-1">
+                {children}
+              </main>
+              <Footer />
+            </div>
+            <ChatBot />
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

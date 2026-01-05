@@ -1,12 +1,32 @@
+'use client';
+
 import Link from 'next/link';
-import { User, Package, MapPin, Settings } from 'lucide-react';
+import { User, Package, MapPin, Settings, LogOut } from 'lucide-react';
 import Button from '@/components/ui/Button';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function CuentaPage() {
-  // Mock: usuario no autenticado
-  const usuarioAutenticado = false;
+  const { user, logout, isLoading, isAdmin } = useAuth();
+  const router = useRouter();
 
-  if (!usuarioAutenticado) {
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+  };
+
+  if (isLoading) {
+    return (
+      <div className="bg-white min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Cargando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
     return (
       <div className="bg-white min-h-screen">
         <div className="mx-auto max-w-md px-4 sm:px-6 lg:px-8 py-16">
@@ -51,11 +71,33 @@ export default function CuentaPage() {
     );
   }
 
-  // Si estuviera autenticado, mostrar dashboard
+  // Usuario autenticado - mostrar dashboard
   return (
     <div className="bg-white min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Mi cuenta</h1>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Mi cuenta</h1>
+            <p className="text-gray-600 mt-1">Bienvenido, {user.nombre}</p>
+          </div>
+          <div className="flex gap-3">
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="btn btn-secondary"
+              >
+                Panel Admin
+              </Link>
+            )}
+            <button
+              onClick={handleLogout}
+              className="btn btn-outline flex items-center gap-2"
+            >
+              <LogOut className="h-4 w-4" />
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Mis pedidos */}

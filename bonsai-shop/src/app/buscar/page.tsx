@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Search, X } from 'lucide-react';
 import ProductCard from '@/components/products/ProductCard';
-import { obtenerProductos } from '@/lib/mockData';
+import { getProductos } from '@/lib/firebase/firestore';
 import { Producto } from '@/types';
 
 export default function BuscarPage() {
@@ -24,12 +24,12 @@ export default function BuscarPage() {
     }
   }, [busquedaActiva]);
 
-  const buscarProductos = (termino: string) => {
+  const buscarProductos = async (termino: string) => {
     setCargando(true);
     
-    // Simular búsqueda
-    setTimeout(() => {
-      const todosLosProductos = obtenerProductos({});
+    try {
+      // Obtener todos los productos de Firebase
+      const todosLosProductos = await getProductos({ publicado: true });
       const terminoLower = termino.toLowerCase().trim();
       
       const resultadosFiltrados = todosLosProductos.filter((producto) => {
@@ -52,8 +52,12 @@ export default function BuscarPage() {
       });
       
       setResultados(resultadosFiltrados);
+    } catch (error) {
+      console.error('Error buscando productos:', error);
+      setResultados([]);
+    } finally {
       setCargando(false);
-    }, 300);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
