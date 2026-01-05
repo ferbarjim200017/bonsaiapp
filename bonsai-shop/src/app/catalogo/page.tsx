@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Filter, X } from 'lucide-react';
 import ProductCard from '@/components/products/ProductCard';
 import { obtenerTodosLosProductos } from '@/lib/mockData';
 import { Producto, ProductCategory, Ubicacion, Dificultad } from '@/types';
 
-export default function CatalogoPage() {
+function CatalogoContent() {
   const searchParams = useSearchParams();
   const [productos, setProductos] = useState<Producto[]>([]);
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
@@ -413,5 +413,24 @@ function FiltrosPanel({
         <span className="text-sm text-gray-700">Solo productos en stock</span>
       </label>
     </div>
+  );
+}
+
+export default function CatalogoPage() {
+  return (
+    <Suspense fallback={
+      <div className="bg-white min-h-screen">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+          <div className="mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+              Catálogo de productos
+            </h1>
+            <p className="text-gray-600">Cargando...</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <CatalogoContent />
+    </Suspense>
   );
 }
