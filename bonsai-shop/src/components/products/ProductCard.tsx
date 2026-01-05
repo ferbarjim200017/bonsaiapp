@@ -26,7 +26,7 @@ export default function ProductCard({ producto }: ProductCardProps) {
     : null;
 
   const tieneOferta = producto.precioAnterior && producto.precioAnterior > producto.precio;
-  const descuentoPorcentaje = tieneOferta
+  const descuentoPorcentaje = tieneOferta && producto.precioAnterior
     ? Math.round(((producto.precioAnterior - producto.precio) / producto.precioAnterior) * 100)
     : 0;
 
