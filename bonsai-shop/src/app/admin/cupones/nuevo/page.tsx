@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Plus } from 'lucide-react';
 import { createCupon } from '@/lib/firebase/firestore';
+import type { ProductCategory } from '@/types';
 
 export default function NuevoCupon() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function NuevoCupon() {
     fechaInicio: '',
     fechaFin: '',
     activo: true,
-    categorias: [] as string[],
+    categorias: [] as ProductCategory[],
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,10 +52,10 @@ export default function NuevoCupon() {
   };
 
   const agregarCategoria = (categoria: string) => {
-    if (!formData.categorias.includes(categoria)) {
+    if (!formData.categorias.includes(categoria as ProductCategory)) {
       setFormData({
         ...formData,
-        categorias: [...formData.categorias, categoria],
+        categorias: [...formData.categorias, categoria as ProductCategory],
       });
     }
   };
