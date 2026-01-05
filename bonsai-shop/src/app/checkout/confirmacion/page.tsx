@@ -52,12 +52,16 @@ export default function ConfirmacionPage() {
 
           {/* Botones de acción */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="primary" size="lg" asChild>
-              <Link href="/cuenta/pedidos">Ver mis pedidos</Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/">Volver al inicio</Link>
-            </Button>
+            <Link href="/cuenta/pedidos">
+              <Button variant="primary" size="lg" className="w-full sm:w-auto">
+                Ver mis pedidos
+              </Button>
+            </Link>
+            <Link href="/">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                Volver al inicio
+              </Button>
+            </Link>
           </div>
 
           {/* Información de cuidados */}
