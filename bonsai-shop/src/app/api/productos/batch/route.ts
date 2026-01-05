@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createProducto } from '@/lib/firebase/firestore';
 import type { Producto } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const productos: Omit<Producto, 'id'>[] = await request.json();

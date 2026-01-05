@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // Sistema de conocimiento sobre bonsáis
 const KNOWLEDGE_BASE = {
   especies: {
