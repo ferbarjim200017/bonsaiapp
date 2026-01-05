@@ -278,7 +278,7 @@ export const getCuponByCodigo = async (codigo: string): Promise<Cupon | null> =>
   }
 };
 
-export const createCupon = async (cupon: Omit<Cupon, 'id'>): Promise<string> => {
+export const createCupon = async (cupon: Omit<Cupon, 'id' | 'createdAt'>): Promise<string> => {
   try {
     const docRef = await addDoc(collection(db, 'cupones'), {
       ...cupon,
