@@ -4,10 +4,6 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
-  i18n: {
-    locales: ['es'],
-    defaultLocale: 'es',
-  },
   // Optimización de imports
   experimental: {
     optimizePackageImports: ['lucide-react'],
