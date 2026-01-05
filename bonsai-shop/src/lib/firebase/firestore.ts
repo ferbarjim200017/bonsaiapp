@@ -12,10 +12,19 @@ import {
   limit,
   Timestamp,
   QueryConstraint,
+  Firestore,
 } from 'firebase/firestore';
 import { db } from './config';
 import type { Producto, Cupon } from '@/types';
 import type { Pedido } from '@/lib/mockPedidos';
+
+// Helper para verificar si Firebase está configurado
+const ensureFirebase = () => {
+  if (!db) {
+    throw new Error('Firebase not initialized. Make sure environment variables are set.');
+  }
+  return db;
+};
 
 // ==================== PRODUCTOS ====================
 
@@ -25,7 +34,8 @@ export const getProductos = async (filters?: {
   publicado?: boolean;
 }): Promise<Producto[]> => {
   try {
-    const productosRef = collection(db, 'productos');
+    const firestore = ensureFirebase();
+    const productosRef = collection(firestore, 'productos');
     const constraints: QueryConstraint[] = [];
 
     if (filters?.categoria) {
