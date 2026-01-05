@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Search, X } from 'lucide-react';
 import ProductCard from '@/components/products/ProductCard';
 import { getProductos } from '@/lib/firebase/firestore';
 import { Producto } from '@/types';
 
-export default function BuscarPage() {
+function BuscarContent() {
   const searchParams = useSearchParams();
   const queryParam = searchParams.get('q') || '';
   
@@ -227,5 +227,21 @@ export default function BuscarPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function BuscarPage() {
+  return (
+    <Suspense fallback={
+      <div className="bg-white min-h-screen">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center py-12">
+            <p className="text-gray-600">Cargando...</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <BuscarContent />
+    </Suspense>
   );
 }
