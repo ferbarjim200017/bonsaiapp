@@ -17,6 +17,12 @@ export default function ContactoPage() {
     setError(null);
 
     try {
+      if (!db) {
+        setError('Error: Firebase no está configurado correctamente');
+        setEnviando(false);
+        return;
+      }
+
       const formData = new FormData(e.currentTarget);
       
       // Procesar imágenes adjuntas

@@ -34,6 +34,11 @@ export default function MensajesPage() {
 
   const cargarMensajes = async () => {
     try {
+      if (!db) {
+        console.error('Firebase no está inicializado');
+        setCargando(false);
+        return;
+      }
       const q = query(
         collection(db, 'mensajes-contacto'),
         orderBy('fechaCreacion', 'desc')
@@ -53,6 +58,7 @@ export default function MensajesPage() {
 
   const marcarComoLeido = async (id: string) => {
     try {
+      if (!db) return;
       await updateDoc(doc(db, 'mensajes-contacto', id), {
         leido: true
       });
@@ -64,6 +70,7 @@ export default function MensajesPage() {
 
   const marcarComoRespondido = async (id: string) => {
     try {
+      if (!db) return;
       await updateDoc(doc(db, 'mensajes-contacto', id), {
         respondido: true
       });
@@ -77,6 +84,7 @@ export default function MensajesPage() {
     if (!confirm('¿Estás seguro de eliminar este mensaje?')) return;
     
     try {
+      if (!db) return;
       await deleteDoc(doc(db, 'mensajes-contacto', id));
       setMensajes(mensajes.filter(m => m.id !== id));
       if (mensajeSeleccionado?.id === id) {
