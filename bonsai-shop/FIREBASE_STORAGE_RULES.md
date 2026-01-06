@@ -1,65 +1,36 @@
-# Firebase Storage Rules Configuration
+# Image Upload Configuration
 
 ## Problem
 The image upload was failing with a 500 error because the code was trying to use the filesystem (`fs/promises`), which doesn't work in Vercel's serverless environment.
 
 ## Solution
-Updated the upload API to use Firebase Storage instead.
+Updated the upload API to use **Vercel Blob Storage** instead, which is free up to 1GB per month.
 
-## Required: Configure Storage Rules
+## Vercel Blob Storage (Free Tier)
 
-You need to set up Firebase Storage rules in the Firebase Console:
+### Features:
+- ✅ **Free**: 1GB storage included
+- ✅ **No external accounts needed**: Uses your Vercel project
+- ✅ **Automatic setup**: Vercel configures it automatically on deployment
+- ✅ **Public URLs**: Direct access to uploaded images
 
-### Steps:
+### How it works:
+1. Images are uploaded to Vercel Blob Storage via the `/api/upload` endpoint
+2. Vercel returns a public URL for each image
+3. URLs are stored in Firestore with the product data
 
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Select your project
-3. Go to **Storage** in the left sidebar
-4. Click on the **Rules** tab
-5. Replace the existing rules with:
+### No configuration needed!
+Vercel automatically creates the `BLOB_READ_WRITE_TOKEN` environment variable when you deploy. Just push your code and it will work.
 
-```javascript
-rules_version = '2';
-service firebase.storage {
-  match /b/{bucket}/o {
-    // Allow anyone to read images
-    match /{allPaths=**} {
-      allow read: if true;
-    }
-    
-    // Only allow authenticated admins to upload/delete images
-    match /productos/{imageName} {
-      allow write: if request.auth != null;
-    }
-  }
-}
-```
+### Usage limits (Free tier):
+- Storage: 1GB
+- Bandwidth: 100GB/month
 
-6. Click **Publish**
+For a small bonsai shop, this is more than enough for product images.
 
-### Rules Explanation:
+### Alternative: If you need more storage
+If you exceed the free tier, you can:
+1. Compress images before upload (recommended)
+2. Use Cloudinary free tier (25GB, requires external account)
+3. Upgrade Vercel plan (paid)
 
-- **Read access**: Anyone can view images (needed for public product images)
-- **Write access**: Only authenticated users can upload images to the `productos/` folder
-- This prevents unauthorized uploads while allowing public access to product images
-
-### Testing:
-
-After configuring the rules, try uploading an image to a product again. It should work without errors.
-
-### Alternative (Temporary - Less Secure):
-
-If you want to test quickly, you can use these permissive rules (NOT recommended for production):
-
-```javascript
-rules_version = '2';
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /{allPaths=**} {
-      allow read, write: if true;
-    }
-  }
-}
-```
-
-⚠️ **Warning**: These rules allow anyone to upload/delete files. Only use for testing!

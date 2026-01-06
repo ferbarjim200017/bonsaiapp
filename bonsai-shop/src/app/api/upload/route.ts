@@ -1,20 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { storage } from '@/lib/firebase/config';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { put } from '@vercel/blob';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
-    // Verificar que Firebase Storage esté configurado
-    if (!storage) {
-      console.error('Firebase Storage no está configurado');
-      return NextResponse.json(
-        { error: 'Servicio de almacenamiento no disponible' },
-        { status: 503 }
-      );
-    }
-
     const formData = await request.formData();
     const files = formData.getAll('files') as File[];
     
@@ -28,27 +18,19 @@ export async function POST(request: NextRequest) {
     const uploadedUrls: string[] = [];
 
     for (const file of files) {
-      // Convertir archivo a bytes
-      const bytes = await file.arrayBuffer();
-      const buffer = new Uint8Array(bytes);
-
       // Generar nombre único para el archivo
       const timestamp = Date.now();
       const randomStr = Math.random().toString(36).substring(2, 8);
       const extension = file.name.split('.').pop();
       const fileName = `productos/${timestamp}-${randomStr}.${extension}`;
 
-      // Crear referencia en Firebase Storage
-      const storageRef = ref(storage, fileName);
-
-      // Subir archivo con metadata
-      await uploadBytes(storageRef, buffer, {
-        contentType: file.type,
+      // Subir a Vercel Blob Storage
+      const blob = await put(fileName, file, {
+        access: 'public',
+        addRandomSuffix: false,
       });
 
-      // Obtener URL pública
-      const downloadURL = await getDownloadURL(storageRef);
-      uploadedUrls.push(downloadURL);
+      uploadedUrls.push(blob.url);
     }
 
     return NextResponse.json({ urls: uploadedUrls });
