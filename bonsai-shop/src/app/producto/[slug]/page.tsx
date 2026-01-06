@@ -77,8 +77,8 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
     }, 300);
   };
 
-  const siguienteImagen = () => {
-    if (!producto) return;
+  return (
+    <div className="bg-white min-h-screen">
       {/* Breadcrumbs */}
       <nav aria-label="Breadcrumb" className="bg-gray-50 border-b border-gray-200">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
