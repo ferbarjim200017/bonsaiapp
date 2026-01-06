@@ -35,44 +35,49 @@ const KNOWLEDGE_BASE = {
 };
 
 // Función para generar respuestas basadas en el conocimiento
-function generateResponse(message: string): string {
+function generateResponse(message: string, history?: any[]): string {
   const lowerMessage = message.toLowerCase();
   
   // Saludos
-  if (lowerMessage.match(/^(hola|buenos dias|buenas tardes|buenas noches|hey|hi)/i)) {
-    return '¡Hola! Estoy aquí para ayudarte con cualquier duda sobre bonsáis y sus cuidados. ¿Qué te gustaría saber?';
+  if (lowerMessage.match(/^(hola|buenos dias|buenas tardes|buenas noches|hey|hi|saludos)/i)) {
+    return '¡Hola! 👋 Soy el asistente de Bonsái Shop. Estoy aquí para ayudarte con cualquier duda sobre bonsáis, sus cuidados, accesorios y productos. ¿En qué puedo ayudarte hoy?';
+  }
+
+  // Despedidas
+  if (lowerMessage.match(/(adios|chao|hasta luego|gracias|bye)/i)) {
+    return '¡Hasta pronto! 🌳 Si tienes más preguntas sobre bonsáis, no dudes en volver. ¡Que tengas un buen día!';
   }
 
   // Preguntas sobre especies específicas
   for (const [especie, info] of Object.entries(KNOWLEDGE_BASE.especies)) {
     if (lowerMessage.includes(especie)) {
-      return `**${especie.charAt(0).toUpperCase() + especie.slice(1)}:**\n\n${info}\n\n¿Tienes alguna pregunta más específica sobre esta especie?`;
+      return `**🌳 ${especie.charAt(0).toUpperCase() + especie.slice(1)}**\n\n${info}\n\n¿Te gustaría saber algo más específico sobre el ${especie}?`;
     }
   }
 
   // Preguntas sobre cuidados
-  if (lowerMessage.includes('riego') || lowerMessage.includes('regar') || lowerMessage.includes('agua')) {
-    return `**Sobre el riego:**\n\n${KNOWLEDGE_BASE.cuidados.riego}\n\n¿Necesitas información sobre alguna especie en particular?`;
+  if (lowerMessage.includes('riego') || lowerMessage.includes('regar') || lowerMessage.includes('agua') || lowerMessage.match(/cu[aá]ndo.*agua|cu[aá]nto.*agua/)) {
+    return `**💧 Sobre el riego:**\n\n${KNOWLEDGE_BASE.cuidados.riego}\n\n¿Tienes alguna duda sobre el riego de una especie en particular?`;
   }
 
-  if (lowerMessage.includes('luz') || lowerMessage.includes('sol') || lowerMessage.includes('sombra')) {
-    return `**Sobre la luz:**\n\n${KNOWLEDGE_BASE.cuidados.luz}\n\n¿Quieres saber más sobre algún aspecto específico?`;
+  if (lowerMessage.includes('luz') || lowerMessage.includes('sol') || lowerMessage.includes('sombra') || lowerMessage.includes('iluminacion')) {
+    return `**☀️ Sobre la luz:**\n\n${KNOWLEDGE_BASE.cuidados.luz}\n\n¿Te gustaría saber sobre los requisitos de luz de alguna especie específica?`;
   }
 
-  if (lowerMessage.includes('abono') || lowerMessage.includes('fertilizante') || lowerMessage.includes('nutriente')) {
-    return `**Sobre el abono:**\n\n${KNOWLEDGE_BASE.cuidados.abono}\n\nTambién tengo información sobre productos: ${KNOWLEDGE_BASE.accesorios.abono}`;
+  if (lowerMessage.includes('abono') || lowerMessage.includes('fertilizante') || lowerMessage.includes('nutriente') || lowerMessage.includes('abonar')) {
+    return `**🌿 Sobre el abono:**\n\n${KNOWLEDGE_BASE.cuidados.abono}\n\n**Productos disponibles:**\n${KNOWLEDGE_BASE.accesorios.abono}\n\n¿Necesitas recomendaciones sobre qué abono usar?`;
   }
 
-  if (lowerMessage.includes('poda') || lowerMessage.includes('podar') || lowerMessage.includes('cortar')) {
-    return `**Sobre la poda:**\n\n${KNOWLEDGE_BASE.cuidados.poda}\n\n¿Quieres saber sobre herramientas de poda?`;
+  if (lowerMessage.includes('poda') || lowerMessage.includes('podar') || lowerMessage.includes('cortar') || lowerMessage.includes('recortar')) {
+    return `**✂️ Sobre la poda:**\n\n${KNOWLEDGE_BASE.cuidados.poda}\n\n¿Te gustaría información sobre herramientas de poda?`;
   }
 
-  if (lowerMessage.includes('trasplante') || lowerMessage.includes('trasplantar') || lowerMessage.includes('cambiar maceta')) {
-    return `**Sobre el trasplante:**\n\n${KNOWLEDGE_BASE.cuidados.trasplante}\n\n¿Necesitas información sobre sustratos o macetas?`;
+  if (lowerMessage.includes('trasplante') || lowerMessage.includes('trasplantar') || lowerMessage.includes('cambiar maceta') || lowerMessage.includes('cambiar de maceta')) {
+    return `**🪴 Sobre el trasplante:**\n\n${KNOWLEDGE_BASE.cuidados.trasplante}\n\n¿Necesitas información sobre sustratos o macetas adecuadas?`;
   }
 
-  if (lowerMessage.includes('ubicacion') || lowerMessage.includes('donde poner') || lowerMessage.includes('interior') || lowerMessage.includes('exterior')) {
-    return `**Sobre la ubicación:**\n\n${KNOWLEDGE_BASE.cuidados.ubicacion}\n\n¿Te gustaría saber qué especies son adecuadas para interior o exterior?`;
+  if (lowerMessage.match(/donde (poner|colocar|ubicar)|ubicacion|interior|exterior/)) {
+    return `**📍 Sobre la ubicación:**\n\n${KNOWLEDGE_BASE.cuidados.ubicacion}\n\n¿Tienes un bonsái específico y quieres saber dónde colocarlo?`;
   }
 
   // Preguntas sobre accesorios
@@ -89,29 +94,29 @@ function generateResponse(message: string): string {
   }
 
   // Problemas comunes
-  if (lowerMessage.includes('amarilla') || lowerMessage.includes('amarillean')) {
-    return `**Hojas amarillas:**\n\n${KNOWLEDGE_BASE.problemas['hojas amarillas']}\n\n¿Cuándo empezaste a notar este problema?`;
+  if (lowerMessage.match(/hojas? amarillas?|amarillean|amarillento/)) {
+    return `**🍂 Hojas amarillas:**\n\n${KNOWLEDGE_BASE.problemas['hojas amarillas']}\n\nPara ayudarte mejor, ¿podrías decirme qué especie de bonsái tienes y hace cuánto notaste este problema?`;
   }
 
-  if (lowerMessage.includes('caen') || lowerMessage.includes('caída') || lowerMessage.includes('pierden')) {
-    return `**Caída de hojas:**\n\n${KNOWLEDGE_BASE.problemas['hojas caidas']}\n\n¿Qué especie de bonsái tienes?`;
+  if (lowerMessage.match(/hojas? (se )?caen|caída|pierden? hojas/)) {
+    return `**🍃 Caída de hojas:**\n\n${KNOWLEDGE_BASE.problemas['hojas caidas']}\n\n¿Qué tipo de bonsái tienes? Esto me ayudará a darte una respuesta más precisa.`;
   }
 
-  if (lowerMessage.includes('plaga') || lowerMessage.includes('bicho') || lowerMessage.includes('insecto') || lowerMessage.includes('pulgon') || lowerMessage.includes('cochinilla')) {
-    return `**Sobre plagas:**\n\n${KNOWLEDGE_BASE.problemas.plagas}\n\n¿Has identificado qué tipo de plaga es?`;
+  if (lowerMessage.match(/plaga|bicho|insecto|pulgon|cochinilla|ara[ñn]a roja/)) {
+    return `**🐛 Plagas:**\n\n${KNOWLEDGE_BASE.problemas.plagas}\n\n¿Has podido identificar qué tipo de plaga tiene tu bonsái? ¿Ves pequeños insectos o manchas en las hojas?`;
   }
 
-  if (lowerMessage.includes('seca') || lowerMessage.includes('muere') || lowerMessage.includes('muerta')) {
-    return `**Ramas secas:**\n\n${KNOWLEDGE_BASE.problemas['ramas secas']}\n\n¿Afecta a todo el árbol o solo a algunas ramas?`;
+  if (lowerMessage.match(/seca|muere|muerta|marchita/)) {
+    return `**⚠️ Ramas secas:**\n\n${KNOWLEDGE_BASE.problemas['ramas secas']}\n\n¿El problema afecta a todo el árbol o solo a algunas ramas específicas?`;
   }
 
   // Preguntas sobre principiantes
-  if (lowerMessage.includes('principiante') || lowerMessage.includes('empezar') || lowerMessage.includes('primer') || lowerMessage.includes('fácil')) {
-    return `**Para principiantes, recomiendo:**\n\n` +
-      `🌿 **Ficus:** El más resistente para interior\n` +
-      `🌿 **Olmo Chino:** Muy versátil y perdona errores\n` +
-      `🌿 **Junípero:** Si tienes espacio exterior\n\n` +
-      `Estos bonsáis son resistentes y perfectos para aprender. ¿Te interesa alguno en particular?`;
+  if (lowerMessage.match(/principiante|empezar|primer|f[aá]cil|recomien|cual.*comprar|cu[aá]l.*mejor/)) {
+    return `**🌱 Recomendaciones para principiantes:**\n\n` +
+      `**Ficus** 🏆 - El más resistente para interior. Perfecto si buscas algo que perdone errores.\n\n` +
+      `**Olmo Chino** 🌿 - Muy versátil, se adapta a interior y exterior. Ideal para aprender.\n\n` +
+      `**Junípero** 🌲 - Si tienes terraza o jardín, es resistente y fácil de cuidar.\n\n` +
+      `¿Cuál te llama más la atención? Puedo darte más detalles sobre cualquiera de ellos.`;
   }
 
   // Preguntas sobre envío o compra
@@ -152,8 +157,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generar respuesta basada en el conocimiento
-    const response = generateResponse(message);
+    // Generar respuesta basada en el conocimiento y el historial
+    const response = generateResponse(message, history);
 
     return NextResponse.json({ response });
   } catch (error) {
