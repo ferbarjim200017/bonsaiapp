@@ -15,6 +15,8 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
   const { agregarAlCarrito } = useCart();
   const [cantidad, setCantidad] = useState(1);
   const [imagenActiva, setImagenActiva] = useState(0);
+  const [direccionSlide, setDireccionSlide] = useState<'left' | 'right'>('right');
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [agregandoCarrito, setAgregandoCarrito] = useState(false);
   const [cargando, setCargando] = useState(true);
 
@@ -77,6 +79,27 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
     }, 300);
   };
 
+  const cambiarImagen = (nuevaImagen: number, direccion: 'left' | 'right') => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setDireccionSlide(direccion);
+    
+    setTimeout(() => {
+      setImagenActiva(nuevaImagen);
+      setIsTransitioning(false);
+    }, 300);
+  };
+
+  const siguienteImagen = () => {
+    const siguiente = imagenActiva === producto!.imagenes.length - 1 ? 0 : imagenActiva + 1;
+    cambiarImagen(siguiente, 'right');
+  };
+
+  const anteriorImagen = () => {
+    const anterior = imagenActiva === 0 ? producto!.imagenes.length - 1 : imagenActiva - 1;
+    cambiarImagen(anterior, 'left');
+  };
+
   return (
     <div className="bg-white min-h-screen">
       {/* Breadcrumbs */}
@@ -112,15 +135,25 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
           {/* Galería de imágenes */}
           <div className="space-y-4">
             <div className="aspect-square relative overflow-hidden rounded-lg bg-gray-100 border border-gray-200">
-              <Image
-                src={producto.imagenes[imagenActiva] || '/images/placeholder-bonsai.jpg'}
-                alt={producto.nombre}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-                priority
-                unoptimized={producto.imagenes[imagenActiva]?.startsWith('data:') || producto.imagenes[imagenActiva]?.endsWith('.svg')}
-              />
+              <div 
+                className={`w-full h-full transition-transform duration-300 ease-in-out ${
+                  isTransitioning 
+                    ? direccionSlide === 'right' 
+                      ? '-translate-x-full opacity-0' 
+                      : 'translate-x-full opacity-0'
+                    : 'translate-x-0 opacity-100'
+                }`}
+              >
+                <Image
+                  src={producto.imagenes[imagenActiva] || '/images/placeholder-bonsai.jpg'}
+                  alt={producto.nombre}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                  priority
+                  unoptimized={producto.imagenes[imagenActiva]?.startsWith('data:') || producto.imagenes[imagenActiva]?.endsWith('.svg')}
+                />
+              </div>
               {producto.stock === 0 && (
                 <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
                   <span className="bg-white text-gray-900 px-4 py-2 rounded-md font-semibold text-lg">
@@ -133,15 +166,17 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
               {producto.imagenes.length > 1 && (
                 <>
                   <button
-                    onClick={() => setImagenActiva((prev) => (prev === 0 ? producto.imagenes.length - 1 : prev - 1))}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600"
+                    onClick={anteriorImagen}
+                    disabled={isTransitioning}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600 disabled:opacity-50"
                     aria-label="Imagen anterior"
                   >
                     <ChevronLeft className="h-6 w-6 text-gray-800" />
                   </button>
                   <button
-                    onClick={() => setImagenActiva((prev) => (prev === producto.imagenes.length - 1 ? 0 : prev + 1))}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600"
+                    onClick={siguienteImagen}
+                    disabled={isTransitioning}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600 disabled:opacity-50"
                     aria-label="Imagen siguiente"
                   >
                     <ChevronRight className="h-6 w-6 text-gray-800" />
@@ -161,8 +196,12 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
                 {producto.imagenes.map((imagen, index) => (
                   <button
                     key={index}
-                    onClick={() => setImagenActiva(index)}
-                    className={`aspect-square relative overflow-hidden rounded-md border-2 transition-all focus:outline-none focus:ring-2 focus:ring-primary-600 ${
+                    onClick={() => {
+                      const direccion = index > imagenActiva ? 'right' : 'left';
+                      cambiarImagen(index, direccion);
+                    }}
+                    disabled={isTransitioning}
+                    className={`aspect-square relative overflow-hidden rounded-md border-2 transition-all focus:outline-none focus:ring-2 focus:ring-primary-600 disabled:opacity-50 ${
                       index === imagenActiva
                         ? 'border-primary-600 ring-2 ring-primary-600'
                         : 'border-gray-200 hover:border-gray-400'
