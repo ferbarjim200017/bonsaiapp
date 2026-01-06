@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { ArrowLeft, Upload, X } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { getProductoById, updateProducto, createProducto } from '@/lib/firebase/firestore';
-import { productosMock } from '@/lib/mockData';
 import type { Producto } from '@/types';
 
 export default function EditarProducto({ params }: { params: { id: string } }) {
@@ -17,7 +16,6 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
   const [imagenesOriginales, setImagenesOriginales] = useState<string[]>([]); // Track original images
   const [imagenesFiles, setImagenesFiles] = useState<File[]>([]);
   const [productoOriginal, setProductoOriginal] = useState<Producto | null>(null);
-  const [esMock, setEsMock] = useState(false);
 
   const [formData, setFormData] = useState({
     nombre: '',
@@ -45,21 +43,12 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
   useEffect(() => {
     const cargarProducto = async () => {
       try {
-        // Intentar cargar desde Firebase primero
-        let producto = await getProductoById(params.id);
+        const producto = await getProductoById(params.id);
         
-        // Si no está en Firebase, buscar en los datos mock
         if (!producto) {
-          producto = productosMock.find(p => p.id === params.id) || null;
-          
-          if (producto) {
-            setEsMock(true);
-            console.log('⚠️ Producto cargado desde datos mock. Se creará en Firebase al guardar.');
-          } else {
-            alert('❌ Producto no encontrado');
-            router.push('/admin/productos');
-            return;
-          }
+          alert('❌ Producto no encontrado');
+          router.push('/admin/productos');
+          return;
         }
 
         setProductoOriginal(producto);
@@ -176,16 +165,9 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
         }
       });
 
-      // 4. Crear o actualizar producto en Firestore
-      if (esMock) {
-        // Si es un producto mock, crearlo en Firebase (se genera nuevo ID)
-        const nuevoId = await createProducto(productoActualizado as Omit<Producto, 'id'>);
-        alert(`✅ Producto creado en Firebase con ID: ${nuevoId}`);
-      } else {
-        // Si ya existe en Firebase, actualizarlo
-        await updateProducto(params.id, productoActualizado);
-        alert('✅ Producto actualizado exitosamente!');
-      }
+      // 4. Actualizar producto en Firestore
+      await updateProducto(params.id, productoActualizado);
+      alert('✅ Producto actualizado exitosamente!');
       
       router.push('/admin/productos');
     } catch (error) {
@@ -226,12 +208,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
         </div>
       </div>
     );
-  }  {esMock && (
-            <p className="mt-1 text-sm text-amber-600 font-medium">
-              ⚠️ Este producto no está en Firebase. Se creará al guardar.
-            </p>
-          )}
-        
+  }
 
   return (
     <div className="space-y-6">
@@ -590,7 +567,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
               </label>
             </div>
           </div>
-        </div>esMock ? 'Crear en Firebase' : 
+        </div>
 
         {/* Botones de acción */}
         <div className="flex justify-end gap-4">

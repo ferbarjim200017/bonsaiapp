@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Filter, X } from 'lucide-react';
 import ProductCard from '@/components/products/ProductCard';
-import { obtenerTodosLosProductos } from '@/lib/mockData';
+import { getProductos } from '@/lib/firebase/firestore';
 import { Producto, ProductCategory, Ubicacion, Dificultad } from '@/types';
 
 function CatalogoContent() {
@@ -40,7 +40,7 @@ function CatalogoContent() {
   }, [filtros]);
 
   const aplicarFiltros = async () => {
-    let productosFiltrados = await obtenerTodosLosProductos();
+    let productosFiltrados = await getProductos({ publicado: true });
 
     // Aplicar filtros
     if (filtros.categoria) {

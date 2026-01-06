@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingCart, Heart, AlertCircle, ChevronRight, Package, Truck, Shield, ChevronLeft } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
-import { obtenerProductoPorSlugCombinado, obtenerTodosLosProductos } from '@/lib/mockData';
+import { getProductoBySlug, getProductos } from '@/lib/firebase/firestore';
 import { Producto } from '@/types';
 
 export default function ProductoPage({ params }: { params: { slug: string } }) {
@@ -22,17 +22,21 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
   useEffect(() => {
     const cargarProducto = async () => {
       setCargando(true);
-      const productoEncontrado = await obtenerProductoPorSlugCombinado(params.slug);
-      
-      if (productoEncontrado) {
-        setProducto(productoEncontrado);
+      try {
+        const productoEncontrado = await getProductoBySlug(params.slug);
         
-        // Cargar productos relacionados
-        const todosLosProductos = await obtenerTodosLosProductos();
-        const relacionados = todosLosProductos
-          .filter((p) => p.categoria === productoEncontrado.categoria && p.id !== productoEncontrado.id)
-          .slice(0, 4);
-        setProductosRelacionados(relacionados);
+        if (productoEncontrado) {
+          setProducto(productoEncontrado);
+          
+          // Cargar productos relacionados
+          const todosLosProductos = await getProductos({ publicado: true });
+          const relacionados = todosLosProductos
+            .filter((p) => p.categoria === productoEncontrado.categoria && p.id !== productoEncontrado.id)
+            .slice(0, 4);
+          setProductosRelacionados(relacionados);
+        }
+      } catch (error) {
+        console.error('Error cargando producto:', error);
       }
       setCargando(false);
     };
