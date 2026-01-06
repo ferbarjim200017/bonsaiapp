@@ -113,6 +113,7 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
     setTouchEnd(0);
   };
 
+  // Render component
   return (
     <div className="bg-white min-h-screen">
       {/* Breadcrumbs */}
