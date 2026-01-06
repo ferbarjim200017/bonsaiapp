@@ -14,6 +14,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
   const [cargando, setCargando] = useState(true);
   const [guardando, setGuardando] = useState(false);
   const [imagenes, setImagenes] = useState<string[]>([]);
+  const [imagenesOriginales, setImagenesOriginales] = useState<string[]>([]); // Track original images
   const [imagenesFiles, setImagenesFiles] = useState<File[]>([]);
   const [productoOriginal, setProductoOriginal] = useState<Producto | null>(null);
   const [esMock, setEsMock] = useState(false);
@@ -89,6 +90,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
         // Cargar imágenes existentes
         if (producto.imagenes && producto.imagenes.length > 0) {
           setImagenes(producto.imagenes);
+          setImagenesOriginales(producto.imagenes); // Save original images
         }
 
         setCargando(false);
@@ -135,6 +137,8 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
         .replace(/^-|-$/g, '');
 
       // 3. Preparar datos actualizados
+      // NOTA: Las imágenes eliminadas se borran automáticamente de Firestore
+      // porque imagenesUrls solo contiene las imágenes que quedaron en el formulario
       const productoActualizado: Partial<Producto> = {
         nombre: formData.nombre,
         descripcion: formData.descripcion,

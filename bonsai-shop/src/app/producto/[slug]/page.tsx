@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ShoppingCart, Heart, AlertCircle, ChevronRight, Package, Truck, Shield } from 'lucide-react';
+import { ShoppingCart, Heart, AlertCircle, ChevronRight, Package, Truck, Shield, ChevronLeft } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { obtenerProductoPorSlugCombinado, obtenerTodosLosProductos } from '@/lib/mockData';
 import { Producto } from '@/types';
@@ -119,7 +119,7 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
                 priority
-                unoptimized={producto.imagenes[imagenActiva]?.endsWith('.svg')}
+                unoptimized={producto.imagenes[imagenActiva]?.startsWith('data:') || producto.imagenes[imagenActiva]?.endsWith('.svg')}
               />
               {producto.stock === 0 && (
                 <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
@@ -128,7 +128,59 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
                   </span>
                 </div>
               )}
+              
+              {/* Navigation arrows - only show if multiple images */}
+              {producto.imagenes.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setImagenActiva((prev) => (prev === 0 ? producto.imagenes.length - 1 : prev - 1))}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600"
+                    aria-label="Imagen anterior"
+                  >
+                    <ChevronLeft className="h-6 w-6 text-gray-800" />
+                  </button>
+                  <button
+                    onClick={() => setImagenActiva((prev) => (prev === producto.imagenes.length - 1 ? 0 : prev + 1))}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600"
+                    aria-label="Imagen siguiente"
+                  >
+                    <ChevronRight className="h-6 w-6 text-gray-800" />
+                  </button>
+                  
+                  {/* Image counter */}
+                  <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm">
+                    {imagenActiva + 1} / {producto.imagenes.length}
+                  </div>
+                </>
+              )}
             </div>
+            
+            {/* Thumbnails - only show if multiple images */}
+            {producto.imagenes.length > 1 && (
+              <div className="grid grid-cols-4 gap-2">
+                {producto.imagenes.map((imagen, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setImagenActiva(index)}
+                    className={`aspect-square relative overflow-hidden rounded-md border-2 transition-all focus:outline-none focus:ring-2 focus:ring-primary-600 ${
+                      index === imagenActiva
+                        ? 'border-primary-600 ring-2 ring-primary-600'
+                        : 'border-gray-200 hover:border-gray-400'
+                    }`}
+                    aria-label={`Ver imagen ${index + 1}`}
+                  >
+                    <Image
+                      src={imagen}
+                      alt={`${producto.nombre} - vista ${index + 1}`}
+                      fill
+                      sizes="(max-width: 1024px) 25vw, 12.5vw"
+                      className="object-cover"
+                      unoptimized={imagen?.startsWith('data:') || imagen?.endsWith('.svg')}
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
 
             {producto.variabilidadNatural && (
               <div className="flex items-start gap-2 text-sm text-gray-600 bg-blue-50 p-3 rounded-md">
