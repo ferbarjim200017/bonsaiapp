@@ -54,7 +54,6 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
 
   if (!producto) {
     notFound();
-    return null; // This line is never reached but helps TypeScript
   }
 
   const precioFormateado = new Intl.NumberFormat('es-ES', {
@@ -70,10 +69,10 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
     : null;
 
   const handleAgregarCarrito = () => {
+    if (!producto) return;
     setAgregandoCarrito(true);
     agregarAlCarrito(producto, cantidad);
     
-    // Mensaje accesible (en producción, usar toast o modal)
     setTimeout(() => {
       setAgregandoCarrito(false);
       alert(`${producto.nombre} añadido al carrito`);
@@ -81,14 +80,15 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
   };
 
   const siguienteImagen = () => {
+    if (!producto) return;
     setImagenActiva((prev) => (prev === producto.imagenes.length - 1 ? 0 : prev + 1));
   };
 
   const anteriorImagen = () => {
+    if (!producto) return;
     setImagenActiva((prev) => (prev === 0 ? producto.imagenes.length - 1 : prev - 1));
   };
 
-  // Touch handlers para swipe
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.targetTouches[0].clientX);
   };
@@ -106,7 +106,8 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
 
     if (isLeftSwipe) {
       siguienteImagen();
-    } else if (isRightSwipe) {
+    }
+    if (isRightSwipe) {
       anteriorImagen();
     }
     
@@ -114,7 +115,6 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
     setTouchEnd(0);
   };
 
-  // Render component
   return (
     <div className="bg-white min-h-screen">
       {/* Breadcrumbs */}
