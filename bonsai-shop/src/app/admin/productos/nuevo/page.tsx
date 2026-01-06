@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Upload, X } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { createProducto } from '@/lib/firebase/firestore';
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { db } from '@/lib/firebase/config';
 import type { Producto } from '@/types';
 
 export default function NuevoProducto() {
@@ -35,6 +37,53 @@ export default function NuevoProducto() {
     // Accesorio específico
     tipoAccesorio: '' as '' | 'herramienta' | 'sustrato' | 'maceta' | 'abono' | 'otro',
   });
+
+  // Generar SKU automáticamente al cargar
+  useEffect(() => {
+    const generarSKU = async () => {
+      try {
+        if (!db) {
+          // Si no hay DB, usar un SKU por defecto
+          setFormData(prev => ({ ...prev, sku: 'BON-001' }));
+          return;
+        }
+
+        // Obtener el último producto creado
+        const q = query(
+          collection(db, 'productos'),
+          orderBy('createdAt', 'desc'),
+          limit(1)
+        );
+        const snapshot = await getDocs(q);
+        
+        if (snapshot.empty) {
+          // Si no hay productos, empezar desde BON-001
+          setFormData(prev => ({ ...prev, sku: 'BON-001' }));
+        } else {
+          // Obtener el SKU del último producto
+          const ultimoProducto = snapshot.docs[0].data();
+          const ultimoSKU = ultimoProducto.sku || 'BON-000';
+          
+          // Extraer el número del SKU (formato: BON-XXX o similar)
+          const match = ultimoSKU.match(/(\d+)$/);
+          if (match) {
+            const numero = parseInt(match[1]) + 1;
+            const nuevoSKU = ultimoSKU.replace(/\d+$/, numero.toString().padStart(3, '0'));
+            setFormData(prev => ({ ...prev, sku: nuevoSKU }));
+          } else {
+            // Si no se puede parsear, usar BON-001
+            setFormData(prev => ({ ...prev, sku: 'BON-001' }));
+          }
+        }
+      } catch (error) {
+        console.error('Error generando SKU:', error);
+        // En caso de error, usar un SKU por defecto
+        setFormData(prev => ({ ...prev, sku: 'BON-001' }));
+      }
+    };
+
+    generarSKU();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -181,16 +230,16 @@ export default function NuevoProducto() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label htmlFor="sku" className="block text-sm font-medium text-gray-900 mb-1">
-                  SKU *
+                  SKU (generado automáticamente)
                 </label>
                 <input
                   type="text"
                   id="sku"
                   required
-                  className="input"
+                  readOnly
+                  className="input bg-gray-50"
                   value={formData.sku}
-                  onChange={(e) => setFormData({ ...formData, sku: e.target.value })}
-                  placeholder="BON-XXX-001"
+                  placeholder="Generando..."
                 />
               </div>
 
