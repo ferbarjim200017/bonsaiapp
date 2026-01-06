@@ -120,7 +120,6 @@ export default function NuevoProducto() {
         nombre: formData.nombre,
         descripcion: formData.descripcion,
         precio: parseFloat(formData.precio),
-        precioAnterior: formData.precioAnterior ? parseFloat(formData.precioAnterior) : undefined,
         sku: formData.sku,
         categoria: formData.categoria,
         imagenes: imagenesUrls,
@@ -134,10 +133,17 @@ export default function NuevoProducto() {
         updatedAt: new Date(),
       };
 
+      // Agregar precioAnterior solo si tiene valor (Firestore no acepta undefined)
+      if (formData.precioAnterior && formData.precioAnterior.trim() !== '') {
+        nuevoProducto.precioAnterior = parseFloat(formData.precioAnterior);
+      }
+
       // Agregar campos específicos según categoría
       if (formData.categoria === 'bonsai') {
         nuevoProducto.especie = formData.especie;
-        nuevoProducto.tamano = formData.tamano ? parseInt(formData.tamano) : undefined;
+        if (formData.tamano) {
+          nuevoProducto.tamano = parseInt(formData.tamano);
+        }
         nuevoProducto.nivelCuidado = formData.nivelCuidado;
         nuevoProducto.ubicacion = formData.ubicacion;
         nuevoProducto.riego = formData.riego;
