@@ -17,6 +17,7 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
   const [imagenActiva, setImagenActiva] = useState(0);
   const [agregandoCarrito, setAgregandoCarrito] = useState(false);
   const [cargando, setCargando] = useState(true);
+  const [modalImagenAbierto, setModalImagenAbierto] = useState(false);
 
   useEffect(() => {
     const cargarProducto = async () => {
@@ -102,7 +103,10 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Galería de imágenes */}
           <div className="space-y-4">
-            <div className="aspect-square relative overflow-hidden rounded-lg bg-gray-100 border border-gray-200">
+            <div 
+              className="aspect-square relative overflow-hidden rounded-lg bg-gray-100 border border-gray-200 cursor-pointer hover:border-primary-500 transition-colors"
+              onClick={() => setModalImagenAbierto(true)}
+            >
               <Image
                 src={producto.imagenes[imagenActiva] || '/images/placeholder-bonsai.jpg'}
                 alt={producto.nombre}
@@ -190,15 +194,6 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
               </div>
             )}
 
-            {producto.variabilidadNatural && (
-              <div className="flex items-start gap-2 text-sm text-gray-600 bg-blue-50 p-3 rounded-md">
-                <AlertCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                <p>
-                  <strong>Producto natural:</strong> El bonsái que recibirás puede variar respecto a la foto
-                  mostrada, ya que cada ejemplar es único.
-                </p>
-              </div>
-            )}
           </div>
 
           {/* Información del producto */}
@@ -411,6 +406,64 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
           </div>
         )}
       </div>
+
+      {/* Modal de imagen completa */}
+      {modalImagenAbierto && (
+        <div
+          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
+          onClick={() => setModalImagenAbierto(false)}
+        >
+          <button
+            onClick={() => setModalImagenAbierto(false)}
+            className="absolute top-4 right-4 text-white hover:text-gray-300 p-2 rounded-lg bg-black/50 hover:bg-black/70 transition-colors"
+            aria-label="Cerrar modal"
+          >
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <div className="max-w-7xl max-h-full w-full flex items-center justify-center">
+            <img
+              src={producto.imagenes[imagenActiva]}
+              alt={producto.nombre}
+              className="max-w-full max-h-[90vh] object-contain rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+
+          {/* Navegación entre imágenes en el modal */}
+          {producto.imagenes.length > 1 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setImagenActiva((prev) => (prev === 0 ? producto.imagenes.length - 1 : prev - 1));
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600"
+                aria-label="Imagen anterior"
+              >
+                <ChevronLeft className="h-8 w-8 text-gray-800" />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setImagenActiva((prev) => (prev === producto.imagenes.length - 1 ? 0 : prev + 1));
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600"
+                aria-label="Imagen siguiente"
+              >
+                <ChevronRight className="h-8 w-8 text-gray-800" />
+              </button>
+
+              {/* Contador de imágenes */}
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-full text-sm">
+                {imagenActiva + 1} / {producto.imagenes.length}
+              </div>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }
