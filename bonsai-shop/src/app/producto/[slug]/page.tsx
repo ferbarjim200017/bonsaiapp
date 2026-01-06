@@ -53,7 +53,8 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
   }
 
   if (!producto) {
-    return notFound();
+    notFound();
+    return null; // This line is never reached but helps TypeScript
   }
 
   const precioFormateado = new Intl.NumberFormat('es-ES', {
