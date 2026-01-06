@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ArrowRight, Leaf, Package, Shield, Truck } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import ProductCard from '@/components/products/ProductCard';
+import { getProductos } from '@/lib/firebase/firestore';
 import { obtenerTodosLosProductos } from '@/lib/mockData';
 import { Producto } from '@/types';
 
@@ -15,12 +16,33 @@ export default function HomePage() {
   const [productosNuevos, setProductosNuevos] = useState<Producto[]>([]);
 
   useEffect(() => {
-    // Cargar productos
+    // Cargar productos desde Firebase
     const cargarProductos = async () => {
-      const destacados = await obtenerTodosLosProductos({ destacados: true, limite: 4 });
-      const nuevos = await obtenerTodosLosProductos({ nuevos: true, limite: 4 });
-      setProductosDestacados(destacados);
-      setProductosNuevos(nuevos);
+      try {
+        // Intentar cargar desde Firebase
+        const todosProductos = await getProductos({ publicado: true });
+        
+        if (todosProductos.length > 0) {
+          // Usar productos de Firebase
+          const destacados = todosProductos.filter(p => p.destacado).slice(0, 4);
+          const nuevos = todosProductos.filter(p => p.nuevo).slice(0, 4);
+          setProductosDestacados(destacados);
+          setProductosNuevos(nuevos);
+        } else {
+          // Si Firebase está vacío, usar mock data
+          const destacados = await obtenerTodosLosProductos({ destacados: true, limite: 4 });
+          const nuevos = await obtenerTodosLosProductos({ nuevos: true, limite: 4 });
+          setProductosDestacados(destacados);
+          setProductosNuevos(nuevos);
+        }
+      } catch (error) {
+        console.error('Error cargando productos, usando mock data:', error);
+        // Si hay error, usar mock data
+        const destacados = await obtenerTodosLosProductos({ destacados: true, limite: 4 });
+        const nuevos = await obtenerTodosLosProductos({ nuevos: true, limite: 4 });
+        setProductosDestacados(destacados);
+        setProductosNuevos(nuevos);
+      }
     };
     cargarProductos();
   }, []);
