@@ -27,29 +27,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Observar cambios en autenticación de Firebase
-    const unsubscribe = onAuthChange(async (firebaseUser: FirebaseUser | null) => {
-      if (firebaseUser) {
-        // Usuario autenticado - obtener perfil de Firestore
-        const profile = await getUserProfile(firebaseUser.uid);
-        
-        if (profile) {
-          setUser({
-            id: profile.uid,
-            email: profile.email,
-            nombre: profile.nombre,
-            rol: profile.rol,
-          });
+    try {
+      const unsubscribe = onAuthChange(async (firebaseUser: FirebaseUser | null) => {
+        if (firebaseUser) {
+          // Usuario autenticado - obtener perfil de Firestore
+          const profile = await getUserProfile(firebaseUser.uid);
+          
+          if (profile) {
+            setUser({
+              id: profile.uid,
+              email: profile.email,
+              nombre: profile.nombre,
+              rol: profile.rol,
+            });
+          } else {
+            setUser(null);
+          }
         } else {
+          // Usuario no autenticado
           setUser(null);
         }
-      } else {
-        // Usuario no autenticado
-        setUser(null);
-      }
-      setIsLoading(false);
-    });
+        setIsLoading(false);
+      });
 
-    return () => unsubscribe();
+      return () => unsubscribe();
+    } catch (error) {
+      console.error('Firebase auth not available:', error);
+      setIsLoading(false);
+    }
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
