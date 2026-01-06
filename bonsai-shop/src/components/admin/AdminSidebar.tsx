@@ -9,7 +9,8 @@ import {
   Tag, 
   ShoppingBag, 
   LogOut,
-  Home
+  Home,
+  Mail
 } from 'lucide-react';
 
 export default function AdminSidebar() {
@@ -21,6 +22,7 @@ export default function AdminSidebar() {
     { name: 'Productos', href: '/admin/productos', icon: Package },
     { name: 'Cupones', href: '/admin/cupones', icon: Tag },
     { name: 'Pedidos', href: '/admin/pedidos', icon: ShoppingBag },
+    { name: 'Mensajes', href: '/admin/mensajes', icon: Mail },
   ];
 
   return (

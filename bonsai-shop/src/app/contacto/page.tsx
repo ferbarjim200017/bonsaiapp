@@ -3,26 +3,70 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import Button from '@/components/ui/Button';
+import { db } from '@/lib/firebase/config';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function ContactoPage() {
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setEnviando(true);
+    setError(null);
 
-    // Simular envío
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const formData = new FormData(e.currentTarget);
+      
+      // Procesar imágenes adjuntas
+      const archivos = formData.getAll('adjuntos') as File[];
+      const imagenesBase64: string[] = [];
+      
+      for (const archivo of archivos) {
+        if (archivo.size > 0) {
+          // Validar tamaño (máximo 500KB por imagen)
+          if (archivo.size > 500 * 1024) {
+            setError('Cada imagen debe ser menor a 500KB');
+            setEnviando(false);
+            return;
+          }
+          
+          const buffer = await archivo.arrayBuffer();
+          const base64 = Buffer.from(buffer).toString('base64');
+          const dataUrl = `data:${archivo.type};base64,${base64}`;
+          imagenesBase64.push(dataUrl);
+        }
+      }
 
-    setEnviando(false);
-    setEnviado(true);
+      // Guardar en Firestore
+      await addDoc(collection(db, 'mensajes-contacto'), {
+        nombre: formData.get('nombre'),
+        apellidos: formData.get('apellidos') || '',
+        email: formData.get('email'),
+        telefono: formData.get('telefono') || '',
+        numeroPedido: formData.get('numeroPedido') || '',
+        motivo: formData.get('motivo'),
+        mensaje: formData.get('mensaje'),
+        imagenes: imagenesBase64,
+        fechaCreacion: serverTimestamp(),
+        leido: false,
+        respondido: false
+      });
 
-    // Resetear formulario y mensaje tras 3 segundos
-    setTimeout(() => {
-      setEnviado(false);
-      (e.target as HTMLFormElement).reset();
-    }, 3000);
+      setEnviando(false);
+      setEnviado(true);
+
+      // Resetear formulario y mensaje tras 3 segundos
+      setTimeout(() => {
+        setEnviado(false);
+        (e.target as HTMLFormElement).reset();
+      }, 3000);
+    } catch (error) {
+      console.error('Error al enviar mensaje:', error);
+      setError('Error al enviar el mensaje. Por favor, inténtalo de nuevo.');
+      setEnviando(false);
+    }
   };
 
   return (
@@ -213,6 +257,15 @@ export default function ContactoPage() {
                   Importante si reportas una incidencia con tu bonsái
                 </p>
               </div>
+
+              {error && (
+                <div
+                  className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-md"
+                  role="alert"
+                >
+                  {error}
+                </div>
+              )}
 
               {enviado && (
                 <div

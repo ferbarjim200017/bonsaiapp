@@ -186,3 +186,22 @@ export interface FiltrosCatalogo {
   ordenar?: 'relevancia' | 'precio-asc' | 'precio-desc' | 'nuevo';
   busqueda?: string;
 }
+
+// Mensajes de contacto
+export type MotivoContacto = 'consulta-general' | 'cuidados' | 'pedido' | 'incidencia' | 'devolucion' | 'otro';
+
+export interface MensajeContacto {
+  id: string;
+  nombre: string;
+  apellidos: string;
+  email: string;
+  telefono?: string;
+  numeroPedido?: string;
+  motivo: MotivoContacto;
+  mensaje: string;
+  imagenes: string[]; // Base64 data URLs
+  leido: boolean;
+  respondido: boolean;
+  fechaCreacion: Date;
+}
+

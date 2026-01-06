@@ -55,5 +55,13 @@ service cloud.firestore {
       // Only admins can manage coupons
       allow create, update, delete: if isAdmin();
     }
+
+    // Contact messages collection
+    match /mensajes-contacto/{mensajeId} {
+      // Anyone can create a contact message (no auth required)
+      allow create: if true;
+      // Only admins can read, update, or delete messages
+      allow read, update, delete: if isAdmin();
+    }
   }
 }
