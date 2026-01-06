@@ -169,23 +169,6 @@ export default function LoginPage() {
             </Link>
           </p>
         </div>
-
-        {/* Credenciales de prueba */}
-        <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="text-sm font-medium text-blue-900 mb-2">
-            🔑 Credenciales de prueba (mock):
-          </p>
-          <div className="text-xs text-blue-800 space-y-1">
-            <p><strong>Cliente:</strong> cliente@test.com / cliente123</p>
-            <p><strong>Admin:</strong> admin@bonsaishop.es / admin123</p>
-          </div>
-          <div className="mt-3 pt-3 border-t border-blue-300">
-            <p className="text-xs text-blue-700">
-              ℹ️ <strong>Nota:</strong> Actualmente usando autenticación mock. 
-              Para usar Firebase real, sigue las instrucciones en <code className="bg-blue-100 px-1 rounded">FIREBASE_SETUP.md</code>
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );
