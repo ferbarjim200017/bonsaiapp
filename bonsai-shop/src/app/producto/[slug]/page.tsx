@@ -15,8 +15,6 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
   const { agregarAlCarrito } = useCart();
   const [cantidad, setCantidad] = useState(1);
   const [imagenActiva, setImagenActiva] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
   const [agregandoCarrito, setAgregandoCarrito] = useState(false);
   const [cargando, setCargando] = useState(true);
 
@@ -81,42 +79,6 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
 
   const siguienteImagen = () => {
     if (!producto) return;
-    setImagenActiva((prev) => (prev === producto.imagenes.length - 1 ? 0 : prev + 1));
-  };
-
-  const anteriorImagen = () => {
-    if (!producto) return;
-    setImagenActiva((prev) => (prev === 0 ? producto.imagenes.length - 1 : prev - 1));
-  };
-
-  // Touch handlers para swipe
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) {
-      siguienteImagen();
-    } else if (isRightSwipe) {
-      anteriorImagen();
-    }
-    
-    setTouchStart(0);
-    setTouchEnd(0);
-  };
-
-  return (
-    <div className="bg-white min-h-screen">
       {/* Breadcrumbs */}
       <nav aria-label="Breadcrumb" className="bg-gray-50 border-b border-gray-200">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
@@ -140,34 +102,19 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Galería de imágenes */}
           <div className="space-y-4">
-            <div 
-              className="aspect-square relative overflow-hidden rounded-lg bg-gray-100 border border-gray-200 touch-pan-y"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
-              {/* Carrusel deslizante */}
-              <div 
-                className="flex h-full transition-transform duration-500 ease-out"
-                style={{ transform: `translateX(-${imagenActiva * 100}%)` }}
-              >
-                {producto.imagenes.map((imagen, index) => (
-                  <div key={index} className="min-w-full h-full relative">
-                    <Image
-                      src={imagen || '/images/placeholder-bonsai.jpg'}
-                      alt={`${producto.nombre} - imagen ${index + 1}`}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover"
-                      priority={index === 0}
-                      unoptimized={imagen?.startsWith('data:') || imagen?.endsWith('.svg')}
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="aspect-square relative overflow-hidden rounded-lg bg-gray-100 border border-gray-200">
+              <Image
+                src={producto.imagenes[imagenActiva] || '/images/placeholder-bonsai.jpg'}
+                alt={producto.nombre}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                priority
+                unoptimized={producto.imagenes[imagenActiva]?.startsWith('data:') || producto.imagenes[imagenActiva]?.endsWith('.svg')}
+              />
               
               {producto.stock === 0 && (
-                <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center pointer-events-none">
+                <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
                   <span className="bg-white text-gray-900 px-4 py-2 rounded-md font-semibold text-lg">
                     Agotado
                   </span>
@@ -178,27 +125,27 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
               {producto.imagenes.length > 1 && (
                 <>
                   <button
-                    onClick={anteriorImagen}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600 z-10"
+                    onClick={() => setImagenActiva((prev) => (prev === 0 ? producto.imagenes.length - 1 : prev - 1))}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600"
                     aria-label="Imagen anterior"
                   >
                     <ChevronLeft className="h-6 w-6 text-gray-800" />
                   </button>
                   <button
-                    onClick={siguienteImagen}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600 z-10"
+                    onClick={() => setImagenActiva((prev) => (prev === producto.imagenes.length - 1 ? 0 : prev + 1))}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary-600"
                     aria-label="Imagen siguiente"
                   >
                     <ChevronRight className="h-6 w-6 text-gray-800" />
                   </button>
                   
                   {/* Image counter */}
-                  <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm z-10">
+                  <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm">
                     {imagenActiva + 1} / {producto.imagenes.length}
                   </div>
                   
                   {/* Dots indicator */}
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                     {producto.imagenes.map((_, index) => (
                       <button
                         key={index}
@@ -224,21 +171,6 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
                     key={index}
                     onClick={() => setImagenActiva(index)}
                     className={`aspect-square relative overflow-hidden rounded-md border-2 transition-all focus:outline-none focus:ring-2 focus:ring-primary-600 ${
-                      index === imagenActiva
-                        ? 'border-primary-600 ring-2 ring-primary-600 scale-95
-            
-            {/* Thumbnails - only show if multiple images */}
-            {producto.imagenes.length > 1 && (
-              <div className="grid grid-cols-4 gap-2">
-                {producto.imagenes.map((imagen, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      const direccion = index > imagenActiva ? 'right' : 'left';
-                      cambiarImagen(index, direccion);
-                    }}
-                    disabled={isTransitioning}
-                    className={`aspect-square relative overflow-hidden rounded-md border-2 transition-all focus:outline-none focus:ring-2 focus:ring-primary-600 disabled:opacity-50 ${
                       index === imagenActiva
                         ? 'border-primary-600 ring-2 ring-primary-600'
                         : 'border-gray-200 hover:border-gray-400'
