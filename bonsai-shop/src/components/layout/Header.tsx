@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { Menu, X, ShoppingCart, User, Search, LogOut } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
@@ -9,23 +9,30 @@ import { useAuth } from '@/context/AuthContext';
 
 export default function Header() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { itemsCount } = useCart();
   const { user, logout } = useAuth();
 
   const navigation = [
     { name: 'Inicio', href: '/', path: '/' },
-    { name: 'Bonsáis', href: '/catalogo?categoria=bonsai', path: '/catalogo' },
-    { name: 'Accesorios', href: '/catalogo?categoria=accesorio', path: '/catalogo' },
+    { name: 'Bonsáis', href: '/catalogo?categoria=bonsai', path: '/catalogo', categoria: 'bonsai' },
+    { name: 'Accesorios', href: '/catalogo?categoria=accesorio', path: '/catalogo', categoria: 'accesorio' },
     { name: 'Guía de cuidados', href: '/cuidados', path: '/cuidados' },
     { name: 'Contacto', href: '/contacto', path: '/contacto' },
   ];
 
-  const isActive = (itemPath: string) => {
-    if (itemPath === '/') {
+  const isActive = (item: { path: string; categoria?: string }) => {
+    if (item.path === '/') {
       return pathname === '/';
     }
-    return pathname?.startsWith(itemPath);
+    
+    // Si el item tiene categoría (Bonsáis o Accesorios)
+    if (item.categoria && pathname === '/catalogo') {
+      return searchParams?.get('categoria') === item.categoria;
+    }
+    
+    return pathname?.startsWith(item.path);
   };
 
   return (
@@ -149,18 +156,25 @@ export default function Header() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden py-4 space-y-1" role="menu">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                prefetch={true}
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md"
-                role="menuitem"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const active = isActive(item);
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  prefetch={true}
+                  className={`block px-3 py-2 text-base font-medium rounded-md ${
+                    active
+                      ? 'text-primary-700 bg-primary-50 border-2 border-primary-600'
+                      : 'text-gray-700 hover:text-primary-700 hover:bg-gray-50'
+                  }`}
+                  role="menuitem"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
             
             {user ? (
               <>
