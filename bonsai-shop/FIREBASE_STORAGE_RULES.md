@@ -1,36 +1,37 @@
 # Image Upload Configuration
 
 ## Problem
-The image upload was failing with a 500 error because the code was trying to use the filesystem (`fs/promises`), which doesn't work in Vercel's serverless environment.
+The image upload was failing with a 500 error because external storage services require additional configuration and costs.
 
 ## Solution
-Updated the upload API to use **Vercel Blob Storage** instead, which is free up to 1GB per month.
+Images are now converted to **base64** and stored directly in Firestore. This is:
+- ✅ **Completely free**: No external storage needed
+- ✅ **No configuration**: Works immediately
+- ✅ **Simple**: One less service to manage
 
-## Vercel Blob Storage (Free Tier)
+## How it works:
+1. Images are uploaded through the form
+2. Converted to base64 format (data URLs)
+3. Stored directly in Firestore with the product data
+4. Displayed using the data URL in `<img src="data:image/jpeg;base64,..."/>`
 
-### Features:
-- ✅ **Free**: 1GB storage included
-- ✅ **No external accounts needed**: Uses your Vercel project
-- ✅ **Automatic setup**: Vercel configures it automatically on deployment
-- ✅ **Public URLs**: Direct access to uploaded images
+## Limitations:
+- **Max file size**: 500KB per image
+- **Recommendation**: Compress images before uploading
+  - Use https://tinypng.com/ or https://squoosh.app/
+  - Optimal size: 100-300KB per image
+  - This keeps the page fast and saves Firestore space
 
-### How it works:
-1. Images are uploaded to Vercel Blob Storage via the `/api/upload` endpoint
-2. Vercel returns a public URL for each image
-3. URLs are stored in Firestore with the product data
+## Why base64?
+- **Firestore limit**: 1MB per document
+- A product with 3 images at 300KB each = 900KB ✅
+- No need for external storage services
+- Simpler architecture
+- Free and unlimited
 
-### No configuration needed!
-Vercel automatically creates the `BLOB_READ_WRITE_TOKEN` environment variable when you deploy. Just push your code and it will work.
-
-### Usage limits (Free tier):
-- Storage: 1GB
-- Bandwidth: 100GB/month
-
-For a small bonsai shop, this is more than enough for product images.
-
-### Alternative: If you need more storage
-If you exceed the free tier, you can:
-1. Compress images before upload (recommended)
-2. Use Cloudinary free tier (25GB, requires external account)
-3. Upgrade Vercel plan (paid)
+## If you need larger images:
+For products that need high-resolution images (>500KB), consider:
+1. Compress images first (recommended)
+2. Use Cloudinary free tier (25GB, requires account)
+3. Use ImgBB free tier (unlimited, with API key)
 
