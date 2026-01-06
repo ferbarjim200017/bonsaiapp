@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
+import { updateUserProfile, changePassword, deleteUserAccount } from '@/lib/firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase/config';
 import { 
   User, 
   Mail, 
@@ -78,14 +81,25 @@ export default function ConfiguracionPage() {
       router.push('/cuenta/login');
     }
 
-    if (user) {
-      // Cargar datos del usuario
-      setProfile({
-        nombre: user.nombre || '',
-        apellidos: '',
-        email: user.email || '',
-        telefono: '',
-      });
+    if (user && db) {
+      // Cargar datos del usuario desde Firestore
+      const loadUserData = async () => {
+        try {
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setProfile({
+              nombre: userData.nombre || '',
+              apellidos: userData.apellidos || '',
+              email: userData.email || user.email || '',
+              telefono: userData.telefono || '',
+            });
+          }
+        } catch (error) {
+          console.error('Error al cargar datos del usuario:', error);
+        }
+      };
+      loadUserData();
     }
   }, [user, isLoading, router]);
 
@@ -95,12 +109,22 @@ export default function ConfiguracionPage() {
     setMessage(null);
 
     try {
-      // Aquí iría la llamada a la API para actualizar el perfil
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulación
+      if (!user) {
+        throw new Error('No hay usuario autenticado');
+      }
+
+      await updateUserProfile(user.uid, {
+        nombre: profile.nombre,
+        apellidos: profile.apellidos,
+        telefono: profile.telefono,
+      });
       
       setMessage({ type: 'success', text: 'Perfil actualizado correctamente' });
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Error al actualizar el perfil' });
+      
+      // Ocultar mensaje después de 3 segundos
+      setTimeout(() => setMessage(null), 3000);
+    } catch (error: any) {
+      setMessage({ type: 'error', text: error.message || 'Error al actualizar el perfil' });
     } finally {
       setIsSaving(false);
     }
@@ -112,6 +136,12 @@ export default function ConfiguracionPage() {
     setMessage(null);
 
     // Validaciones
+    if (!passwordForm.currentPassword) {
+      setMessage({ type: 'error', text: 'Ingresa tu contraseña actual' });
+      setIsSaving(false);
+      return;
+    }
+
     if (passwordForm.newPassword.length < 8) {
       setMessage({ type: 'error', text: 'La contraseña debe tener al menos 8 caracteres' });
       setIsSaving(false);
@@ -125,13 +155,15 @@ export default function ConfiguracionPage() {
     }
 
     try {
-      // Aquí iría la llamada a la API para cambiar la contraseña
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulación
+      await changePassword(passwordForm.currentPassword, passwordForm.newPassword);
       
       setMessage({ type: 'success', text: 'Contraseña actualizada correctamente' });
       setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Error al actualizar la contraseña' });
+      
+      // Ocultar mensaje después de 3 segundos
+      setTimeout(() => setMessage(null), 3000);
+    } catch (error: any) {
+      setMessage({ type: 'error', text: error.message || 'Error al actualizar la contraseña' });
     } finally {
       setIsSaving(false);
     }
@@ -155,6 +187,12 @@ export default function ConfiguracionPage() {
   };
 
   const handleDeleteAccount = async () => {
+    const password = prompt('Para eliminar tu cuenta, ingresa tu contraseña:');
+    
+    if (!password) {
+      return;
+    }
+
     if (!confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')) {
       return;
     }
@@ -164,13 +202,12 @@ export default function ConfiguracionPage() {
     }
 
     try {
-      // Aquí iría la llamada a la API para eliminar la cuenta
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulación
+      await deleteUserAccount(password);
       
       logout();
       router.push('/');
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Error al eliminar la cuenta' });
+    } catch (error: any) {
+      setMessage({ type: 'error', text: error.message || 'Error al eliminar la cuenta' });
     }
   };
 

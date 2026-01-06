@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Columna 1: Información */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Bonsái Shop</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Bonsai Shop</h3>
             <p className="text-sm text-gray-600 mb-4">
               Tu tienda especializada en bonsáis de calidad y accesorios para su cuidado en España.
             </p>
@@ -169,7 +169,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-gray-200">
           <p className="text-sm text-gray-500 text-center">
-            © {currentYear} Bonsái Shop. Todos los derechos reservados. | 
+            © {currentYear} Bonsai Shop. Todos los derechos reservados. | 
             Tienda online de bonsáis en España con envío a toda la península, Baleares, Canarias, Ceuta y Melilla.
           </p>
         </div>

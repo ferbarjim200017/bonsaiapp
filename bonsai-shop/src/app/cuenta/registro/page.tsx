@@ -76,7 +76,7 @@ export default function RegistroPage() {
           </h1>
           
           <p className="text-gray-600">
-            Únete a Bonsái Shop y empieza a comprar
+            Únete a Bonsai Shop y empieza a comprar
           </p>
         </div>
 

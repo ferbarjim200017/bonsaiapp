@@ -40,7 +40,7 @@ function generateResponse(message: string, history?: any[]): string {
   
   // Saludos
   if (lowerMessage.match(/^(hola|buenos dias|buenas tardes|buenas noches|hey|hi|saludos)/i)) {
-    return '¡Hola! 👋 Soy el asistente de Bonsái Shop. Estoy aquí para ayudarte con cualquier duda sobre bonsáis, sus cuidados, accesorios y productos. ¿En qué puedo ayudarte hoy?';
+    return '¡Hola! 👋 Soy el asistente de Bonsai Shop. Estoy aquí para ayudarte con cualquier duda sobre bonsáis, sus cuidados, accesorios y productos. ¿En qué puedo ayudarte hoy?';
   }
 
   // Despedidas

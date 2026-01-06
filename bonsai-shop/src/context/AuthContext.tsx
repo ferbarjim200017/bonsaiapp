@@ -6,6 +6,7 @@ import type { User as FirebaseUser } from 'firebase/auth';
 
 interface User {
   id: string;
+  uid: string; // Firebase UID
   email: string;
   nombre: string;
   rol: 'admin' | 'cliente';
@@ -36,6 +37,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           if (profile) {
             setUser({
               id: profile.uid,
+              uid: profile.uid,
               email: profile.email,
               nombre: profile.nombre,
               rol: profile.rol,
@@ -64,6 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
       setUser({
         id: profile.uid,
+        uid: profile.uid,
         email: profile.email,
         nombre: profile.nombre,
         rol: profile.rol,
@@ -78,8 +81,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log('⚠️ Usando autenticación mock de respaldo');
       
       const mockUsers = [
-        { id: 'mock-1', email: 'admin@bonsaishop.es', nombre: 'Administrador', rol: 'admin' as const, password: 'admin123' },
-        { id: 'mock-2', email: 'cliente@test.com', nombre: 'Cliente Test', rol: 'cliente' as const, password: 'cliente123' },
+        { id: 'mock-1', uid: 'mock-1', email: 'admin@bonsaishop.es', nombre: 'Administrador', rol: 'admin' as const, password: 'admin123' },
+        { id: 'mock-2', uid: 'mock-2', email: 'cliente@test.com', nombre: 'Cliente Test', rol: 'cliente' as const, password: 'cliente123' },
       ];
       
       const mockUser = mockUsers.find(u => u.email === email && u.password === password);

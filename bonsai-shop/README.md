@@ -1,4 +1,4 @@
-# 🌳 Bonsái Shop - Tienda Online de Bonsáis
+# 🌳 Bonsai Shop - Tienda Online de Bonsáis
 
 Aplicación web completa de e-commerce especializada en la venta de bonsáis y accesorios en España, desarrollada siguiendo estrictamente los requisitos documentados en `docs/REQUISITOS_WEB_BONSAIS_ES.md`.
 
@@ -213,7 +213,7 @@ Para completar la implementación según los requisitos:
 
 ## 📄 Licencia
 
-Este proyecto es privado y de uso exclusivo para Bonsái Shop España.
+Este proyecto es privado y de uso exclusivo para Bonsai Shop España.
 
 ---
 

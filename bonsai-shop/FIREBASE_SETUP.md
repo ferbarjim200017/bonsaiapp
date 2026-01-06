@@ -1,6 +1,6 @@
 # 🔥 Configuración de Firebase
 
-Este documento explica cómo configurar Firebase para el proyecto Bonsái Shop.
+Este documento explica cómo configurar Firebase para el proyecto Bonsai Shop.
 
 ## 📋 Prerrequisitos
 

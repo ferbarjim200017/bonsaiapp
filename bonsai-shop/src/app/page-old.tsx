@@ -6,11 +6,11 @@ import { obtenerProductos } from '@/lib/mockData';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Bonsái Shop - Venta de Bonsáis y Accesorios en España',
+  title: 'Bonsai Shop - Venta de Bonsáis y Accesorios en España',
   description: 'Tienda online especializada en bonsáis de calidad para interior y exterior. Envíos a toda España con garantía de calidad. Encuentra tu bonsái perfecto.',
   keywords: ['bonsái', 'bonsais españa', 'comprar bonsái', 'bonsái interior', 'bonsái exterior', 'accesorios bonsái'],
   openGraph: {
-    title: 'Bonsái Shop - Venta de Bonsáis en España',
+    title: 'Bonsai Shop - Venta de Bonsáis en España',
     description: 'Tienda online especializada en bonsáis de calidad',
     type: 'website',
   },

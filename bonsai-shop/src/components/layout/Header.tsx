@@ -44,9 +44,9 @@ export default function Header() {
             <Link 
               href="/" 
               className="text-2xl font-bold text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded"
-              aria-label="Bonsái Shop - Ir a inicio"
+              aria-label="Bonsai Shop - Ir a inicio"
             >
-              🌳 Bonsái Shop
+              🌳 Bonsai Shop
             </Link>
           </div>
 
