@@ -16,7 +16,7 @@ export default function Header() {
 
   const navigation = [
     { name: 'Inicio', href: '/', path: '/' },
-    { name: 'Bonsáis', href: '/catalogo?categoria=bonsái', path: '/catalogo', categoria: 'bonsái' },
+    { name: 'Bonsáis', href: '/catalogo?categoria=bonsai', path: '/catalogo', categoria: 'bonsai' },
     { name: 'Accesorios', href: '/catalogo?categoria=accesorio', path: '/catalogo', categoria: 'accesorio' },
     { name: 'Guía de cuidados', href: '/cuidados', path: '/cuidados' },
     { name: 'Contacto', href: '/contacto', path: '/contacto' },

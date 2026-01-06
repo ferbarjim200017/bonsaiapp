@@ -351,7 +351,7 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
             </section>
 
             {/* Cuidados (solo bonsáis) */}
-            {producto.categoria === 'bonsái' && producto.riego && (
+            {producto.categoria === 'bonsai' && producto.riego && (
               <section aria-labelledby="cuidados-heading">
                 <h2 id="cuidados-heading" className="text-2xl font-bold text-gray-900 mb-4">
                   Guía de cuidados

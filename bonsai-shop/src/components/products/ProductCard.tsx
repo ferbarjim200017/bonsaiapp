@@ -82,7 +82,7 @@ export default function ProductCard({ producto }: ProductCardProps) {
       <div className="p-4 flex flex-col">
         {/* Categoría / Ubicación */}
         <div className="text-xs text-gray-500 mb-1 h-4">
-          {producto.categoria === 'bonsái' && producto.ubicacion && (
+          {producto.categoria === 'bonsai' && producto.ubicacion && (
             <span className="capitalize">{producto.ubicacion}</span>
           )}
           {producto.categoria === 'accesorio' && producto.tipoAccesorio && (
@@ -102,7 +102,7 @@ export default function ProductCard({ producto }: ProductCardProps) {
 
         {/* Atributos específicos */}
         <div className="text-sm text-gray-600 mb-2 min-h-[2.5rem]">
-          {producto.categoria === 'bonsái' && (
+          {producto.categoria === 'bonsai' && (
             <>
               {producto.especie && <p className="line-clamp-1">{producto.especie}</p>}
               {producto.nivelCuidado && (

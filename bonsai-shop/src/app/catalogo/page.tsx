@@ -266,8 +266,8 @@ function FiltrosPanel({
           <input
             type="radio"
             name="categoria"
-            value="bonsái"
-            checked={filtros.categoria === 'bonsái'}
+            value="bonsai"
+            checked={filtros.categoria === 'bonsai'}
             onChange={(e) => setFiltros({ ...filtros, categoria: e.target.value })}
             className="h-4 w-4 text-primary-600 focus:ring-2 focus:ring-primary-600"
           />
@@ -287,7 +287,7 @@ function FiltrosPanel({
       </fieldset>
 
       {/* Ubicación (solo para bonsáis) */}
-      {(!filtros.categoria || filtros.categoria === 'bonsái') && (
+      {(!filtros.categoria || filtros.categoria === 'bonsai') && (
         <fieldset className="space-y-2">
           <legend className="text-sm font-medium text-gray-900 mb-2">Ubicación</legend>
           <label className="flex items-center gap-2 cursor-pointer">
@@ -327,7 +327,7 @@ function FiltrosPanel({
       )}
 
       {/* Dificultad (solo para bonsáis) */}
-      {(!filtros.categoria || filtros.categoria === 'bonsái') && (
+      {(!filtros.categoria || filtros.categoria === 'bonsai') && (
         <fieldset className="space-y-2">
           <legend className="text-sm font-medium text-gray-900 mb-2">Dificultad de cuidado</legend>
           <label className="flex items-center gap-2 cursor-pointer">

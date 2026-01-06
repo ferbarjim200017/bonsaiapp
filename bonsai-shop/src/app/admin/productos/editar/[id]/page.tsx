@@ -157,7 +157,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
       };
 
       // Agregar campos específicos según categoría
-      if (formData.categoria === 'bonsái') {
+      if (formData.categoria === 'bonsai') {
         productoActualizado.especie = formData.especie;
         productoActualizado.tamano = formData.tamano ? parseInt(formData.tamano) : undefined;
         productoActualizado.nivelCuidado = formData.nivelCuidado;
@@ -313,7 +313,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
                   value={formData.categoria}
                   onChange={(e) => setFormData({ ...formData, categoria: e.target.value as any })}
                 >
-                  <option value="bonsái">Bonsái</option>
+                  <option value="bonsai">Bonsái</option>
                   <option value="accesorio">Accesorio</option>
                 </select>
               </div>
@@ -419,7 +419,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
         </div>
 
         {/* Atributos específicos de bonsái */}
-        {formData.categoria === 'bonsái' && (
+        {formData.categoria === 'bonsai' && (
           <div className="bg-white shadow rounded-lg p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
               Atributos de Bonsái
