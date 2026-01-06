@@ -85,6 +85,7 @@ export default function ConfiguracionPage() {
       // Cargar datos del usuario desde Firestore
       const loadUserData = async () => {
         try {
+          if (!db) return; // Validación adicional para TypeScript
           const userDoc = await getDoc(doc(db, 'users', user.uid));
           if (userDoc.exists()) {
             const userData = userDoc.data();
