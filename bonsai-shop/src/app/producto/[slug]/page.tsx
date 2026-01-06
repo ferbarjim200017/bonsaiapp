@@ -233,7 +233,7 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
             </div>
 
             {/* Atributos específicos para bonsáis */}
-            {producto.categoria === 'bonsái' && (
+            {producto.categoria === 'bonsai' && (
               <div className="border-t border-b border-gray-200 py-4 space-y-3">
                 <h2 className="font-semibold text-gray-900 mb-3">Características</h2>
                 <dl className="grid grid-cols-2 gap-3 text-sm">

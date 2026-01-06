@@ -1,8 +1,8 @@
-# Requisitos completos — Web de venta de bonsais (España)
+# Requisitos completos — Web de venta de bonsáis (España)
 
 **Documento:** PRD / Requisitos funcionales y no funcionales
 
-- **Producto:** Tienda online de bonsais y accesorios
+- **Producto:** Tienda online de bonsáis y accesorios
 - **Cobertura geográfica:** **España** (ver detalle de zonas)
 - **Canal:** Web responsive (móvil, tablet, escritorio)
 - **Accesibilidad objetivo:** **WCAG 2.2 nivel AA**
@@ -12,7 +12,7 @@
 ---
 
 ## 0. Objetivo del documento
-Definir los requisitos necesarios para construir “en condiciones” una web de venta de bonsais en España, incluyendo:
+Definir los requisitos necesarios para construir “en condiciones” una web de venta de bonsáis en España, incluyendo:
 - Experiencia de compra (catálogo → producto → carrito → checkout → postcompra).
 - Operación (stock, pedidos, envíos, incidencias y devoluciones, especialmente por ser **producto vivo**).
 - Accesibilidad (WCAG 2.2 AA) y diseño responsive multi-dispositivo.
@@ -22,10 +22,10 @@ Definir los requisitos necesarios para construir “en condiciones” una web de
 
 ## 1. Contexto, objetivos y KPI
 ### 1.1 Contexto
-Se vende un producto vivo (bonsais) con necesidades de logística y comunicación específicas (variabilidad natural, embalaje, cuidados, limitaciones por clima/temperatura y plazos).
+Se vende un producto vivo (bonsáis) con necesidades de logística y comunicación específicas (variabilidad natural, embalaje, cuidados, limitaciones por clima/temperatura y plazos).
 
 ### 1.2 Objetivos de negocio
-- Permitir vender bonsais y accesorios de forma fiable y escalable.
+- Permitir vender bonsáis y accesorios de forma fiable y escalable.
 - Reducir fricción de compra en móvil.
 - Asegurar operación eficiente (gestión de pedidos y stock) y atención al cliente trazable.
 
@@ -113,7 +113,7 @@ Se vende un producto vivo (bonsais) con necesidades de logística y comunicació
 
 **RF-CAT-02 (Must):** Filtros y ordenación:
 - Filtros mínimos:
-  - Tipo: bonsai / accesorio.
+  - Tipo: bonsái / accesorio.
   - Ubicación recomendada: interior/exterior.
   - Dificultad de cuidado (baja/media/alta).
   - Rango de precio.
@@ -141,7 +141,7 @@ Se vende un producto vivo (bonsais) con necesidades de logística y comunicació
 ### 6.3 Ficha de producto (PDP)
 **RF-PDP-01 (Must):** Mostrar: título, galería de imágenes (con zoom), precio (IVA incl.), disponibilidad, CTA “Añadir al carrito”.
 
-**RF-PDP-02 (Must):** Mostrar atributos mínimos para bonsai:
+**RF-PDP-02 (Must):** Mostrar atributos mínimos para bonsái:
 - Especie.
 - Tamaño (altura aproximada en cm) y/o categoría de tamaño.
 - Nivel de cuidado.
@@ -174,7 +174,7 @@ Se vende un producto vivo (bonsais) con necesidades de logística y comunicació
 - Persistencia por sesión.
 - Para usuario logueado, persistencia multi-dispositivo (mismo carrito al iniciar sesión).
 
-**RF-CAR-04 (Should):** Sugerencias “también comprado” / “recomendado para tu bonsai”.
+**RF-CAR-04 (Should):** Sugerencias “también comprado” / “recomendado para tu bonsái”.
 
 ---
 
@@ -245,7 +245,7 @@ Se vende un producto vivo (bonsais) con necesidades de logística y comunicació
 - Pedido entregado (si hay evento).
 - Incidencia (si aplica).
 
-**RF-POST-03 (Should):** Email “cuidados al recibir tu bonsai” (contenido) tras entrega o tras envío.
+**RF-POST-03 (Should):** Email “cuidados al recibir tu bonsái” (contenido) tras entrega o tras envío.
 
 ---
 
@@ -285,7 +285,7 @@ Se vende un producto vivo (bonsais) con necesidades de logística y comunicació
 - Nombre, descripción, precio (IVA incl), SKU.
 - Categorías y etiquetas.
 - Imágenes.
-- Atributos bonsai (especie, dificultad, interior/exterior, tamaño, cuidados).
+- Atributos bonsái (especie, dificultad, interior/exterior, tamaño, cuidados).
 
 **RB-PROD-02 (Must):** Gestión de stock por SKU (cantidad) y estado de publicación (borrador/publicado).
 

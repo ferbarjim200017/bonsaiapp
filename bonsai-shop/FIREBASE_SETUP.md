@@ -1,6 +1,6 @@
 # 🔥 Configuración de Firebase
 
-Este documento explica cómo configurar Firebase para el proyecto Bonsai Shop.
+Este documento explica cómo configurar Firebase para el proyecto Bonsái Shop.
 
 ## 📋 Prerrequisitos
 
@@ -54,7 +54,7 @@ Este documento explica cómo configurar Firebase para el proyecto Bonsai Shop.
 1. Ve a Authentication → Users
 2. Click en "Add user"
 3. Crea el usuario admin:
-   - Email: `admin@bonsaishop.es`
+   - Email: `admin@bonsáishop.es`
    - Password: `admin123`
 4. Después de crear el usuario, ve a Firestore Database
 5. Crea una colección llamada `users`
@@ -62,7 +62,7 @@ Este documento explica cómo configurar Firebase para el proyecto Bonsai Shop.
    ```json
    {
      "uid": "[UID del usuario]",
-     "email": "admin@bonsaishop.es",
+     "email": "admin@bonsáishop.es",
      "nombre": "Administrador",
      "rol": "admin",
      "createdAt": "[fecha actual]"
@@ -93,7 +93,7 @@ npx tsx scripts/initFirebase.ts
 2. Ve a `http://localhost:3000/cuenta/login`
 
 3. Intenta iniciar sesión con:
-   - **Admin**: admin@bonsaishop.es / admin123
+   - **Admin**: admin@bonsáishop.es / admin123
    - **Cliente**: cliente@test.com / cliente123
 
 4. Si el login funciona, ¡Firebase está configurado correctamente!
@@ -120,7 +120,7 @@ npx tsx scripts/initFirebase.ts
   descripcion: string;
   precio: number;
   precioAnterior?: number;
-  categoria: 'bonsai' | 'accesorio';
+  categoria: 'bonsái' | 'accesorio';
   imagenes: string[];
   stock: number;
   publicado: boolean;

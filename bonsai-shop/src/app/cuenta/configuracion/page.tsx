@@ -568,7 +568,7 @@ export default function ConfiguracionPage() {
                         <div>
                           <div className="text-sm font-medium text-gray-900">Consejos y recomendaciones</div>
                           <div className="text-sm text-gray-500">
-                            Recibe consejos sobre el cuidado de bonsais y recomendaciones personalizadas
+                            Recibe consejos sobre el cuidado de bonsáis y recomendaciones personalizadas
                           </div>
                         </div>
                       </label>

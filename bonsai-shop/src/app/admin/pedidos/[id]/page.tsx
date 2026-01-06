@@ -38,7 +38,7 @@ export default function DetallePedido({ params }: { params: { id: string } }) {
       {
         id: '1',
         nombre: 'Bonsái Ficus Retusa',
-        imagen: '/productos/bonsai-ficus.jpg',
+        imagen: '/productos/bonsái-ficus.jpg',
         precio: 34.99,
         cantidad: 2,
       },

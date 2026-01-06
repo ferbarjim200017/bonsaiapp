@@ -12,7 +12,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ producto }: ProductCardProps) {
   const { agregarAlCarrito } = useCart();
-  const imagenPrincipal = producto.imagenes[0] || '/images/placeholder-bonsai.jpg';
+  const imagenPrincipal = producto.imagenes[0] || '/images/placeholder-bonsái.jpg';
   const precioFormateado = new Intl.NumberFormat('es-ES', {
     style: 'currency',
     currency: 'EUR',
@@ -82,7 +82,7 @@ export default function ProductCard({ producto }: ProductCardProps) {
       <div className="p-4 flex flex-col">
         {/* Categoría / Ubicación */}
         <div className="text-xs text-gray-500 mb-1 h-4">
-          {producto.categoria === 'bonsai' && producto.ubicacion && (
+          {producto.categoria === 'bonsái' && producto.ubicacion && (
             <span className="capitalize">{producto.ubicacion}</span>
           )}
           {producto.categoria === 'accesorio' && producto.tipoAccesorio && (
@@ -102,7 +102,7 @@ export default function ProductCard({ producto }: ProductCardProps) {
 
         {/* Atributos específicos */}
         <div className="text-sm text-gray-600 mb-2 min-h-[2.5rem]">
-          {producto.categoria === 'bonsai' && (
+          {producto.categoria === 'bonsái' && (
             <>
               {producto.especie && <p className="line-clamp-1">{producto.especie}</p>}
               {producto.nivelCuidado && (

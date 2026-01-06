@@ -1,4 +1,4 @@
-# 🆓 Firebase GRATIS - Bonsai Shop
+# 🆓 Firebase GRATIS - Bonsái Shop
 
 ## ✅ **100% GRATUITO - SIN COSTOS**
 
@@ -14,7 +14,7 @@ Esta integración usa **SOLO servicios gratuitos**:
 ### 1. Habilitar Authentication
 
 1. Ve a https://console.firebase.google.com
-2. Selecciona proyecto **bonsai-shop-de046**
+2. Selecciona proyecto **bonsái-shop-de046**
 3. Menú lateral → **Authentication**
 4. Click **"Get started"**
 5. Habilita **Email/Password** ✅
@@ -77,7 +77,7 @@ Click **"Publish"**
 **Opción A - Desde la web:**
 1. Ve a `http://localhost:3000/cuenta/registro`
 2. Regístrate:
-   - Email: `admin@bonsaishop.es`
+   - Email: `admin@bonsáishop.es`
    - Password: `admin123`
    - Nombre: `Admin`
 3. Después:
@@ -158,7 +158,7 @@ public/
 
 ### Test 1: Crear producto
 ```
-1. Login con admin@bonsaishop.es / admin123
+1. Login con admin@bonsáishop.es / admin123
 2. /admin/productos/nuevo
 3. Sube 2-3 imágenes
 4. Rellena formulario
@@ -215,7 +215,7 @@ public/
   precio: 45.99,
   imagenes: ["/uploads/productos/123.jpg"], // ← URLs locales
   stock: 10,
-  categoria: "bonsai",
+  categoria: "bonsái",
   publicado: true,
   // ... más campos
 }

@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h1 className="text-center text-3xl font-bold text-gray-900 mb-2">
-          🌳 Bonsai Shop
+          🌳 Bonsái Shop
         </h1>
         <h2 className="text-center text-xl font-semibold text-gray-700">
           Panel de Administración
@@ -100,7 +100,7 @@ export default function AdminLoginPage() {
             </div>
 
             <div className="mt-4 text-sm text-gray-600 space-y-1">
-              <p><strong>Admin:</strong> admin@bonsaishop.es / admin123</p>
+              <p><strong>Admin:</strong> admin@bonsáishop.es / admin123</p>
               <p><strong>Cliente:</strong> cliente@test.com / cliente123</p>
             </div>
           </div>

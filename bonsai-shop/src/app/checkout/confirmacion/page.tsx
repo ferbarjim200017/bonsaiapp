@@ -68,7 +68,7 @@ function ConfirmacionContent() {
           {/* Información de cuidados */}
           <div className="mt-12 pt-8 border-t border-gray-200">
             <p className="text-sm text-gray-600 mb-4">
-              💡 <strong>Consejo:</strong> Cuando recibas tu bonsai, consulta nuestra guía de cuidados para asegurar su correcto mantenimiento.
+              💡 <strong>Consejo:</strong> Cuando recibas tu bonsái, consulta nuestra guía de cuidados para asegurar su correcto mantenimiento.
             </p>
             <Link
               href="/cuidados"

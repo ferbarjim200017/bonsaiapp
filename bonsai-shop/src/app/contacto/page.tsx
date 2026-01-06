@@ -97,10 +97,10 @@ export default function ContactoPage() {
                   <div>
                     <p className="text-sm font-medium text-gray-900">Email</p>
                     <a
-                      href="mailto:info@bonsaishop.es"
+                      href="mailto:info@bonsáishop.es"
                       className="text-sm text-primary-700 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded"
                     >
-                      info@bonsaishop.es
+                      info@bonsáishop.es
                     </a>
                   </div>
                 </div>
@@ -260,7 +260,7 @@ export default function ContactoPage() {
                   className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Importante si reportas una incidencia con tu bonsai
+                  Importante si reportas una incidencia con tu bonsái
                 </p>
               </div>
 

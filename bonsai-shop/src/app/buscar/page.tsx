@@ -39,7 +39,7 @@ function BuscarContent() {
         // Buscar en descripción
         if (producto.descripcion.toLowerCase().includes(terminoLower)) return true;
         
-        // Buscar en especie (para bonsais)
+        // Buscar en especie (para bonsáis)
         if (producto.especie && producto.especie.toLowerCase().includes(terminoLower)) return true;
         
         // Buscar en categoría
@@ -80,7 +80,7 @@ function BuscarContent() {
           
           <form onSubmit={handleSubmit} className="relative max-w-2xl">
             <label htmlFor="search-input" className="sr-only">
-              Buscar bonsais y accesorios
+              Buscar bonsáis y accesorios
             </label>
             <div className="relative">
               <input
@@ -88,7 +88,7 @@ function BuscarContent() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Buscar bonsais, accesorios..."
+                placeholder="Buscar bonsáis, accesorios..."
                 className="input w-full pl-12 pr-12 h-14 text-lg"
                 autoFocus
               />
@@ -171,10 +171,10 @@ function BuscarContent() {
           <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
             <Search className="h-20 w-20 text-gray-300 mx-auto mb-4" aria-hidden="true" />
             <h2 className="text-xl font-semibold text-gray-900 mb-2">
-              Busca tu bonsai ideal
+              Busca tu bonsái ideal
             </h2>
             <p className="text-gray-600 mb-6">
-              Encuentra bonsais por especie, ubicación, dificultad o busca accesorios.
+              Encuentra bonsáis por especie, ubicación, dificultad o busca accesorios.
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               <button

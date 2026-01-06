@@ -18,7 +18,7 @@ if (-not $gitInstalled) {
     Write-Host "  1. Abre la pestaña 'Source Control' en VS Code (Ctrl+Shift+G)" -ForegroundColor White
     Write-Host "  2. Click en 'Initialize Repository'" -ForegroundColor White
     Write-Host "  3. Click en 'Publish to GitHub'" -ForegroundColor White
-    Write-Host "  4. Nombre: bonsaiahopApp" -ForegroundColor White
+    Write-Host "  4. Nombre: bonsáiahopApp" -ForegroundColor White
     Write-Host "  5. ¡Listo!" -ForegroundColor White
     Write-Host ""
     Write-Host "OPCIÓN 2: Instalar Git" -ForegroundColor Cyan
@@ -55,7 +55,7 @@ git add .
 
 # Commit
 Write-Host "💾 Creando commit inicial..." -ForegroundColor Cyan
-git commit -m "Initial commit: Bonsai Shop - E-commerce completo"
+git commit -m "Initial commit: Bonsái Shop - E-commerce completo"
 
 # Configurar rama principal
 Write-Host "🔧 Configurando rama principal..." -ForegroundColor Cyan
@@ -75,7 +75,7 @@ if (-not $remoteExists) {
     $opcion = Read-Host "Elige una opción (1 o 2)"
     
     if ($opcion -eq "1") {
-        $repoUrl = Read-Host "Introduce la URL del repositorio (ej: https://github.com/ferbarjim200017/bonsaiahopApp.git)"
+        $repoUrl = Read-Host "Introduce la URL del repositorio (ej: https://github.com/ferbarjim200017/bonsáiahopApp.git)"
         git remote add origin $repoUrl
         
         Write-Host ""
@@ -91,7 +91,7 @@ if (-not $remoteExists) {
         Write-Host "2. Click en el botón '...' (más opciones)" -ForegroundColor White
         Write-Host "3. Click en 'Push to...'" -ForegroundColor White
         Write-Host "4. Selecciona 'Publish to GitHub'" -ForegroundColor White
-        Write-Host "5. Nombre: bonsaiahopApp" -ForegroundColor White
+        Write-Host "5. Nombre: bonsáiahopApp" -ForegroundColor White
         Write-Host ""
     }
 } else {
@@ -107,7 +107,7 @@ Write-Host ""
 Write-Host "1. Ve a: https://vercel.com" -ForegroundColor Cyan
 Write-Host "2. Sign up con tu cuenta de GitHub" -ForegroundColor Cyan
 Write-Host "3. Click 'Add New' > 'Project'" -ForegroundColor Cyan
-Write-Host "4. Importa: ferbarjim200017/bonsaiahopApp" -ForegroundColor Cyan
+Write-Host "4. Importa: ferbarjim200017/bonsáiahopApp" -ForegroundColor Cyan
 Write-Host "5. Click 'Deploy'" -ForegroundColor Cyan
 Write-Host "6. ¡Tu web estará lista en ~2 minutos!" -ForegroundColor Cyan
 Write-Host ""

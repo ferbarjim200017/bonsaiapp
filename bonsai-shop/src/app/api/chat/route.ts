@@ -2,27 +2,27 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
-// Sistema de conocimiento sobre bonsais
+// Sistema de conocimiento sobre bonsáis
 const KNOWLEDGE_BASE = {
   especies: {
-    'ficus': 'El Ficus es uno de los bonsais más populares para principiantes. Es resistente, de crecimiento rápido y muy versátil. Necesita luz indirecta abundante, riego regular (cuando la tierra superficial esté seca) y temperatura entre 15-25°C. Es apto para interior.',
+    'ficus': 'El Ficus es uno de los bonsáis más populares para principiantes. Es resistente, de crecimiento rápido y muy versátil. Necesita luz indirecta abundante, riego regular (cuando la tierra superficial esté seca) y temperatura entre 15-25°C. Es apto para interior.',
     'olmo': 'El Olmo Chino es excelente para principiantes. Muy resistente y perdona errores de cuidado. Necesita luz abundante, riego frecuente en verano y puede estar en interior o exterior. Pierde hojas en invierno si está fuera.',
-    'carmona': 'La Carmona o Té de Fukien es un bonsai de interior con flores blancas pequeñas. Necesita mucha luz, humedad constante y temperatura estable. Nivel de cuidado medio.',
-    'junipero': 'El Junípero es un bonsai de exterior clásico. Muy resistente al frío, necesita pleno sol y buen drenaje. No debe estar en interior. Riego moderado. Ideal para principiantes que tengan espacio exterior.',
-    'pino': 'Los pinos son bonsais de exterior tradicionales. Necesitan mucho sol, sustrato bien drenado y protección del viento fuerte. Nivel de cuidado medio-alto. Muy apreciados por su aspecto.',
+    'carmona': 'La Carmona o Té de Fukien es un bonsái de interior con flores blancas pequeñas. Necesita mucha luz, humedad constante y temperatura estable. Nivel de cuidado medio.',
+    'junipero': 'El Junípero es un bonsái de exterior clásico. Muy resistente al frío, necesita pleno sol y buen drenaje. No debe estar en interior. Riego moderado. Ideal para principiantes que tengan espacio exterior.',
+    'pino': 'Los pinos son bonsáis de exterior tradicionales. Necesitan mucho sol, sustrato bien drenado y protección del viento fuerte. Nivel de cuidado medio-alto. Muy apreciados por su aspecto.',
     'arce': 'El Arce Japonés es famoso por sus colores otoñales. Necesita protección del sol directo en verano, riego abundante y buen drenaje. Es de exterior. Nivel de cuidado medio-alto.',
   },
   cuidados: {
     'riego': 'El riego es fundamental: riega cuando la capa superficial de la tierra esté seca (1-2cm). En verano puede ser diario, en invierno menos frecuente. Mejor agua sin cal. Riega a fondo hasta que salga por los agujeros de drenaje.',
-    'luz': 'La mayoría de bonsais necesitan mucha luz. Los de interior necesitan luz indirecta brillante cerca de una ventana. Los de exterior necesitan sol directo (al menos 4-6 horas). Sin luz suficiente, las hojas amarillean.',
-    'abono': 'Abona en primavera y verano cada 2-3 semanas con abono específico para bonsais. En otoño reduce la frecuencia. No abones en invierno ni árboles recién trasplantados.',
+    'luz': 'La mayoría de bonsáis necesitan mucha luz. Los de interior necesitan luz indirecta brillante cerca de una ventana. Los de exterior necesitan sol directo (al menos 4-6 horas). Sin luz suficiente, las hojas amarillean.',
+    'abono': 'Abona en primavera y verano cada 2-3 semanas con abono específico para bonsáis. En otoño reduce la frecuencia. No abones en invierno ni árboles recién trasplantados.',
     'poda': 'La poda de mantenimiento se hace durante la época de crecimiento, cortando brotes nuevos. La poda estructural se hace en reposo vegetativo (invierno/principios primavera). Usa tijeras afiladas y limpias.',
-    'trasplante': 'Los bonsais jóvenes se trasplantan cada 2 años, los adultos cada 3-5 años. Se hace al inicio de primavera. Usa sustrato específico para bonsais con buen drenaje.',
-    'ubicacion': 'Respeta si tu bonsai es de interior o exterior. Los bonsais de exterior necesitan experimentar las estaciones. Protege del viento fuerte y heladas extremas (menos de -5°C).',
+    'trasplante': 'Los bonsáis jóvenes se trasplantan cada 2 años, los adultos cada 3-5 años. Se hace al inicio de primavera. Usa sustrato específico para bonsáis con buen drenaje.',
+    'ubicacion': 'Respeta si tu bonsái es de interior o exterior. Los bonsáis de exterior necesitan experimentar las estaciones. Protege del viento fuerte y heladas extremas (menos de -5°C).',
   },
   accesorios: {
-    'sustrato': 'El sustrato para bonsais debe drenar bien y retener algo de humedad. Mezclas típicas: akadama (arcilla japonesa), pumita, fibra de coco o kiryuu. Evita tierra de jardín común.',
-    'macetas': 'Las macetas de bonsai deben tener agujeros de drenaje. El tamaño debe ser proporcional al árbol. Las de cerámica esmaltada son decorativas, las sin esmaltar más funcionales.',
+    'sustrato': 'El sustrato para bonsáis debe drenar bien y retener algo de humedad. Mezclas típicas: akadama (arcilla japonesa), pumita, fibra de coco o kiryuu. Evita tierra de jardín común.',
+    'macetas': 'Las macetas de bonsái deben tener agujeros de drenaje. El tamaño debe ser proporcional al árbol. Las de cerámica esmaltada son decorativas, las sin esmaltar más funcionales.',
     'herramientas': 'Herramientas básicas: tijeras de poda, tijeras para ramitas finas, alambre para modelar, rastrillo de raíces, palillos. La calidad es importante para cortes limpios.',
     'abono': 'Abonos específicos NPK equilibrado (ej. 10-10-10) para crecimiento general. Mayor N en primavera, mayor P y K en otoño. Presentación líquida o sólida (pellets).',
   },
@@ -40,12 +40,12 @@ function generateResponse(message: string, history?: any[]): string {
   
   // Saludos
   if (lowerMessage.match(/^(hola|buenos dias|buenas tardes|buenas noches|hey|hi|saludos)/i)) {
-    return '¡Hola! 👋 Soy el asistente de Bonsai Shop. Estoy aquí para ayudarte con cualquier duda sobre bonsais, sus cuidados, accesorios y productos. ¿En qué puedo ayudarte hoy?';
+    return '¡Hola! 👋 Soy el asistente de Bonsái Shop. Estoy aquí para ayudarte con cualquier duda sobre bonsáis, sus cuidados, accesorios y productos. ¿En qué puedo ayudarte hoy?';
   }
 
   // Despedidas
   if (lowerMessage.match(/(adios|chao|hasta luego|gracias|bye)/i)) {
-    return '¡Hasta pronto! 🌳 Si tienes más preguntas sobre bonsais, no dudes en volver. ¡Que tengas un buen día!';
+    return '¡Hasta pronto! 🌳 Si tienes más preguntas sobre bonsáis, no dudes en volver. ¡Que tengas un buen día!';
   }
 
   // Preguntas sobre especies específicas
@@ -77,12 +77,12 @@ function generateResponse(message: string, history?: any[]): string {
   }
 
   if (lowerMessage.match(/donde (poner|colocar|ubicar)|ubicacion|interior|exterior/)) {
-    return `**📍 Sobre la ubicación:**\n\n${KNOWLEDGE_BASE.cuidados.ubicacion}\n\n¿Tienes un bonsai específico y quieres saber dónde colocarlo?`;
+    return `**📍 Sobre la ubicación:**\n\n${KNOWLEDGE_BASE.cuidados.ubicacion}\n\n¿Tienes un bonsái específico y quieres saber dónde colocarlo?`;
   }
 
   // Preguntas sobre accesorios
   if (lowerMessage.includes('sustrato') || lowerMessage.includes('tierra') || lowerMessage.includes('akadama')) {
-    return `**Sobre sustratos:**\n\n${KNOWLEDGE_BASE.accesorios.sustrato}\n\n¿Necesitas saber qué sustrato es mejor para tu bonsai?`;
+    return `**Sobre sustratos:**\n\n${KNOWLEDGE_BASE.accesorios.sustrato}\n\n¿Necesitas saber qué sustrato es mejor para tu bonsái?`;
   }
 
   if (lowerMessage.includes('maceta') || lowerMessage.includes('tiesto')) {
@@ -95,15 +95,15 @@ function generateResponse(message: string, history?: any[]): string {
 
   // Problemas comunes
   if (lowerMessage.match(/hojas? amarillas?|amarillean|amarillento/)) {
-    return `**🍂 Hojas amarillas:**\n\n${KNOWLEDGE_BASE.problemas['hojas amarillas']}\n\nPara ayudarte mejor, ¿podrías decirme qué especie de bonsai tienes y hace cuánto notaste este problema?`;
+    return `**🍂 Hojas amarillas:**\n\n${KNOWLEDGE_BASE.problemas['hojas amarillas']}\n\nPara ayudarte mejor, ¿podrías decirme qué especie de bonsái tienes y hace cuánto notaste este problema?`;
   }
 
   if (lowerMessage.match(/hojas? (se )?caen|caída|pierden? hojas/)) {
-    return `**🍃 Caída de hojas:**\n\n${KNOWLEDGE_BASE.problemas['hojas caidas']}\n\n¿Qué tipo de bonsai tienes? Esto me ayudará a darte una respuesta más precisa.`;
+    return `**🍃 Caída de hojas:**\n\n${KNOWLEDGE_BASE.problemas['hojas caidas']}\n\n¿Qué tipo de bonsái tienes? Esto me ayudará a darte una respuesta más precisa.`;
   }
 
   if (lowerMessage.match(/plaga|bicho|insecto|pulgon|cochinilla|ara[ñn]a roja/)) {
-    return `**🐛 Plagas:**\n\n${KNOWLEDGE_BASE.problemas.plagas}\n\n¿Has podido identificar qué tipo de plaga tiene tu bonsai? ¿Ves pequeños insectos o manchas en las hojas?`;
+    return `**🐛 Plagas:**\n\n${KNOWLEDGE_BASE.problemas.plagas}\n\n¿Has podido identificar qué tipo de plaga tiene tu bonsái? ¿Ves pequeños insectos o manchas en las hojas?`;
   }
 
   if (lowerMessage.match(/seca|muere|muerta|marchita/)) {
@@ -125,11 +125,11 @@ function generateResponse(message: string, history?: any[]): string {
       `- Península: 2-3 días laborables\n` +
       `- Baleares: 3-5 días laborables\n` +
       `- Canarias: 5-7 días laborables\n\n` +
-      `Los bonsais se envían con protección especial para garantizar que lleguen en perfecto estado.`;
+      `Los bonsáis se envían con protección especial para garantizar que lleguen en perfecto estado.`;
   }
 
   if (lowerMessage.includes('precio') || lowerMessage.includes('costo') || lowerMessage.includes('cuanto cuesta')) {
-    return `Nuestros precios varían según la especie, tamaño y edad del bonsai:\n` +
+    return `Nuestros precios varían según la especie, tamaño y edad del bonsái:\n` +
       `- Bonsáis pequeños (15-25cm): desde 25-40€\n` +
       `- Bonsáis medianos (25-40cm): desde 45-80€\n` +
       `- Bonsáis grandes (40cm+): desde 90€\n\n` +

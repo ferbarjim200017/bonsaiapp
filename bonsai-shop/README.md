@@ -1,13 +1,13 @@
-# 🌳 Bonsai Shop - Tienda Online de Bonsáis
+# 🌳 Bonsái Shop - Tienda Online de Bonsáis
 
-Aplicación web completa de e-commerce especializada en la venta de bonsais y accesorios en España, desarrollada siguiendo estrictamente los requisitos documentados en `docs/REQUISITOS_WEB_BONSAIS_ES.md`.
+Aplicación web completa de e-commerce especializada en la venta de bonsáis y accesorios en España, desarrollada siguiendo estrictamente los requisitos documentados en `docs/REQUISITOS_WEB_BONSAIS_ES.md`.
 
 ## 📋 Características implementadas
 
 ### ✅ Frontend (Cliente)
 - ✅ **Página principal (Home)** con hero, características, productos destacados y novedades
 - ✅ **Catálogo (PLP)** con filtros avanzados:
-  - Por categoría (bonsai/accesorio)
+  - Por categoría (bonsái/accesorio)
   - Por ubicación (interior/exterior)
   - Por dificultad de cuidado
   - Por rango de precio
@@ -15,7 +15,7 @@ Aplicación web completa de e-commerce especializada en la venta de bonsais y ac
   - Ordenación (relevancia, precio, novedades)
 - ✅ **Ficha de producto (PDP)** con:
   - Galería de imágenes
-  - Atributos específicos de bonsai (especie, tamaño, nivel de cuidado, ubicación, riego, toxicidad mascotas)
+  - Atributos específicos de bonsái (especie, tamaño, nivel de cuidado, ubicación, riego, toxicidad mascotas)
   - Información de stock en tiempo real
   - Aviso de variabilidad natural del producto
   - Guías de cuidados
@@ -99,7 +99,7 @@ Aplicación web completa de e-commerce especializada en la venta de bonsais y ac
 ## 📁 Estructura del proyecto
 
 ```
-bonsai-shop/
+bonsái-shop/
 ├── src/
 │   ├── app/                    # Next.js App Router
 │   │   ├── layout.tsx          # Layout principal con Header/Footer
@@ -213,11 +213,11 @@ Para completar la implementación según los requisitos:
 
 ## 📄 Licencia
 
-Este proyecto es privado y de uso exclusivo para Bonsai Shop España.
+Este proyecto es privado y de uso exclusivo para Bonsái Shop España.
 
 ---
 
 **Desarrollado siguiendo los requisitos documentados en:**  
 `docs/REQUISITOS_WEB_BONSAIS_ES.md`
 
-**Contacto:** info@bonsaishop.es
+**Contacto:** info@bonsáishop.es

@@ -46,7 +46,7 @@ export default function CarritoPage() {
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-4">Tu carrito está vacío</h1>
             <p className="text-gray-600 mb-8">
-              Explora nuestro catálogo y añade tus bonsais favoritos
+              Explora nuestro catálogo y añade tus bonsáis favoritos
             </p>
             <Link
               href="/catalogo"
@@ -76,7 +76,7 @@ export default function CarritoPage() {
                 {/* Imagen */}
                 <div className="relative w-24 h-24 flex-shrink-0 rounded overflow-hidden bg-gray-100">
                   <Image
-                    src={item.producto.imagenes[0] || '/images/placeholder-bonsai.jpg'}
+                    src={item.producto.imagenes[0] || '/images/placeholder-bonsái.jpg'}
                     alt={item.producto.nombre}
                     fill
                     sizes="96px"

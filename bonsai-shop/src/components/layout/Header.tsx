@@ -16,7 +16,7 @@ export default function Header() {
 
   const navigation = [
     { name: 'Inicio', href: '/', path: '/' },
-    { name: 'Bonsáis', href: '/catalogo?categoria=bonsai', path: '/catalogo', categoria: 'bonsai' },
+    { name: 'Bonsáis', href: '/catalogo?categoria=bonsái', path: '/catalogo', categoria: 'bonsái' },
     { name: 'Accesorios', href: '/catalogo?categoria=accesorio', path: '/catalogo', categoria: 'accesorio' },
     { name: 'Guía de cuidados', href: '/cuidados', path: '/cuidados' },
     { name: 'Contacto', href: '/contacto', path: '/contacto' },
@@ -44,9 +44,9 @@ export default function Header() {
             <Link 
               href="/" 
               className="text-2xl font-bold text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded"
-              aria-label="Bonsai Shop - Ir a inicio"
+              aria-label="Bonsái Shop - Ir a inicio"
             >
-              🌳 Bonsai Shop
+              🌳 Bonsái Shop
             </Link>
           </div>
 

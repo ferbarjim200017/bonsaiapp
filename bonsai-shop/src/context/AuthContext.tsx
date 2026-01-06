@@ -81,7 +81,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log('⚠️ Usando autenticación mock de respaldo');
       
       const mockUsers = [
-        { id: 'mock-1', uid: 'mock-1', email: 'admin@bonsaishop.es', nombre: 'Administrador', rol: 'admin' as const, password: 'admin123' },
+        { id: 'mock-1', uid: 'mock-1', email: 'admin@bonsáishop.es', nombre: 'Administrador', rol: 'admin' as const, password: 'admin123' },
         { id: 'mock-2', uid: 'mock-2', email: 'cliente@test.com', nombre: 'Cliente Test', rol: 'cliente' as const, password: 'cliente123' },
       ];
       

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 // Rutas a precargar
 const routesToPreload = [
-  '/catalogo?categoria=bonsai',
+  '/catalogo?categoria=bonsái',
   '/catalogo?categoria=accesorio',
   '/cuidados',
   '/contacto',

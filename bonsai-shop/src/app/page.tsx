@@ -74,7 +74,7 @@ export default function HomePage() {
           }}
         >
           <Image
-            src="/images/hero-bonsai.jpg"
+            src="/images/hero-bonsái.jpg"
             alt="Bonsái decorativo"
             fill
             className="object-cover"
@@ -97,10 +97,10 @@ export default function HomePage() {
         >
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-              Tu tienda de bonsais en España
+              Tu tienda de bonsáis en España
             </h1>
             <p className="text-lg md:text-xl text-white/95 mb-8 drop-shadow-md">
-              Descubre nuestra selección de bonsais de calidad para interior y exterior. 
+              Descubre nuestra selección de bonsáis de calidad para interior y exterior. 
               Envíos seguros a toda España con garantía y guías de cuidado incluidas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -227,14 +227,14 @@ export default function HomePage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Link
-              href="/catalogo?categoria=bonsai"
+              href="/catalogo?categoria=bonsái"
               className="group relative overflow-hidden rounded-lg bg-green-100 h-64 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-green-700/20 group-hover:from-green-500/30 group-hover:to-green-700/30 transition-colors" />
               <div className="relative h-full flex flex-col items-center justify-center text-center p-6">
                 <div className="text-6xl mb-4">🌳</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Bonsáis</h3>
-                <p className="text-gray-700">Descubre nuestra selección de bonsais para interior y exterior</p>
+                <p className="text-gray-700">Descubre nuestra selección de bonsáis para interior y exterior</p>
               </div>
             </Link>
             
@@ -283,7 +283,7 @@ export default function HomePage() {
       <section className="py-16 bg-primary-600" aria-labelledby="cta-heading">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 id="cta-heading" className="text-3xl md:text-4xl font-bold text-white mb-4">
-            ¿Necesitas ayuda para elegir tu bonsai?
+            ¿Necesitas ayuda para elegir tu bonsái?
           </h2>
           <p className="text-xl text-primary-50 mb-8">
             Nuestro equipo está aquí para asesorarte y resolver todas tus dudas.

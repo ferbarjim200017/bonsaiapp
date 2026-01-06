@@ -25,7 +25,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
     precio: '',
     precioAnterior: '',
     sku: '',
-    categoria: 'bonsai' as 'bonsai' | 'accesorio',
+    categoria: 'bonsái' as 'bonsái' | 'accesorio',
     stock: '',
     publicado: true,
     destacado: false,
@@ -71,7 +71,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
           precio: producto.precio?.toString() || '',
           precioAnterior: producto.precioAnterior?.toString() || '',
           sku: producto.sku || '',
-          categoria: producto.categoria || 'bonsai',
+          categoria: producto.categoria || 'bonsái',
           stock: producto.stock?.toString() || '',
           publicado: producto.publicado ?? true,
           destacado: producto.destacado ?? false,
@@ -157,7 +157,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
       };
 
       // Agregar campos específicos según categoría
-      if (formData.categoria === 'bonsai') {
+      if (formData.categoria === 'bonsái') {
         productoActualizado.especie = formData.especie;
         productoActualizado.tamano = formData.tamano ? parseInt(formData.tamano) : undefined;
         productoActualizado.nivelCuidado = formData.nivelCuidado;
@@ -313,7 +313,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
                   value={formData.categoria}
                   onChange={(e) => setFormData({ ...formData, categoria: e.target.value as any })}
                 >
-                  <option value="bonsai">Bonsái</option>
+                  <option value="bonsái">Bonsái</option>
                   <option value="accesorio">Accesorio</option>
                 </select>
               </div>
@@ -418,8 +418,8 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
           </div>
         </div>
 
-        {/* Atributos específicos de bonsai */}
-        {formData.categoria === 'bonsai' && (
+        {/* Atributos específicos de bonsái */}
+        {formData.categoria === 'bonsái' && (
           <div className="bg-white shadow rounded-lg p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
               Atributos de Bonsái

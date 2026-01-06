@@ -115,7 +115,7 @@ function CatalogoContent() {
             Catálogo de productos
           </h1>
           <p className="text-gray-600">
-            Explora nuestra selección de bonsais y accesorios
+            Explora nuestra selección de bonsáis y accesorios
           </p>
         </div>
 
@@ -266,8 +266,8 @@ function FiltrosPanel({
           <input
             type="radio"
             name="categoria"
-            value="bonsai"
-            checked={filtros.categoria === 'bonsai'}
+            value="bonsái"
+            checked={filtros.categoria === 'bonsái'}
             onChange={(e) => setFiltros({ ...filtros, categoria: e.target.value })}
             className="h-4 w-4 text-primary-600 focus:ring-2 focus:ring-primary-600"
           />
@@ -286,8 +286,8 @@ function FiltrosPanel({
         </label>
       </fieldset>
 
-      {/* Ubicación (solo para bonsais) */}
-      {(!filtros.categoria || filtros.categoria === 'bonsai') && (
+      {/* Ubicación (solo para bonsáis) */}
+      {(!filtros.categoria || filtros.categoria === 'bonsái') && (
         <fieldset className="space-y-2">
           <legend className="text-sm font-medium text-gray-900 mb-2">Ubicación</legend>
           <label className="flex items-center gap-2 cursor-pointer">
@@ -326,8 +326,8 @@ function FiltrosPanel({
         </fieldset>
       )}
 
-      {/* Dificultad (solo para bonsais) */}
-      {(!filtros.categoria || filtros.categoria === 'bonsai') && (
+      {/* Dificultad (solo para bonsáis) */}
+      {(!filtros.categoria || filtros.categoria === 'bonsái') && (
         <fieldset className="space-y-2">
           <legend className="text-sm font-medium text-gray-900 mb-2">Dificultad de cuidado</legend>
           <label className="flex items-center gap-2 cursor-pointer">

@@ -74,7 +74,7 @@ export default function AdminDashboard() {
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
         <p className="mt-1 text-sm text-gray-600">
-          Bienvenido al panel de administración de Bonsai Shop
+          Bienvenido al panel de administración de Bonsái Shop
         </p>
       </div>
 

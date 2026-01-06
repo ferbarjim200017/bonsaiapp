@@ -21,12 +21,12 @@ async function initializeFirebase() {
     // Crear usuario admin
     console.log('👤 Creando usuario administrador...');
     await registerUser(
-      'admin@bonsaishop.es',
+      'admin@bonsáishop.es',
       'admin123',
       'Administrador',
       'admin'
     );
-    console.log('✅ Admin creado: admin@bonsaishop.es / admin123\n');
+    console.log('✅ Admin creado: admin@bonsáishop.es / admin123\n');
 
     // Crear usuario cliente de prueba
     console.log('👤 Creando usuario cliente de prueba...');

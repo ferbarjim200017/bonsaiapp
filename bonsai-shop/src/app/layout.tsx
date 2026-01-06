@@ -12,19 +12,19 @@ import { AuthProvider } from '@/context/AuthContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Bonsai Shop - Venta de Bonsáis y Accesorios en España',
-  description: 'Tienda online especializada en bonsais de calidad y accesorios para su cuidado. Envíos a toda España.',
-  keywords: ['bonsai', 'bonsais', 'plantas', 'jardinería', 'macetas', 'herramientas bonsai'],
-  authors: [{ name: 'Bonsai Shop' }],
+  title: 'Bonsái Shop - Venta de Bonsáis y Accesorios en España',
+  description: 'Tienda online especializada en bonsáis de calidad y accesorios para su cuidado. Envíos a toda España.',
+  keywords: ['bonsái', 'bonsáis', 'plantas', 'jardinería', 'macetas', 'herramientas bonsái'],
+  authors: [{ name: 'Bonsái Shop' }],
   viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
   themeColor: '#16a34a',
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: 'https://bonsaishop.es',
-    title: 'Bonsai Shop - Venta de Bonsáis en España',
-    description: 'Tienda online especializada en bonsais de calidad',
-    siteName: 'Bonsai Shop',
+    url: 'https://bonsáishop.es',
+    title: 'Bonsái Shop - Venta de Bonsáis en España',
+    description: 'Tienda online especializada en bonsáis de calidad',
+    siteName: 'Bonsái Shop',
   },
 };
 

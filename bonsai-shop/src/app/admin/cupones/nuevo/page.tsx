@@ -211,7 +211,7 @@ export default function NuevoCupon() {
             <div className="flex gap-2 mb-2">
               <button
                 type="button"
-                onClick={() => agregarCategoria('bonsai')}
+                onClick={() => agregarCategoria('bonsái')}
                 className="px-3 py-1 text-sm border rounded hover:bg-gray-50"
               >
                 <Plus className="h-4 w-4 inline mr-1" />
@@ -233,7 +233,7 @@ export default function NuevoCupon() {
                     key={cat}
                     className="px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm flex items-center gap-2"
                   >
-                    {cat === 'bonsai' ? 'Bonsáis' : 'Accesorios'}
+                    {cat === 'bonsái' ? 'Bonsáis' : 'Accesorios'}
                     <button
                       type="button"
                       onClick={() => removerCategoria(cat)}

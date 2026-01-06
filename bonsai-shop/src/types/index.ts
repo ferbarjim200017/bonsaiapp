@@ -1,4 +1,4 @@
-// Tipos principales para la tienda de bonsais
+// Tipos principales para la tienda de bonsáis
 
 export type ProductCategory = 'bonsai' | 'accesorio';
 export type Ubicacion = 'interior' | 'exterior' | 'ambos';
@@ -19,7 +19,7 @@ export interface Producto {
   destacado: boolean;
   nuevo: boolean;
   
-  // Atributos específicos para bonsais
+  // Atributos específicos para bonsáis
   especie?: string;
   tamano?: number; // Altura en cm
   nivelCuidado?: Dificultad;

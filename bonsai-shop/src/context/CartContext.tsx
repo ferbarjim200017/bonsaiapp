@@ -30,8 +30,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Persistir carrito en localStorage
   useEffect(() => {
-    const savedCart = localStorage.getItem('bonsai-cart');
-    const savedCupon = localStorage.getItem('bonsai-cupon');
+    const savedCart = localStorage.getItem('bonsái-cart');
+    const savedCupon = localStorage.getItem('bonsái-cupon');
     if (savedCart) {
       try {
         setCarrito(JSON.parse(savedCart));
@@ -49,14 +49,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('bonsai-cart', JSON.stringify(carrito));
+    localStorage.setItem('bonsái-cart', JSON.stringify(carrito));
   }, [carrito]);
 
   useEffect(() => {
     if (cuponData) {
-      localStorage.setItem('bonsai-cupon', JSON.stringify(cuponData));
+      localStorage.setItem('bonsái-cupon', JSON.stringify(cuponData));
     } else {
-      localStorage.removeItem('bonsai-cupon');
+      localStorage.removeItem('bonsái-cupon');
     }
   }, [cuponData]);
 

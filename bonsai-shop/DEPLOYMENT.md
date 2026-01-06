@@ -5,10 +5,10 @@
 1. Descargar e instalar [GitHub Desktop](https://desktop.github.com/)
 2. Abrir GitHub Desktop
 3. Click en "File" > "Add Local Repository"
-4. Seleccionar la carpeta: `C:\Users\fernando.barrera\bonsaiapp\bonsai-shop`
+4. Seleccionar la carpeta: `C:\Users\fernando.barrera\bonsáiapp\bonsái-shop`
 5. Si pregunta "crear repositorio", click en "create a repository"
 6. Click en "Publish repository"
-7. Nombre del repositorio: `bonsaiahopApp`
+7. Nombre del repositorio: `bonsáiahopApp`
 8. Desmarcar "Keep this code private" si quieres que sea público
 9. Click en "Publish repository"
 
@@ -17,12 +17,12 @@
 Si Git está instalado en tu sistema, ejecutar:
 
 ```bash
-cd C:\Users\fernando.barrera\bonsaiapp\bonsai-shop
+cd C:\Users\fernando.barrera\bonsáiapp\bonsái-shop
 git init
 git add .
-git commit -m "Initial commit - Bonsai Shop"
+git commit -m "Initial commit - Bonsái Shop"
 git branch -M main
-git remote add origin https://github.com/ferbarjim200017/bonsaiahopApp.git
+git remote add origin https://github.com/ferbarjim200017/bonsáiahopApp.git
 git push -u origin main
 ```
 
@@ -33,15 +33,15 @@ git push -u origin main
 1. Ir a [https://vercel.com](https://vercel.com)
 2. Click en "Sign Up" y usar tu cuenta de GitHub
 3. Click en "Add New..." > "Project"
-4. Importar repositorio `ferbarjim200017/bonsaiahopApp`
+4. Importar repositorio `ferbarjim200017/bonsáiahopApp`
 5. Click en "Deploy"
-6. ¡Listo! Tu web estará en: `https://bonsaiahop-app.vercel.app`
+6. ¡Listo! Tu web estará en: `https://bonsáiahop-app.vercel.app`
 
 ### Opción B: Usar Vercel CLI
 
 ```bash
 npm install -g vercel
-cd C:\Users\fernando.barrera\bonsaiapp\bonsai-shop
+cd C:\Users\fernando.barrera\bonsáiapp\bonsái-shop
 vercel login
 vercel --prod
 ```
@@ -64,8 +64,8 @@ Una vez desplegado en Vercel, puedes:
 
 ## URLs de ejemplo después del deployment
 
-- **Vercel:** `https://bonsaiahop-app.vercel.app`
-- **GitHub Pages (si se configura):** `https://ferbarjim200017.github.io/bonsaiahopApp`
+- **Vercel:** `https://bonsáiahop-app.vercel.app`
+- **GitHub Pages (si se configura):** `https://ferbarjim200017.github.io/bonsáiahopApp`
 
 ## Problemas comunes
 

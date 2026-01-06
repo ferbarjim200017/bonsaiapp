@@ -10,18 +10,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Columna 1: Información */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Bonsai Shop</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Bonsái Shop</h3>
             <p className="text-sm text-gray-600 mb-4">
-              Tu tienda especializada en bonsais de calidad y accesorios para su cuidado en España.
+              Tu tienda especializada en bonsáis de calidad y accesorios para su cuidado en España.
             </p>
             <div className="space-y-2 text-sm text-gray-600">
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4" aria-hidden="true" />
                 <a 
-                  href="mailto:info@bonsaishop.es"
+                  href="mailto:info@bonsáishop.es"
                   className="hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded"
                 >
-                  info@bonsaishop.es
+                  info@bonsáishop.es
                 </a>
               </div>
               <div className="flex items-center gap-2">
@@ -46,7 +46,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link 
-                  href="/catalogo?categoria=bonsai" 
+                  href="/catalogo?categoria=bonsái" 
                   className="text-gray-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded"
                 >
                   Bonsáis
@@ -169,8 +169,8 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-gray-200">
           <p className="text-sm text-gray-500 text-center">
-            © {currentYear} Bonsai Shop. Todos los derechos reservados. | 
-            Tienda online de bonsais en España con envío a toda la península, Baleares, Canarias, Ceuta y Melilla.
+            © {currentYear} Bonsái Shop. Todos los derechos reservados. | 
+            Tienda online de bonsáis en España con envío a toda la península, Baleares, Canarias, Ceuta y Melilla.
           </p>
         </div>
       </div>

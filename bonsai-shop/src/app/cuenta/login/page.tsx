@@ -74,7 +74,7 @@ export default function LoginPage() {
           </h1>
           
           <p className="text-gray-600">
-            Accede a tu cuenta de Bonsai Shop
+            Accede a tu cuenta de Bonsái Shop
           </p>
         </div>
 

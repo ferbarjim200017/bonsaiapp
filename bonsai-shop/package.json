@@ -1,8 +1,8 @@
 {
-  "name": "bonsai-shop",
+  "name": "bonsái-shop",
   "version": "1.0.0",
   "private": true,
-  "description": "Tienda online de bonsais en España - Accesible y responsive",
+  "description": "Tienda online de bonsáis en España - Accesible y responsive",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
