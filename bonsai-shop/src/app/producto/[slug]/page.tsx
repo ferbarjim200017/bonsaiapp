@@ -69,10 +69,10 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
     : null;
 
   const handleAgregarCarrito = () => {
-    if (!producto) return;
     setAgregandoCarrito(true);
     agregarAlCarrito(producto, cantidad);
     
+    // Mensaje accesible (en producción, usar toast o modal)
     setTimeout(() => {
       setAgregandoCarrito(false);
       alert(`${producto.nombre} añadido al carrito`);
@@ -89,6 +89,7 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
     setImagenActiva((prev) => (prev === 0 ? producto.imagenes.length - 1 : prev - 1));
   };
 
+  // Touch handlers para swipe
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.targetTouches[0].clientX);
   };
@@ -106,8 +107,7 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
 
     if (isLeftSwipe) {
       siguienteImagen();
-    }
-    if (isRightSwipe) {
+    } else if (isRightSwipe) {
       anteriorImagen();
     }
     
@@ -128,13 +128,19 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
             </li>
             <ChevronRight className="h-4 w-4 text-gray-400" aria-hidden="true" />
             <li>
-              <Link
-                href={`/catalogo?categoria=${producto.categoria}`}
-                className="text-gray-500 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded px-1 capitalize"
-              >
-                {producto.categoria}s
-              </Link>
+              <span className="text-gray-900 font-medium" aria-current="page">
+                {producto.nombre}
+              </span>
             </li>
+          </ol>
+        </div>
+      </nav>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Galería de imágenes */}
+          <div className="space-y-4">
+            <div 
               className="aspect-square relative overflow-hidden rounded-lg bg-gray-100 border border-gray-200 touch-pan-y"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
