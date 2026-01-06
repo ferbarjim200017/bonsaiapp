@@ -13,6 +13,7 @@ export default function LoginPage() {
     email: '',
     password: '',
   });
+  const [recordarme, setRecordarme] = useState(false);
   const [error, setError] = useState('');
   const [cargando, setCargando] = useState(false);
 
@@ -32,6 +33,12 @@ export default function LoginPage() {
       const success = await login(formData.email, formData.password);
       
       if (success) {
+        // Guardar preferencia de recordarme
+        if (recordarme) {
+          localStorage.setItem('rememberMe', 'true');
+        } else {
+          localStorage.removeItem('rememberMe');
+        }
         router.push('/cuenta');
       } else {
         setError('Credenciales incorrectas');
@@ -128,6 +135,8 @@ export default function LoginPage() {
               <input
                 id="remember"
                 type="checkbox"
+                checked={recordarme}
+                onChange={(e) => setRecordarme(e.target.checked)}
                 className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
               />
               <label htmlFor="remember" className="ml-2 block text-sm text-gray-700">

@@ -98,6 +98,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       await logoutUser();
       setUser(null);
+      // Limpiar preferencia de recordarme al cerrar sesión
+      localStorage.removeItem('rememberMe');
     } catch (error) {
       console.error('Error en logout:', error);
     }

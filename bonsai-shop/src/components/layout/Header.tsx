@@ -1,23 +1,32 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Menu, X, ShoppingCart, User, Search, LogOut } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 
 export default function Header() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { itemsCount } = useCart();
   const { user, logout } = useAuth();
 
   const navigation = [
-    { name: 'Inicio', href: '/' },
-    { name: 'Bonsáis', href: '/catalogo?categoria=bonsai' },
-    { name: 'Accesorios', href: '/catalogo?categoria=accesorio' },
-    { name: 'Guía de cuidados', href: '/cuidados' },
-    { name: 'Contacto', href: '/contacto' },
+    { name: 'Inicio', href: '/', path: '/' },
+    { name: 'Bonsáis', href: '/catalogo?categoria=bonsai', path: '/catalogo' },
+    { name: 'Accesorios', href: '/catalogo?categoria=accesorio', path: '/catalogo' },
+    { name: 'Guía de cuidados', href: '/cuidados', path: '/cuidados' },
+    { name: 'Contacto', href: '/contacto', path: '/contacto' },
   ];
+
+  const isActive = (itemPath: string) => {
+    if (itemPath === '/') {
+      return pathname === '/';
+    }
+    return pathname?.startsWith(itemPath);
+  };
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
@@ -36,16 +45,23 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                prefetch={true}
-                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const active = isActive(item.path);
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  prefetch={true}
+                  className={`px-3 py-2 text-sm font-medium rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 transition-colors ${
+                    active
+                      ? 'text-primary-700 bg-primary-50 border-2 border-primary-600'
+                      : 'text-gray-700 hover:text-primary-700 hover:bg-gray-50 border-2 border-transparent'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right side: Search, User, Cart */}
