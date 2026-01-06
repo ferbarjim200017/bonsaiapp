@@ -74,7 +74,7 @@ export default function HomePage() {
           }}
         >
           <Image
-            src="/images/hero-bonsái.jpg"
+            src="/images/hero-bonsai.jpg"
             alt="Bonsái decorativo"
             fill
             className="object-cover"
