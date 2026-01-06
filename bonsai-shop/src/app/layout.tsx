@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   authors: [{ name: 'Bonsái Shop' }],
   viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
   themeColor: '#16a34a',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
   openGraph: {
     type: 'website',
     locale: 'es_ES',
