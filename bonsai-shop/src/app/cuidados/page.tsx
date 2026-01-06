@@ -7,7 +7,7 @@ export default function CuidadosPage() {
     {
       icono: <Droplets className="h-8 w-8" />,
       titulo: 'Riego',
-      descripcion: 'El riego es fundamental para la salud de tu bonsái.',
+      descripcion: 'El riego es fundamental para la salud de tu bonsai.',
       detalles: [
         'Riega cuando la superficie del sustrato esté seca al tacto',
         'Usa agua a temperatura ambiente, preferiblemente reposada 24h',
@@ -19,19 +19,19 @@ export default function CuidadosPage() {
     {
       icono: <Sun className="h-8 w-8" />,
       titulo: 'Luz',
-      descripcion: 'La ubicación correcta es clave según el tipo de bonsái.',
+      descripcion: 'La ubicación correcta es clave según el tipo de bonsai.',
       detalles: [
         'Bonsáis de exterior: necesitan luz solar directa al menos 4-6 horas diarias',
         'Bonsáis de interior: luz brillante indirecta, cerca de ventana',
         'Evita cambios bruscos de ubicación',
-        'Rota el bonsái cada semana para crecimiento uniforme',
+        'Rota el bonsai cada semana para crecimiento uniforme',
         'Protege de luz solar directa en horas más intensas del verano'
       ]
     },
     {
       icono: <Scissors className="h-8 w-8" />,
       titulo: 'Poda',
-      descripcion: 'Mantén la forma y salud de tu bonsái mediante podas regulares.',
+      descripcion: 'Mantén la forma y salud de tu bonsai mediante podas regulares.',
       detalles: [
         'Poda de mantenimiento: elimina brotes nuevos durante toda la temporada',
         'Poda estructural: en otoño/invierno cuando el árbol está en reposo',
@@ -58,7 +58,7 @@ export default function CuidadosPage() {
       descripcion: 'Nutrición adecuada para un crecimiento saludable.',
       detalles: [
         'Abona desde primavera hasta otoño (época de crecimiento)',
-        'Usa abono específico para bonsáis',
+        'Usa abono específico para bonsais',
         'Frecuencia: cada 2-4 semanas según la especie',
         'No abones tras trasplante hasta 4-6 semanas',
         'Reduce el abonado en otoño e invierno'
@@ -141,7 +141,7 @@ export default function CuidadosPage() {
             Guía de Cuidados de Bonsáis
           </h1>
           <p className="text-lg text-gray-700 max-w-3xl">
-            Todo lo que necesitas saber para mantener tu bonsái saludable y hermoso.
+            Todo lo que necesitas saber para mantener tu bonsai saludable y hermoso.
             Desde técnicas básicas hasta consejos avanzados.
           </p>
         </div>
@@ -279,15 +279,15 @@ export default function CuidadosPage() {
           <div className="space-y-3 text-gray-700">
             <p className="flex items-start gap-2">
               <span className="text-primary-600 mt-1 font-bold">→</span>
-              <span><strong>Paciencia:</strong> El bonsái es un arte que requiere tiempo y observación constante.</span>
+              <span><strong>Paciencia:</strong> El bonsai es un arte que requiere tiempo y observación constante.</span>
             </p>
             <p className="flex items-start gap-2">
               <span className="text-primary-600 mt-1 font-bold">→</span>
-              <span><strong>Observación:</strong> Inspecciona tu bonsái diariamente para detectar cambios o problemas.</span>
+              <span><strong>Observación:</strong> Inspecciona tu bonsai diariamente para detectar cambios o problemas.</span>
             </p>
             <p className="flex items-start gap-2">
               <span className="text-primary-600 mt-1 font-bold">→</span>
-              <span><strong>Aprendizaje continuo:</strong> Cada bonsái es único, aprenderás con la experiencia.</span>
+              <span><strong>Aprendizaje continuo:</strong> Cada bonsai es único, aprenderás con la experiencia.</span>
             </p>
             <p className="flex items-start gap-2">
               <span className="text-primary-600 mt-1 font-bold">→</span>

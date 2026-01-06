@@ -16,7 +16,7 @@ export default function ChatBot() {
     {
       id: '1',
       role: 'assistant',
-      content: '¡Hola! Soy tu asistente virtual de Bonsai Shop. Puedo ayudarte con preguntas sobre bonsáis, sus cuidados, accesorios y más. ¿En qué puedo ayudarte hoy?',
+      content: '¡Hola! Soy tu asistente virtual de Bonsai Shop. Puedo ayudarte con preguntas sobre bonsais, sus cuidados, accesorios y más. ¿En qué puedo ayudarte hoy?',
       timestamp: new Date(),
     },
   ]);
@@ -117,7 +117,7 @@ export default function ChatBot() {
             <MessageCircle className="w-5 h-5" />
             <div>
               <h3 className="font-semibold">Asistente Bonsai Shop</h3>
-              <p className="text-xs text-green-100">Experto en bonsáis</p>
+              <p className="text-xs text-green-100">Experto en bonsais</p>
             </div>
           </div>
           <button

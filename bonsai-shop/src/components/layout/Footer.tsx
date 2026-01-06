@@ -12,7 +12,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Bonsai Shop</h3>
             <p className="text-sm text-gray-600 mb-4">
-              Tu tienda especializada en bonsáis de calidad y accesorios para su cuidado en España.
+              Tu tienda especializada en bonsais de calidad y accesorios para su cuidado en España.
             </p>
             <div className="space-y-2 text-sm text-gray-600">
               <div className="flex items-center gap-2">
@@ -170,7 +170,7 @@ export default function Footer() {
         <div className="mt-8 pt-8 border-t border-gray-200">
           <p className="text-sm text-gray-500 text-center">
             © {currentYear} Bonsai Shop. Todos los derechos reservados. | 
-            Tienda online de bonsáis en España con envío a toda la península, Baleares, Canarias, Ceuta y Melilla.
+            Tienda online de bonsais en España con envío a toda la península, Baleares, Canarias, Ceuta y Melilla.
           </p>
         </div>
       </div>

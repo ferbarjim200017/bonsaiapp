@@ -418,7 +418,7 @@ export default function EditarProducto({ params }: { params: { id: string } }) {
           </div>
         </div>
 
-        {/* Atributos específicos de bonsái */}
+        {/* Atributos específicos de bonsai */}
         {formData.categoria === 'bonsai' && (
           <div className="bg-white shadow rounded-lg p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">

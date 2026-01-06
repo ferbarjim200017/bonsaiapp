@@ -115,7 +115,7 @@ function CatalogoContent() {
             Catálogo de productos
           </h1>
           <p className="text-gray-600">
-            Explora nuestra selección de bonsáis y accesorios
+            Explora nuestra selección de bonsais y accesorios
           </p>
         </div>
 
@@ -286,7 +286,7 @@ function FiltrosPanel({
         </label>
       </fieldset>
 
-      {/* Ubicación (solo para bonsáis) */}
+      {/* Ubicación (solo para bonsais) */}
       {(!filtros.categoria || filtros.categoria === 'bonsai') && (
         <fieldset className="space-y-2">
           <legend className="text-sm font-medium text-gray-900 mb-2">Ubicación</legend>
@@ -326,7 +326,7 @@ function FiltrosPanel({
         </fieldset>
       )}
 
-      {/* Dificultad (solo para bonsáis) */}
+      {/* Dificultad (solo para bonsais) */}
       {(!filtros.categoria || filtros.categoria === 'bonsai') && (
         <fieldset className="space-y-2">
           <legend className="text-sm font-medium text-gray-900 mb-2">Dificultad de cuidado</legend>

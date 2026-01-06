@@ -46,7 +46,7 @@ export default function CarritoPage() {
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-4">Tu carrito está vacío</h1>
             <p className="text-gray-600 mb-8">
-              Explora nuestro catálogo y añade tus bonsáis favoritos
+              Explora nuestro catálogo y añade tus bonsais favoritos
             </p>
             <Link
               href="/catalogo"

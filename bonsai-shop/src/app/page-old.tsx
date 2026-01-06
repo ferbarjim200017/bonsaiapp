@@ -7,11 +7,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Bonsai Shop - Venta de Bonsáis y Accesorios en España',
-  description: 'Tienda online especializada en bonsáis de calidad para interior y exterior. Envíos a toda España con garantía de calidad. Encuentra tu bonsái perfecto.',
-  keywords: ['bonsái', 'bonsais españa', 'comprar bonsái', 'bonsái interior', 'bonsái exterior', 'accesorios bonsái'],
+  description: 'Tienda online especializada en bonsais de calidad para interior y exterior. Envíos a toda España con garantía de calidad. Encuentra tu bonsai perfecto.',
+  keywords: ['bonsai', 'bonsais españa', 'comprar bonsai', 'bonsai interior', 'bonsai exterior', 'accesorios bonsai'],
   openGraph: {
     title: 'Bonsai Shop - Venta de Bonsáis en España',
-    description: 'Tienda online especializada en bonsáis de calidad',
+    description: 'Tienda online especializada en bonsais de calidad',
     type: 'website',
   },
 };
@@ -27,10 +27,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Tu tienda de bonsáis en España
+              Tu tienda de bonsais en España
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8">
-              Descubre nuestra selección de bonsáis de calidad para interior y exterior. 
+              Descubre nuestra selección de bonsais de calidad para interior y exterior. 
               Envíos seguros a toda España con garantía y guías de cuidado incluidas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -152,7 +152,7 @@ export default function HomePage() {
               <div className="relative h-full flex flex-col items-center justify-center text-center p-6">
                 <div className="text-6xl mb-4">🌳</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Bonsáis</h3>
-                <p className="text-gray-700">Descubre nuestra selección de bonsáis para interior y exterior</p>
+                <p className="text-gray-700">Descubre nuestra selección de bonsais para interior y exterior</p>
               </div>
             </Link>
             
@@ -201,7 +201,7 @@ export default function HomePage() {
       <section className="py-16 bg-primary-600" aria-labelledby="cta-heading">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 id="cta-heading" className="text-3xl md:text-4xl font-bold text-white mb-4">
-            ¿Necesitas ayuda para elegir tu bonsái?
+            ¿Necesitas ayuda para elegir tu bonsai?
           </h2>
           <p className="text-xl text-primary-50 mb-8">
             Nuestro equipo está aquí para asesorarte y resolver todas tus dudas.
