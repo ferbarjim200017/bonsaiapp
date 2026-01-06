@@ -53,7 +53,7 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-1">
             {navigation.map((item) => {
-              const active = isActive(item.path);
+              const active = isActive(item);
               return (
                 <Link
                   key={item.name}
