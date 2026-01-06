@@ -108,7 +108,7 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
               onClick={() => setModalImagenAbierto(true)}
             >
               <Image
-                src={producto.imagenes[imagenActiva] || '/images/placeholder-bonsai.jpg'}
+                src={producto.imagenes[imagenActiva] || '/images/placeholder-bonsái.jpg'}
                 alt={producto.nombre}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -232,8 +232,8 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
               )}
             </div>
 
-            {/* Atributos específicos para bonsais */}
-            {producto.categoria === 'bonsai' && (
+            {/* Atributos específicos para bonsáis */}
+            {producto.categoria === 'bonsái' && (
               <div className="border-t border-b border-gray-200 py-4 space-y-3">
                 <h2 className="font-semibold text-gray-900 mb-3">Características</h2>
                 <dl className="grid grid-cols-2 gap-3 text-sm">
@@ -350,8 +350,8 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
               <p className="text-gray-700 leading-relaxed">{producto.descripcion}</p>
             </section>
 
-            {/* Cuidados (solo bonsais) */}
-            {producto.categoria === 'bonsai' && producto.riego && (
+            {/* Cuidados (solo bonsáis) */}
+            {producto.categoria === 'bonsái' && producto.riego && (
               <section aria-labelledby="cuidados-heading">
                 <h2 id="cuidados-heading" className="text-2xl font-bold text-gray-900 mb-4">
                   Guía de cuidados
