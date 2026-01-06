@@ -80,12 +80,10 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
   };
 
   const siguienteImagen = () => {
-    if (!producto) return;
     setImagenActiva((prev) => (prev === producto.imagenes.length - 1 ? 0 : prev + 1));
   };
 
   const anteriorImagen = () => {
-    if (!producto) return;
     setImagenActiva((prev) => (prev === 0 ? producto.imagenes.length - 1 : prev - 1));
   };
 
