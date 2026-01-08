@@ -132,7 +132,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link 
-                  href="/aviso-legal" 
+                  href="/legal/aviso-legal" 
                   className="text-gray-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded"
                 >
                   Aviso legal
@@ -140,7 +140,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="/privacidad" 
+                  href="/legal/privacidad" 
                   className="text-gray-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded"
                 >
                   Política de privacidad
@@ -148,7 +148,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="/cookies" 
+                  href="/legal/cookies" 
                   className="text-gray-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded"
                 >
                   Política de cookies
@@ -156,7 +156,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="/terminos" 
+                  href="/legal/terminos" 
                   className="text-gray-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded"
                 >
                   Términos y condiciones
