@@ -210,7 +210,7 @@ export default function HomePage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Link
-              href="/catalogo?categoria=bonsái"
+              href="/catalogo?categoria=bonsai"
               className="group relative overflow-hidden rounded-lg bg-green-100 h-64 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-green-700/20 group-hover:from-green-500/30 group-hover:to-green-700/30 transition-colors" />

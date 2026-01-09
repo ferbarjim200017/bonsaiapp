@@ -46,7 +46,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link 
-                  href="/catalogo?categoria=bonsái" 
+                  href="/catalogo?categoria=bonsai" 
                   className="text-gray-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 rounded"
                 >
                   Bonsáis
