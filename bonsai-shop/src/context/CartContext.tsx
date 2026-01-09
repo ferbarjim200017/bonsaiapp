@@ -2,7 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Carrito, ItemCarrito, Producto } from '@/types';
-import { getCuponByCodigo } from '@/lib/firebase/firestore';
+import { getCuponByCodigo, saveCarrito, getCarrito, deleteCarrito, getProductoById } from '@/lib/firebase/firestore';
+import { useAuth } from './AuthContext';
 
 interface CartContextType {
   carrito: Carrito;
@@ -17,6 +18,7 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { user } = useAuth();
   const [carrito, setCarrito] = useState<Carrito>({
     items: [],
     subtotal: 0,
@@ -27,11 +29,74 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Guardar datos del cupón aplicado
   const [cuponData, setCuponData] = useState<{ codigo: string; tipo: 'porcentaje' | 'fijo'; valor: number } | null>(null);
+  const [isLoadingCart, setIsLoadingCart] = useState(false);
 
-  // Persistir carrito en localStorage
+  // Cargar carrito cuando el usuario inicia sesión
   useEffect(() => {
+    const loadCartFromFirestore = async () => {
+      if (user?.uid && !isLoadingCart) {
+        setIsLoadingCart(true);
+        try {
+          const carritoFirestore = await getCarrito(user.uid);
+          
+          if (carritoFirestore && carritoFirestore.items.length > 0) {
+            // Reconstruir el carrito con los datos completos de los productos
+            const itemsWithProducts: ItemCarrito[] = [];
+            
+            for (const item of carritoFirestore.items) {
+              const producto = await getProductoById(item.productoId);
+              if (producto) {
+                itemsWithProducts.push({
+                  productoId: producto.id,
+                  producto,
+                  cantidad: item.cantidad,
+                });
+              }
+            }
+
+            // Si hay un cupón aplicado, cargarlo
+            let cuponDataLoaded = null;
+            if (carritoFirestore.cuponAplicado) {
+              const cupon = await getCuponByCodigo(carritoFirestore.cuponAplicado);
+              if (cupon && cupon.activo) {
+                cuponDataLoaded = {
+                  codigo: cupon.codigo,
+                  tipo: cupon.tipo,
+                  valor: cupon.valor,
+                };
+                setCuponData(cuponDataLoaded);
+              }
+            }
+
+            const totales = recalcularTotales(itemsWithProducts, cuponDataLoaded || undefined);
+            
+            setCarrito({
+              items: itemsWithProducts,
+              cuponAplicado: carritoFirestore.cuponAplicado,
+              ...totales,
+            });
+          }
+        } catch (error) {
+          console.error('Error cargando carrito desde Firestore:', error);
+          // Si hay error, cargar desde localStorage como fallback
+          loadCartFromLocalStorage();
+        } finally {
+          setIsLoadingCart(false);
+        }
+      } else if (!user) {
+        // Usuario no autenticado - cargar desde localStorage
+        loadCartFromLocalStorage();
+      }
+    };
+
+    loadCartFromFirestore();
+  }, [user?.uid]);
+
+  // Función para cargar desde localStorage (fallback o usuarios no autenticados)
+  const loadCartFromLocalStorage = () => {
     const savedCart = localStorage.getItem('bonsái-cart');
     const savedCupon = localStorage.getItem('bonsái-cupon');
+    
     if (savedCart) {
       try {
         setCarrito(JSON.parse(savedCart));
@@ -39,6 +104,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         console.error('Error al cargar carrito:', error);
       }
     }
+    
     if (savedCupon) {
       try {
         setCuponData(JSON.parse(savedCupon));
@@ -46,8 +112,31 @@ export function CartProvider({ children }: { children: ReactNode }) {
         console.error('Error al cargar cupón:', error);
       }
     }
-  }, []);
+  };
 
+  // Sincronizar carrito con Firestore cuando cambia (si el usuario está autenticado)
+  useEffect(() => {
+    const syncCartToFirestore = async () => {
+      if (user?.uid && !isLoadingCart && carrito.items.length >= 0) {
+        try {
+          const itemsToSave = carrito.items.map(item => ({
+            productoId: item.productoId,
+            cantidad: item.cantidad,
+          }));
+          
+          await saveCarrito(user.uid, itemsToSave, carrito.cuponAplicado);
+        } catch (error) {
+          console.error('Error sincronizando carrito con Firestore:', error);
+        }
+      }
+    };
+
+    // Debounce para evitar demasiadas escrituras
+    const timeoutId = setTimeout(syncCartToFirestore, 500);
+    return () => clearTimeout(timeoutId);
+  }, [carrito, user?.uid, isLoadingCart]);
+
+  // Persistir carrito en localStorage (fallback)
   useEffect(() => {
     localStorage.setItem('bonsái-cart', JSON.stringify(carrito));
   }, [carrito]);
@@ -218,7 +307,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const limpiarCarrito = () => {
+  const limpiarCarrito = async () => {
     setCarrito({
       items: [],
       subtotal: 0,
@@ -227,6 +316,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
       total: 0,
     });
     setCuponData(null);
+    
+    // Limpiar también de Firestore si el usuario está autenticado
+    if (user?.uid) {
+      try {
+        await deleteCarrito(user.uid);
+      } catch (error) {
+        console.error('Error al limpiar carrito en Firestore:', error);
+      }
+    }
   };
 
   const itemsCount = carrito.items.reduce((sum, item) => sum + item.cantidad, 0);

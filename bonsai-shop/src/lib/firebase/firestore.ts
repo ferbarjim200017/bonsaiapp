@@ -5,6 +5,7 @@ import {
   getDocs,
   addDoc,
   updateDoc,
+  setDoc,
   deleteDoc,
   query,
   where,
@@ -345,6 +346,63 @@ export const deleteCupon = async (id: string): Promise<void> => {
     await deleteDoc(doc(firestore, 'cupones', id));
   } catch (error) {
     console.error('Error eliminando cupón:', error);
+    throw error;
+  }
+};
+
+// ==================== CARRITO ====================
+
+export interface CarritoFirestore {
+  userId: string;
+  items: Array<{
+    productoId: string;
+    cantidad: number;
+  }>;
+  cuponAplicado?: string;
+  updatedAt: Timestamp;
+}
+
+export const saveCarrito = async (userId: string, items: Array<{ productoId: string; cantidad: number }>, cuponAplicado?: string): Promise<void> => {
+  try {
+    const firestore = ensureFirebase();
+    const carritoRef = doc(firestore, 'carritos', userId);
+    
+    // Usar setDoc con merge para crear o actualizar
+    await setDoc(carritoRef, {
+      userId,
+      items,
+      cuponAplicado: cuponAplicado || null,
+      updatedAt: Timestamp.now(),
+    }, { merge: true });
+  } catch (error) {
+    console.error('Error guardando carrito:', error);
+    throw error;
+  }
+};
+
+export const getCarrito = async (userId: string): Promise<CarritoFirestore | null> => {
+  try {
+    const firestore = ensureFirebase();
+    const carritoRef = doc(firestore, 'carritos', userId);
+    const docSnap = await getDoc(carritoRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data() as CarritoFirestore;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error obteniendo carrito:', error);
+    return null;
+  }
+};
+
+export const deleteCarrito = async (userId: string): Promise<void> => {
+  try {
+    const firestore = ensureFirebase();
+    const carritoRef = doc(firestore, 'carritos', userId);
+    await deleteDoc(carritoRef);
+  } catch (error) {
+    console.error('Error eliminando carrito:', error);
     throw error;
   }
 };
