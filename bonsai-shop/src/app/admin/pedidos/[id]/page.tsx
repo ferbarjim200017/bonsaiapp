@@ -15,6 +15,31 @@ export default function DetallePedido({ params }: { params: { id: string } }) {
   const [codigoSeguimiento, setCodigoSeguimiento] = useState('');
   const [guardando, setGuardando] = useState(false);
 
+  useEffect(() => {
+    cargarPedido();
+  }, [params.id]);
+
+  const cargarPedido = async () => {
+    setCargando(true);
+    try {
+      const pedidoData = await getPedidoById(params.id);
+      if (pedidoData) {
+        setPedido(pedidoData);
+        setNuevoEstado(pedidoData.estado);
+        setCodigoSeguimiento(pedidoData.codigoSeguimiento || '');
+      } else {
+        alert('Pedido no encontrado');
+        router.push('/admin/pedidos');
+      }
+    } catch (error) {
+      console.error('Error cargando pedido:', error);
+      alert('Error al cargar el pedido');
+      router.push('/admin/pedidos');
+    } finally {
+      setCargando(false);
+    }
+  };
+
   const actualizarPedido = async () => {
     setGuardando(true);
     
