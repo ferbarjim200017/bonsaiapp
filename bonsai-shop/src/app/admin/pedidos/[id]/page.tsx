@@ -1,65 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Package, Truck, Check } from 'lucide-react';
-import { updatePedido } from '@/lib/firebase/firestore';
-
-interface ItemPedido {
-  id: string;
-  nombre: string;
-  imagen: string;
-  precio: number;
-  cantidad: number;
-}
+import { getPedidoById, updatePedido } from '@/lib/firebase/firestore';
+import type { Pedido } from '@/lib/mockPedidos';
 
 export default function DetallePedido({ params }: { params: { id: string } }) {
   const router = useRouter();
-
-  // Mock de pedido
-  const [pedido] = useState({
-    id: params.id,
-    numero: '2025-001',
-    fecha: new Date('2025-01-15'),
-    estado: 'preparando' as 'nuevo' | 'pagado' | 'preparando' | 'enviado' | 'entregado',
-    cliente: {
-      nombre: 'Juan Pérez',
-      email: 'juan@example.com',
-      telefono: '+34 600 123 456',
-    },
-    direccionEnvio: {
-      calle: 'Calle Mayor, 123',
-      ciudad: 'Madrid',
-      codigoPostal: '28001',
-      provincia: 'Madrid',
-    },
-    items: [
-      {
-        id: '1',
-        nombre: 'Bonsái Ficus Retusa',
-        imagen: '/productos/bonsái-ficus.jpg',
-        precio: 34.99,
-        cantidad: 2,
-      },
-      {
-        id: '2',
-        nombre: 'Kit Herramientas Básicas',
-        imagen: '/productos/kit-herramientas.jpg',
-        precio: 19.99,
-        cantidad: 1,
-      },
-    ] as ItemPedido[],
-    subtotal: 89.97,
-    envio: 5.99,
-    descuento: 0,
-    total: 95.96,
-    metodoPago: 'Tarjeta de crédito',
-    codigoSeguimiento: '',
-  });
-
-  const [nuevoEstado, setNuevoEstado] = useState(pedido.estado);
-  const [codigoSeguimiento, setCodigoSeguimiento] = useState(pedido.codigoSeguimiento);
+  const [pedido, setPedido] = useState<Pedido | null>(null);
+  const [cargando, setCargando] = useState(true);
+  const [nuevoEstado, setNuevoEstado] = useState<Pedido['estado']>('nuevo');
+  const [codigoSeguimiento, setCodigoSeguimiento] = useState('');
   const [guardando, setGuardando] = useState(false);
 
   const actualizarPedido = async () => {
@@ -73,10 +26,12 @@ export default function DetallePedido({ params }: { params: { id: string } }) {
       } as any);
       
       alert('✅ Pedido actualizado exitosamente!');
-      setGuardando(false);
+      // Recargar el pedido para mostrar datos actualizados
+      await cargarPedido();
     } catch (error) {
       console.error('Error actualizando pedido:', error);
       alert('❌ Error al actualizar el pedido.');
+    } finally {
       setGuardando(false);
     }
   };
@@ -87,7 +42,23 @@ export default function DetallePedido({ params }: { params: { id: string } }) {
     preparando: { label: 'Preparando', color: 'bg-yellow-100 text-yellow-800', icon: Package },
     enviado: { label: 'Enviado', color: 'bg-purple-100 text-purple-800', icon: Truck },
     entregado: { label: 'Entregado', color: 'bg-gray-100 text-gray-800', icon: Check },
+    cancelado: { label: 'Cancelado', color: 'bg-red-100 text-red-800', icon: Package },
   };
+
+  if (cargando) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Cargando pedido...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!pedido) {
+    return null;
+  }
 
   const EstadoIcon = estadoConfig[pedido.estado].icon;
 
@@ -132,9 +103,17 @@ export default function DetallePedido({ params }: { params: { id: string } }) {
               Productos
             </h2>
             <div className="space-y-4">
-              {pedido.items.map((item) => (
-                <div key={item.id} className="flex gap-4">
-                  <div className="w-16 h-16 bg-gray-200 rounded flex-shrink-0" />
+              {pedido.productos.map((item, index) => (
+                <div key={item.productoId || index} className="flex gap-4">
+                  <div className="w-16 h-16 bg-gray-200 rounded flex-shrink-0 overflow-hidden">
+                    {item.imagen && (
+                      <img 
+                        src={item.imagen} 
+                        alt={item.nombre} 
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                  </div>
                   <div className="flex-1">
                     <div className="font-medium text-gray-900">{item.nombre}</div>
                     <div className="text-sm text-gray-600">
@@ -235,7 +214,7 @@ export default function DetallePedido({ params }: { params: { id: string } }) {
             <div className="space-y-2 text-sm">
               <div>
                 <div className="font-medium text-gray-900">
-                  {pedido.cliente.nombre}
+                  {pedido.cliente.nombre} {pedido.cliente.apellidos}
                 </div>
                 <div className="text-gray-600">{pedido.cliente.email}</div>
                 <div className="text-gray-600">{pedido.cliente.telefono}</div>
@@ -249,7 +228,7 @@ export default function DetallePedido({ params }: { params: { id: string } }) {
               Dirección de Envío
             </h2>
             <div className="text-sm text-gray-600 space-y-1">
-              <div>{pedido.direccionEnvio.calle}</div>
+              <div>{pedido.direccionEnvio.direccion}</div>
               <div>
                 {pedido.direccionEnvio.codigoPostal} {pedido.direccionEnvio.ciudad}
               </div>

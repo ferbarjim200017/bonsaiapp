@@ -144,7 +144,13 @@ export const getPedidos = async (filters?: {
   try {
     const firestore = ensureFirebase();
     const pedidosRef = collection(firestore, 'pedidos');
-    const constraints: QueryConstraint[] = [orderBy('fecha', 'desc')];
+    const constraints: QueryConstraint[] = [];
+
+    // Solo agregar orderBy si NO se está filtrando por userId
+    // (para evitar necesidad de índice compuesto)
+    if (!filters?.userId) {
+      constraints.push(orderBy('fecha', 'desc'));
+    }
 
     if (filters?.estado && filters.estado !== 'todos') {
       constraints.push(where('estado', '==', filters.estado));
@@ -156,7 +162,7 @@ export const getPedidos = async (filters?: {
     const q = query(pedidosRef, ...constraints);
     const querySnapshot = await getDocs(q);
 
-    return querySnapshot.docs.map((doc) => {
+    const pedidos = querySnapshot.docs.map((doc) => {
       const data = doc.data();
       return {
         id: doc.id,
@@ -164,6 +170,13 @@ export const getPedidos = async (filters?: {
         fecha: data.fecha.toDate(),
       };
     }) as Pedido[];
+
+    // Ordenar en memoria si se filtró por userId
+    if (filters?.userId) {
+      pedidos.sort((a, b) => b.fecha.getTime() - a.fecha.getTime());
+    }
+
+    return pedidos;
   } catch (error) {
     console.error('Error obteniendo pedidos:', error);
     return [];
