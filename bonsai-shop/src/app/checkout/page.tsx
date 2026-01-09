@@ -109,7 +109,7 @@ export default function CheckoutPage() {
         metodoPago: formData.metodoPago,
         estado: 'nuevo',
         items: carrito.items.reduce((sum, item) => sum + item.cantidad, 0),
-        cuponAplicado: carrito.cuponAplicado,
+        ...(carrito.cuponAplicado && { cuponAplicado: carrito.cuponAplicado }),
       };
 
       // Crear el pedido en Firestore
