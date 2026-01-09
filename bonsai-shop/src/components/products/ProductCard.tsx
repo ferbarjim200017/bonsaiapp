@@ -11,8 +11,15 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ producto }: ProductCardProps) {
-  const { agregarAlCarrito } = useCart();
+  const { agregarAlCarrito, carrito } = useCart();
   const imagenPrincipal = producto.imagenes[0] || '/images/placeholder-bonsái.jpg';
+  
+  // Calcular cantidad en carrito y stock disponible
+  const itemEnCarrito = carrito.items.find(item => item.productoId === producto.id);
+  const cantidadEnCarrito = itemEnCarrito?.cantidad || 0;
+  const stockDisponible = producto.stock - cantidadEnCarrito;
+  const sinStockDisponible = stockDisponible <= 0;
+  
   const precioFormateado = new Intl.NumberFormat('es-ES', {
     style: 'currency',
     currency: 'EUR',
@@ -132,16 +139,17 @@ export default function ProductCard({ producto }: ProductCardProps) {
         {/* Botones */}
         <div className="flex gap-2">
           <button
-            disabled={producto.stock === 0}
+            disabled={producto.stock === 0 || sinStockDisponible}
             onClick={(e) => {
               e.preventDefault();
               agregarAlCarrito(producto);
             }}
             className="flex-1 bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             aria-label={`Añadir ${producto.nombre} al carrito`}
+            title={sinStockDisponible && cantidadEnCarrito > 0 ? `Ya tienes ${cantidadEnCarrito} en el carrito (stock máximo)` : undefined}
           >
             <ShoppingCart className="h-4 w-4" aria-hidden="true" />
-            <span>Añadir</span>
+            <span>{sinStockDisponible && cantidadEnCarrito > 0 ? 'En carrito' : 'Añadir'}</span>
           </button>
           <Link
             href={`/producto/${producto.slug}`}

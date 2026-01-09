@@ -175,17 +175,30 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCarrito((prev) => {
       const existingItem = prev.items.find((item) => item.productoId === producto.id);
       
+      // Calcular cuánto stock hay disponible
+      const cantidadEnCarrito = existingItem ? existingItem.cantidad : 0;
+      const stockDisponible = producto.stock - cantidadEnCarrito;
+      
+      // Si no hay stock disponible, no añadir
+      if (stockDisponible <= 0) {
+        console.warn(`No hay más stock disponible para ${producto.nombre}`);
+        return prev;
+      }
+      
+      // Limitar la cantidad a añadir al stock disponible
+      const cantidadAAñadir = Math.min(cantidad, stockDisponible);
+      
       let newItems: ItemCarrito[];
       if (existingItem) {
         newItems = prev.items.map((item) =>
           item.productoId === producto.id
-            ? { ...item, cantidad: item.cantidad + cantidad }
+            ? { ...item, cantidad: item.cantidad + cantidadAAñadir }
             : item
         );
       } else {
         newItems = [
           ...prev.items,
-          { productoId: producto.id, producto, cantidad },
+          { productoId: producto.id, producto, cantidad: cantidadAAñadir },
         ];
       }
       
@@ -219,9 +232,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
     
     setCarrito((prev) => {
-      const newItems = prev.items.map((item) =>
-        item.productoId === productoId ? { ...item, cantidad } : item
-      );
+      const newItems = prev.items.map((item) => {
+        if (item.productoId === productoId) {
+          // Limitar la cantidad al stock disponible del producto
+          const cantidadLimitada = Math.min(cantidad, item.producto.stock);
+          return { ...item, cantidad: cantidadLimitada };
+        }
+        return item;
+      });
       const totales = recalcularTotales(newItems, cuponData || undefined);
       
       return {
