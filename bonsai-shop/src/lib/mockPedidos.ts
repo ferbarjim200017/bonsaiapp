@@ -30,6 +30,7 @@ export interface Pedido {
   estado: 'nuevo' | 'pagado' | 'preparando' | 'enviado' | 'entregado' | 'cancelado';
   items: number; // número total de items
   cuponAplicado?: string;
+  codigoSeguimiento?: string; // código de seguimiento del envío
 }
 
 export const pedidosMock: Pedido[] = [
