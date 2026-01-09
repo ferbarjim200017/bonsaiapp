@@ -5,10 +5,14 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
+import { createPedido, updateProducto } from '@/lib/firebase/firestore';
+import type { Pedido } from '@/lib/mockPedidos';
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { carrito, limpiarCarrito } = useCart();
+  const { user } = useAuth();
   const [procesando, setProcesando] = useState(false);
   const [errores, setErrores] = useState<Record<string, string>>({});
 
@@ -70,17 +74,65 @@ export default function CheckoutPage() {
 
     setProcesando(true);
 
-    // Simular procesamiento de pago
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // Generar número de pedido único
+      const numeroPedido = `BON-${Date.now()}`;
+      
+      // Preparar datos del pedido
+      const pedidoData: Omit<Pedido, 'id'> = {
+        numero: numeroPedido,
+        fecha: new Date(),
+        userId: user?.uid,
+        cliente: {
+          nombre: formData.nombre,
+          apellidos: formData.apellidos,
+          email: formData.email,
+          telefono: formData.telefono,
+        },
+        direccionEnvio: {
+          direccion: formData.direccion,
+          ciudad: formData.ciudad,
+          provincia: formData.provincia,
+          codigoPostal: formData.codigoPostal,
+        },
+        productos: carrito.items.map(item => ({
+          productoId: item.productoId,
+          nombre: item.producto.nombre,
+          precio: item.producto.precio,
+          cantidad: item.cantidad,
+          imagen: item.producto.imagenes[0],
+        })),
+        subtotal: carrito.subtotal,
+        envio: carrito.envio,
+        descuento: carrito.descuento,
+        total: carrito.total,
+        metodoPago: formData.metodoPago,
+        estado: 'nuevo',
+        items: carrito.items.reduce((sum, item) => sum + item.cantidad, 0),
+        cuponAplicado: carrito.cuponAplicado,
+      };
 
-    // Mock: crear pedido
-    const numeroPedido = `BON-${Date.now()}`;
-    
-    // Limpiar carrito
-    limpiarCarrito();
+      // Crear el pedido en Firestore
+      const pedidoId = await createPedido(pedidoData);
 
-    // Redirigir a confirmación
-    router.push(`/checkout/confirmacion?pedido=${numeroPedido}`);
+      // Reducir el stock de cada producto
+      for (const item of carrito.items) {
+        const nuevoStock = item.producto.stock - item.cantidad;
+        await updateProducto(item.productoId, { 
+          stock: Math.max(0, nuevoStock) 
+        });
+      }
+
+      // Limpiar carrito
+      await limpiarCarrito();
+
+      // Redirigir a confirmación
+      router.push(`/checkout/confirmacion?pedido=${numeroPedido}&id=${pedidoId}`);
+    } catch (error) {
+      console.error('Error al procesar el pedido:', error);
+      alert('Hubo un error al procesar tu pedido. Por favor, inténtalo de nuevo.');
+      setProcesando(false);
+    }
   };
 
   return (
